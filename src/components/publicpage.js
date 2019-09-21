@@ -3,21 +3,7 @@ import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
 
-class publicpage extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      events: []
-    };
-  }
-
-  componentDidMount() {
-    axios
-      .get("/currentEvents")
-      .then(response => this.setState({ events: response.data }));
-  }
-
+class PublicPage extends Component {
   render() {
     const currentEvents = this.state.events.map((i, events) => {
       return <div></div>;
@@ -42,4 +28,4 @@ class publicpage extends Component {
   }
 }
 
-export default publicpage;
+export default PublicPage;
