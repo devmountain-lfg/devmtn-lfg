@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class publicpage extends Component {
+class PublicPage extends Component {
   render() {
     return (
       <div className="parent_login">
@@ -14,4 +14,4 @@ class publicpage extends Component {
   }
 }
 
-export default publicpage;
+export default PublicPage;
