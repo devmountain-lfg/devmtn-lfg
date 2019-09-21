@@ -60,3 +60,57 @@
   color: white;
   border: none;
 }
+
+.event {
+  width: 100vw;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px dashed black;
+  margin: 3px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-top {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.creator-ref {
+  height: 100%;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .creator {
+}
+
+.people {
+} */
+
+.title {
+  width: 100px;
+  height: 100%;
+  text-decoration: underline;
+  font-size: 30px;
+}
+
+.message {
+  width: 100%;
+  height: 20px;
+  text-decoration: italic;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.event-buttons {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100px;
+}
