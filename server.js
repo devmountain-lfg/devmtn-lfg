@@ -37,8 +37,8 @@ app.use(
   })
 );
 
-app.get("/usersTest", drewController.getUsers);
-app.get("/currentEvents", drewController.getCurrentEvents);
+app.get("/users_test", drewController.getUsers);
+app.get("/current_events", drewController.getCurrentEvents);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
