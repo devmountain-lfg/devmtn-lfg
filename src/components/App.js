@@ -10,15 +10,18 @@ import Calendar from "./calendar";
 import Homepage from "./homepage";
 import Settings from "./settings";
 import Chats from "./chat";
+import '../styling/reference.css';
 import Reference from "../reference";
+
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {/* <Route exact path="/" render={props => props.history.push('/login')} /> */}
+          <Route exact path="/" render={props => props.history.push('/public_page')} />
           {/* <Route path="/app" component={AuthenticatedRouts} /> */}
+          <Route path="/create_user" component={CreateUser} />
           <Route path="/" component={Reference} />
           <Route path="/public_page" component={Publicpage} />
           <Route path="/home_page" component={Homepage} />
@@ -27,7 +30,7 @@ function App() {
           <Route path="/create_event" component={CreateEvents} />
           <Route path="/user_setup" component={UserSetup} />
           <Route path="/chats" component={Chats} />
-          <Route path="/create_user" component={CreateUser} />
+          <Route path="/public_page" component={Publicpage} />
           <Route path="/settings" component={Settings} />
         </Switch>
       </Router>
