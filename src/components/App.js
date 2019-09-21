@@ -11,23 +11,24 @@ import Homepage from "./homepage";
 import Settings from "./settings";
 import Chats from "./chat";
 
-import './App.css';
+import '../styling/App.css';
+
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {/* <Route exact path="/" render={props => props.history.push('/login')} /> */}
+          <Route exact path="/" render={props => props.history.push('/public_page')} />
           {/* <Route path="/app" component={AuthenticatedRouts} /> */}
-          <Route path="/public_page" component={Publicpage} />
+          <Route path="/create_user" component={CreateUser} />
           <Route path="/home_page" component={Homepage} />
           <Route path="/calendar" component={Calendar} />
           <Route path="/manage_events" component={ManageEvents} />
           <Route path="/create_event" component={CreateEvents} />
           <Route path="/user_setup" component={UserSetup} />
           <Route path="/chats" component={Chats} />
-          <Route path="/create_user" component={CreateUser} />
+          <Route path="/public_page" component={Publicpage} />
           <Route path="/settings" component={Settings} />
         </Switch>
       </Router>
