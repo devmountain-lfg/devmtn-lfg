@@ -62,5 +62,22 @@ module.exports = {
       console.log(err);
       res.status(500).send(`Here is error: ${err}`);
     }
+  },
+
+  getMyEvents: async (req, res) => {
+    try {
+    const { user_id } = req.body;
+    const db = req.app.get("db");
+    const query = `SELECT e.activity_id, e.event_date, e.public_event, e.creator_id, e.max_players
+    FROM events as e 
+    JOIN 
+    user_events ON user_events.event_id = e.event_id
+    WHERE user_events.user_id = ${user_id};`
+    const results = await db.query(query);
+    res.status(200).send(results);
+    } catch (err) {
+      res.status(500).send(err);
+      console.log(`here is error: ${err}`)
+    }
   }
 };
