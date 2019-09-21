@@ -6,6 +6,7 @@
   height: 812px;
   width: 100vw;
   overflow-y: scroll;
+  background: #e1dfe6;
 }
 
 .body-ref {
@@ -103,4 +104,67 @@
 .checkbox-ref {
   height: 20px;
   width: 20px;
+}
+
+.all-colors-ref {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+  min-height: 150px;
+}
+
+.color-ref-one {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  background: #faf7ff;
+}
+.color-ref-two {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  background: #e1dfe6;
+}
+.color-ref-three {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  background: #bcbabf;
+}
+.color-ref-four {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  background: #7d7c80;
+}
+.color-ref-five {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  color: white;
+  background: #3f3e40;
+}
+.color-ref-six {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  color: white;
+  background: #2a397c;
+}
+.color-ref-seven {
+  height: 20px;
+  width: 200px;
+  margin: 2px;
+  border: 1px solid black;
+  color: white;
+  background: #1a3dd8;
 }

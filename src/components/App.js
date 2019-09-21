@@ -10,19 +10,22 @@ import Calendar from "./calendar";
 import Homepage from "./homepage";
 import Settings from "./settings";
 import Chats from "./chat";
-import '../styling/reference.css';
+import "../styling/reference.css";
 import Reference from "../reference";
-
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" render={props => props.history.push('/public_page')} />
+          <Route
+            exact
+            path="/"
+            render={props => props.history.push("/public_page")}
+          />
           {/* <Route path="/app" component={AuthenticatedRouts} /> */}
           <Route path="/create_user" component={CreateUser} />
-          <Route path="/" component={Reference} />
+          <Route path="/reference" component={Reference} />
           <Route path="/public_page" component={Publicpage} />
           <Route path="/home_page" component={Homepage} />
           <Route path="/calendar" component={Calendar} />

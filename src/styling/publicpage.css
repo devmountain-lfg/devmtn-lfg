@@ -1,0 +1,52 @@
+.header-ref {
+  display: flex;
+  align-self: flex-start;
+  height: 75px;
+  width: 100vw;
+  justify-content: flex-end;
+  background: #7d7c80;
+  box-shadow: 3px 7px 13px #3f3e4044;
+}
+
+.events-ref {
+  display: flex;
+  height: 700px;
+  width: 100vw;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.footer-ref {
+  display: flex;
+  align-self: flex-end;
+  height: 75px;
+  width: 100vw;
+  justify-content: space-around;
+  background: #7d7c80;
+  box-shadow: -3px -7px 13px #3f3e4044;
+}
+
+.home-button-ref {
+  width: 75px;
+  height: 100%;
+  background: #3f3e40;
+  color: white;
+  border: none;
+}
+
+.add-event-ref {
+  width: 75px;
+  height: 100%;
+  border-radius: 180px;
+  background: #1a3dd8;
+  color: white;
+  border: none;
+}
+
+.account-settings-ref {
+  width: 75px;
+  height: 100%;
+  background: #3f3e40;
+  color: white;
+  border: none;
+}

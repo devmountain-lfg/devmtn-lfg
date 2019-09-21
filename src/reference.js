@@ -44,34 +44,6 @@ function Reference(props) {
             placeholder="input-ref-large"
           ></input>
         </div>
-        <div className="all-inputs-ref">
-          <input
-            className="input-ref-small"
-            placeholder="input-ref-small"
-          ></input>
-          <input
-            className="input-ref-medium"
-            placeholder="input-ref-medium"
-          ></input>
-          <input
-            className="input-ref-large"
-            placeholder="input-ref-large"
-          ></input>
-        </div>
-        <div className="all-inputs-ref">
-          <input
-            className="input-ref-small"
-            placeholder="input-ref-small"
-          ></input>
-          <input
-            className="input-ref-medium"
-            placeholder="input-ref-medium"
-          ></input>
-          <input
-            className="input-ref-large"
-            placeholder="input-ref-large"
-          ></input>
-        </div>
         <div className="all-buttons-ref">
           <button className="button-ref-small"></button>^button-ref-small^
           <button className="button-ref-medium">button-ref-medium</button>
@@ -84,6 +56,15 @@ function Reference(props) {
         </div>
         <div className="all-checkboxs-ref">
           <input className="checkbox-ref" type="checkbox"></input>
+        </div>
+        <div className="all-colors-ref">
+          <div className="color-ref-one">background: #faf7ff;</div>
+          <div className="color-ref-two">background: #e1dfe6;</div>
+          <div className="color-ref-three">background: #bcbabf;</div>
+          <div className="color-ref-four">background: #7d7c80;</div>
+          <div className="color-ref-five">background: #3f3e40;</div>
+          <div className="color-ref-six">background: #2a397c;</div>
+          <div className="color-ref-seven">background: #1a3dd8;</div>
         </div>
       </div>
     </div>
