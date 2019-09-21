@@ -4,6 +4,20 @@ import "../styling/publicpage.css";
 import axios from "axios";
 
 class PublicPage extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      events: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get("/currentEvents").then(response => {
+      console.log(response.data);
+      this.setState({ events: response.data });
+    });
+  }
   render() {
     const currentEvents = this.state.events.map((i, events) => {
       return <div></div>;
