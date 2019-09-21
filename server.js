@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -5,16 +6,14 @@ const cors = require("cors");
 const session = require("express-session");
 const massive = require("massive");
 const app = express();
-require("dotenv").config();
 const drewController = require("./controllers/drewController");
 const paulController = require("./controllers/paulController");
 const peterController = require("./controllers/peterController");
 const taylorController = require("./controllers/taylorController");
 
-
 massive(process.env.DATABASE_URL)
   .then(db => {
-    console.log('heroku database connected')
+    console.log("heroku database connected");
     app.set("db", db);
   })
   .catch(err => console.error(err));
@@ -44,7 +43,7 @@ app.get("/me", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(_dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(process.env.PORT || 8080, function() {

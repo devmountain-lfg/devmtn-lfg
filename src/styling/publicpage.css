@@ -1,3 +1,13 @@
+.publicpage-ref {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  height: 812px;
+  width: 100vw;
+  background: #e1dfe6;
+}
+
 .header-ref {
   display: flex;
   align-self: flex-start;
