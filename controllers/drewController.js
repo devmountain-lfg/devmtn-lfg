@@ -1,5 +1,3 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
 
 module.exports = {
   login: async (req, res) => {
@@ -11,6 +9,7 @@ module.exports = {
       const db = req.app.get("db");
 
       const [user] = await db.users.find({ email });
+      console.log(user);
 
       if (!user)
         return res
@@ -18,15 +17,18 @@ module.exports = {
           .send(
             "The user does not exist. Please enter a valid email and password"
           );
+      let authenticated = false;
+      if(user.user_password === password) {
+        authenticated = true;
+      };
 
-      const authenticated = await bcrypt.compare(password, user.password);
-
-      if (!authenticated) {
+      if (authenticated === false) {
         return res.status(400).send("Please authenticate!");
+      } else {
+        req.session.user = user;
       }
       delete user.password;
 
-      req.session.user = user;
       console.log("here is user", user);
       return res.status(200).send(user);
     } catch (error) {
