@@ -6,7 +6,11 @@ const session = require("express-session");
 const massive = require("massive");
 const app = express();
 require("dotenv").config();
-const controller = require("./controller");
+const drewController = require("./controllers/drewController");
+const paulController = require("./controllers/paulController");
+const peterController = require("./controllers/peterController");
+const taylorController = require("./controllers/taylorController");
+
 
 massive(process.env.DATABASE_URL)
   .then(db => {
@@ -33,8 +37,8 @@ app.use(
   })
 );
 
-app.get("/usersTest", controller.getUsers);
-app.get("/currentEvents", controller.getCurrentEvents);
+app.get("/usersTest", drewController.getUsers);
+app.get("/currentEvents", drewController.getCurrentEvents);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
