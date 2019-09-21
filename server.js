@@ -11,10 +11,10 @@ const paulController = require("./controllers/paulController");
 const peterController = require("./controllers/peterController");
 const taylorController = require("./controllers/taylorController");
 
-
+console.log(process.env.DATABASE_URL);
 massive(process.env.DATABASE_URL)
   .then(db => {
-    console.log('heroku database connected')
+    console.log("heroku database connected");
     app.set("db", db);
   })
   .catch(err => console.error(err));
