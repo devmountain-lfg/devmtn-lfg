@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Publicpage from "./publicpage";
@@ -10,8 +10,7 @@ import Calendar from "./calendar";
 import Homepage from "./homepage";
 import Settings from "./settings";
 import Chats from "./chat";
-
-import './App.css';
+import Reference from "../reference";
 
 function App() {
   return (
@@ -20,6 +19,7 @@ function App() {
         <Switch>
           {/* <Route exact path="/" render={props => props.history.push('/login')} /> */}
           {/* <Route path="/app" component={AuthenticatedRouts} /> */}
+          <Route path="/" component={Reference} />
           <Route path="/public_page" component={Publicpage} />
           <Route path="/home_page" component={Homepage} />
           <Route path="/calendar" component={Calendar} />

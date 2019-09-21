@@ -1,0 +1,106 @@
+.main-container-ref {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  height: 812px;
+  width: 100vw;
+  overflow-y: scroll;
+}
+
+.body-ref {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  width: 100vw;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.all-inputs-ref {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 150px;
+  min-height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+}
+
+.input-ref-small {
+  height: 25px;
+  width: 125px;
+  border: 1px solid black;
+  margin: 2px;
+}
+.input-ref-medium {
+  height: 25px;
+  width: 200px;
+  border: 1px solid black;
+  margin: 2px;
+}
+.input-ref-large {
+  height: 25px;
+  width: 300px;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+.all-buttons-ref {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+  min-height: 150px;
+}
+
+.button-ref-small {
+  display: flex;
+  margin: 2px;
+  width: 75px;
+  height: 25px;
+}
+.button-ref-medium {
+  display: flex;
+  width: 150px;
+  height: 50px;
+  margin: 2px;
+}
+.button-ref-large {
+  display: flex;
+  width: 300px;
+  height: 75px;
+  margin: 2px;
+}
+
+.all-dropdowns-ref {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+  min-height: 150px;
+}
+
+.dropdown-ref {
+  height: 25px;
+  width: 150px;
+}
+
+.all-checkboxs-ref {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+  min-height: 150px;
+}
+
+.checkbox-ref {
+  height: 20px;
+  width: 20px;
+}
