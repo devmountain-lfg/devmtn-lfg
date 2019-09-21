@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS user_preferences;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS user_events;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS activities;
@@ -32,6 +34,7 @@ CREATE TABLE user_preferences (
     user_id int REFERENCES users(user_id),
     activity_id int REFERENCES activities(activity_id)
 )
+;
 ;
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
