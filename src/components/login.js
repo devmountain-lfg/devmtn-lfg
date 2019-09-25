@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
-import { thisExpression } from "@babel/types";
 
 class Login extends Component {
   constructor() {
