@@ -115,6 +115,21 @@
   width: 100px;
 }
 
-.login {
+.login-logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 100vw;
+  height: 500px;
+  background: #bcbabf;
+  padding-top: 20px;
+}
+
+.sign-up-link {
+  color: rgb(0, 102, 255);
+}
+
+.welcome-back {
+  font-size: 30px;
 }

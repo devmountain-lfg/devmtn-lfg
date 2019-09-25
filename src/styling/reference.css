@@ -59,18 +59,21 @@
 
 .button-ref-small {
   display: flex;
+  justify-content: center;
   margin: 2px;
   width: 75px;
   height: 25px;
 }
 .button-ref-medium {
   display: flex;
+  justify-content: center;
   width: 150px;
   height: 50px;
   margin: 2px;
 }
 .button-ref-large {
   display: flex;
+  justify-content: center;
   width: 300px;
   height: 75px;
   margin: 2px;
