@@ -1,5 +1,6 @@
 DROP VIEW IF EXISTS user_preferences_view;
 DROP VIEW IF EXISTS user_events_view;
+DROP VIEW IF EXISTS current_events_view;
 
 
 CREATE VIEW user_preferences_view
@@ -32,3 +33,22 @@ from users u
      inner join activities a
      on e.activity_id = a.activity_id
 ;
+CREATE VIEW current_events_view
+AS
+select a.activity_name,
+       e.created_date,
+       e.event_date,
+       a.min_players_required,
+       e.max_players,
+       concat(u.first_name, ' ', u.last_name) creator_name
+       
+from events e
+     inner join activities a
+     on e.activity_id = a.activity_id
+     inner join users u
+     on e.creator_id = u.user_id
+where public_event is TRUE
+and   event_date >= NOW()
+order by event_date
+;
+
