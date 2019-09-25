@@ -17,10 +17,10 @@ class Login extends Component {
   handleLogin = async user => {
     try {
       const body = {
-        email: this.state.username,
+        username: this.state.username,
         password: this.state.password
       };
-      if (body.email && body.password) {
+      if (body.username && body.password) {
         axios.post("/login", body).then(response => {
           console.log(response.data);
           this.setState({ currentUser: user });

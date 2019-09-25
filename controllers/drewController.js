@@ -1,13 +1,15 @@
 module.exports = {
   login: async (req, res) => {
     try {
-      const { email, password } = req.body;
-      if (!email || !password)
-        return res.status(400).send("Please enter email and password");
+      const { username, password } = req.body;
+      if (!username || !password)
+        return res.status(400).send("Please enter username and password");
 
       const db = req.app.get("db");
 
-      const [user] = await db.users.find({ email: req.body.email });
+      const [user] = await db.users.where("email=$1 OR username=$1", [
+        req.body.username
+      ]);
       console.log(user);
 
       if (!user)
