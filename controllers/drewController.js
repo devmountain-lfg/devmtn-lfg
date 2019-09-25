@@ -66,7 +66,7 @@ module.exports = {
 
   getMyEvents: async (req, res) => {
     try {
-    const { user_id } = req.body;
+    const { user_id } = req.params;
     const db = req.app.get("db");
     const query = `SELECT e.activity_id, e.event_date, e.public_event, e.creator_id, e.max_players
     FROM events as e 
