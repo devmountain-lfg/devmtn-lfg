@@ -17,6 +17,20 @@ module.exports = {
                 
                 return containsNum;
             }
+
+            const checkForNonNumbers = (str) => {
+                const charArr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','@','#','$','%','&','*','!','+'];
+                let containsChar = false;
+                
+                for(var i = 0; i < str.length; i++) {
+                    if(str.includes(charArr[i])) {
+                        containsChar = true;
+                        return;
+                    }
+                }
+                
+                return containsNum;
+            }
             
             const {firstName, lastName, gender, email, phoneNumber, username, password} = req.body;
             
@@ -28,6 +42,7 @@ module.exports = {
             if (email === null || email === "" || !email.includes('@')) return res.status(400).send('Invalid email');
             if (username === null || username === "") return res.status(400).send('Invalid username');
             if (password === null || password === "" || password.length < 7 || checkForNumber(password) === false) return res.status(400).send('Invalid password. Password must be at least 7 characters long and contain at least one number');
+            if (phoneNumber !== null && checkForNonNumbers(phoneNumber) === true) return res.status(400).send('Invalid character in Phone Number');
 
             await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName,lastName,gender,email,phoneNumber,username,password]);   
 
