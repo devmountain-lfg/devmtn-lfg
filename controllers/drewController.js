@@ -1,4 +1,3 @@
-
 module.exports = {
   login: async (req, res) => {
     try {
@@ -8,7 +7,7 @@ module.exports = {
 
       const db = req.app.get("db");
 
-      const [user] = await db.users.find({ email });
+      const [user] = await db.users.find({ email: req.body.email });
       console.log(user);
 
       if (!user)
@@ -18,9 +17,9 @@ module.exports = {
             "The user does not exist. Please enter a valid email and password"
           );
       let authenticated = false;
-      if(user.user_password === password) {
+      if (user.user_password === password) {
         authenticated = true;
-      };
+      }
 
       if (authenticated === false) {
         return res.status(400).send("Please authenticate!");
@@ -66,18 +65,18 @@ module.exports = {
 
   getMyEvents: async (req, res) => {
     try {
-    const { user_id } = req.body;
-    const db = req.app.get("db");
-    const query = `SELECT e.activity_id, e.event_date, e.public_event, e.creator_id, e.max_players
+      const { user_id } = req.body;
+      const db = req.app.get("db");
+      const query = `SELECT e.activity_id, e.event_date, e.public_event, e.creator_id, e.max_players
     FROM events as e 
     JOIN 
     user_events ON user_events.event_id = e.event_id
-    WHERE user_events.user_id = ${user_id};`
-    const results = await db.query(query);
-    res.status(200).send(results);
+    WHERE user_events.user_id = ${user_id};`;
+      const results = await db.query(query);
+      res.status(200).send(results);
     } catch (err) {
       res.status(500).send(err);
-      console.log(`here is error: ${err}`)
+      console.log(`here is error: ${err}`);
     }
   }
 };
