@@ -10,21 +10,26 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      currentUser: ""
+      currentUser: []
     };
   }
 
-  handleLogin = async () => {
+  handleLogin = async user => {
     try {
       const body = {
         username: this.state.username,
         password: this.state.password
       };
-
-      axios.post("/login", body).then(response => {
-        this.setState({ currentUser: response.data });
-        this.props.history.push("/app/home_page");
-      });
+      if (body.username && body.password) {
+        axios.post("/login", body).then(response => {
+          console.log(response.data);
+          this.setState({ currentUser: user });
+          this.props.history.push("/app/home_page");
+        });
+      } else {
+        this.props.history.push("/login");
+        alert("Login incorrect");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -41,11 +46,17 @@ class Login extends Component {
             className="input-ref-large"
             type="text"
             placeholder="username"
+            value={this.state.username}
+            onChange={this.handleChange}
+            name="username"
           ></input>
           <input
             className="input-ref-large"
             type="password"
             placeholder="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
           ></input>
           <Link to="/homepage">
             <button className="button-ref-medium" onClick={this.handleLogin}>

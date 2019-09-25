@@ -59,7 +59,8 @@ $$;
 
 CREATE PROCEDURE createNewEvent(
     activity_id int, 
-    event_date TIMESTAMP,
+    event_date_start TIMESTAMP,
+    event_date_end TIMESTAMP,
     is_public_event BOOLEAN,
     max_player int,
     creator_id int
@@ -67,7 +68,7 @@ CREATE PROCEDURE createNewEvent(
 LANGUAGE plpgsql    
 AS $$
 BEGIN
-    if $2 < NOW()
+    if $2 < NOW() or $3 < NOW()
         THEN 
            RAISE NOTICE 'Invalid event date. Must be in the future';
            RETURN;
@@ -79,20 +80,20 @@ BEGIN
             RETURN;
         END IF;
         
-    if $4 < (select min_players_required from activities a where a.activity_id = $1)
+    if $5 < (select min_players_required from activities a where a.activity_id = $1)
         THEN 
             RAISE NOTICE 'Max Players is less than min players required';
             RETURN;
         END IF;
         
-    if (select count(*) from users u where u.user_id = $5) < 1
+    if (select count(*) from users u where u.user_id = $6) < 1
         THEN
             RAISE NOTICE 'Invalid user_id for creator';
             RETURN;
         END IF;
         
-    INSERT INTO events(activity_id,event_date,public_event,creator_id,max_players)
-    VALUES($1,$2,$3,$5,$4);
+    INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players)
+    VALUES($1,$2,$3,$4,$6,$5);
     
     RETURN;
 END;
