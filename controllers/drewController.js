@@ -1,14 +1,15 @@
-
 module.exports = {
   login: async (req, res) => {
     try {
-      const { email, password } = req.body;
-      if (!email || !password)
-        return res.status(400).send("Please enter email and password");
+      const { username, password } = req.body;
+      if (!username || !password)
+        return res.status(400).send("Please enter username and password");
 
       const db = req.app.get("db");
 
-      const [user] = await db.users.find({ email });
+      const [user] = await db.users.where("email=$1 OR username=$1", [
+        req.body.username
+      ]);
       console.log(user);
 
       if (!user)
@@ -18,9 +19,9 @@ module.exports = {
             "The user does not exist. Please enter a valid email and password"
           );
       let authenticated = false;
-      if(user.user_password === password) {
+      if (user.user_password === password) {
         authenticated = true;
-      };
+      }
 
       if (authenticated === false) {
         return res.status(400).send("Please authenticate!");
@@ -72,12 +73,12 @@ module.exports = {
     FROM events as e 
     JOIN 
     user_events ON user_events.event_id = e.event_id
-    WHERE user_events.user_id = ${user_id};`
-    const results = await db.query(query);
-    res.status(200).send(results);
+    WHERE user_events.user_id = ${user_id};`;
+      const results = await db.query(query);
+      res.status(200).send(results);
     } catch (err) {
       res.status(500).send(err);
-      console.log(`here is error: ${err}`)
+      console.log(`here is error: ${err}`);
     }
   }
 };
