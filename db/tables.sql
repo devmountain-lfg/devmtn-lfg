@@ -1,10 +1,9 @@
-DROP TABLE IF EXISTS user_preferences;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS user_events;
+DROP TABLE IF EXISTS user_preferences;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS users;
+
 
 
 CREATE TABLE users (
@@ -35,11 +34,12 @@ CREATE TABLE user_preferences (
     activity_id int REFERENCES activities(activity_id)
 )
 ;
-;
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
     activity_id int REFERENCES activities(activity_id),
     created_date TIMESTAMP DEFAULT NOW(),
+    event_date_start TIMESTAMP NOT NULL,
+    event_date_end TIMESTAMP NOT NULL,
     public_event BOOLEAN,
     creator_id int REFERENCES users(user_id),
     max_players int
