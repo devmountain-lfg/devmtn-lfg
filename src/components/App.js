@@ -13,9 +13,34 @@ import Chats from "./chat";
 import "../styling/reference.css";
 import Reference from "../reference";
 
+class AuthenticatedRouts extends React.Component {
+  async componentDidMount() {
+    try {
+      const user = await axios.get("/me");
+    } catch (error) {
+      console.log("Need to login first.", error);
+      this.props.history.push("/public_page");
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Route path="app/home_page" component={Homepage} />
+        <Route path="app/calendar" component={Calendar} />
+        <Route path="app/manage_events" component={ManageEvents} />
+        <Route path="app/create_event" component={CreateEvents} />
+        <Route path="app/user_setup" component={UserSetup} />
+        <Route path="app/chats" component={Chats} />
+        <Route path="app/settings" component={Settings} />
+      </div>
+    );
+  }
+}
+
 function App() {
   return (
-    <div className="App">
+    <div className="wrapper">
       <Router>
         <Switch>
           <Route
@@ -23,21 +48,13 @@ function App() {
             path="/"
             render={props => props.history.push("/public_page")}
           />
-          {/* <Route path="/app" component={AuthenticatedRouts} /> */}
+          <Route path="/app" component={AuthenticatedRouts} />
           <Route path="/create_user" component={CreateUser} />
           <Route path="/Reference" component={Reference} />
           <Route path="/public_page" component={PublicPage} />
-          <Route path="/home_page" component={Homepage} />
-          <Route path="/calendar" component={Calendar} />
-          <Route path="/manage_events" component={ManageEvents} />
-          <Route path="/create_event" component={CreateEvents} />
-          <Route path="/user_setup" component={UserSetup} />
-          <Route path="/chats" component={Chats} />
-          <Route path="/settings" component={Settings} />
         </Switch>
       </Router>
     </div>
   );
 }
-
 export default App;
