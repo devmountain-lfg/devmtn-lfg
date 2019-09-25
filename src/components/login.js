@@ -2,21 +2,61 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
+import { thisExpression } from "@babel/types";
 
 class Login extends Component {
   constructor() {
     super();
 
     this.state = {
-      events: []
+      username: "",
+      password: "",
+      currentUser: ""
     };
   }
+
+  handleLogin = async () => {
+    try {
+      const body = {
+        username: this.state.username,
+        password: this.state.password
+      };
+
+      axios.post("/login", body).then(response => {
+        this.setState({ currentUser: response.data });
+        this.props.history.push("/app/home_page");
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     return (
       <div className="publicpage-ref">
-        <input className="input-ref-medium" type="text"></input>
-        <input className="input-ref-medium" type="password"></input>
+        <div className="welcome-back">Welcome! Let's play a game</div>
+        <div className="login-logout">
+          <input
+            className="input-ref-large"
+            type="text"
+            placeholder="username"
+          ></input>
+          <input
+            className="input-ref-large"
+            type="password"
+            placeholder="password"
+          ></input>
+          <Link to="/homepage">
+            <button className="button-ref-medium" onClick={this.handleLogin}>
+              Sign In
+            </button>
+          </Link>
+          <Link to="/create_user" className="sign-up-link">
+            Don't have an account? Click here to sign up!
+          </Link>
+        </div>
       </div>
     );
   }
