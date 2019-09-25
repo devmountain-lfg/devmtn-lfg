@@ -21,7 +21,7 @@ class PublicPage extends Component {
   render() {
     const currentEvents = this.state.events.map((i, events) => {
       return (
-        <div className="event">
+        <div className="event" key="i">
           <div className="event-top">
             <div className="creator-ref">
               <div className="creator">Creator</div>
