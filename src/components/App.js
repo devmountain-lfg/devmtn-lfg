@@ -13,7 +13,7 @@ import Chats from "./chat";
 import "../styling/reference.css";
 import Reference from "../reference";
 
-class AuthenticatedRouts extends React.Component {
+class AuthenticatedRoutes extends React.Component {
   async componentDidMount() {
     try {
       const user = await axios.get("/me");
@@ -48,7 +48,7 @@ function App() {
             path="/"
             render={props => props.history.push("/public_page")}
           />
-          <Route path="/app" component={AuthenticatedRouts} />
+          <Route path="/app" component={AuthenticatedRoutes} />
           <Route path="/create_user" component={CreateUser} />
           <Route path="/Reference" component={Reference} />
           <Route path="/public_page" component={PublicPage} />
