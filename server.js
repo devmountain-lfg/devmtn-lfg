@@ -47,6 +47,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(_dirname, "build", "index.html"));
 });
 
+app.post("/create-new-user", paulController.createNewUser);
+
+
 app.listen(process.env.PORT || 8080, function() {
   console.log(`listening on port:${this.address().port}`);
 });
