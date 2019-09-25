@@ -10,6 +10,7 @@ import Calendar from "./calendar";
 import Homepage from "./homepage";
 import Settings from "./settings";
 import Chats from "./chat";
+import Login from "./login";
 import "../styling/reference.css";
 import Reference from "../reference";
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/create_user" component={CreateUser} />
           <Route path="/Reference" component={Reference} />
           <Route path="/public_page" component={PublicPage} />
+          <Route path="/login" component={Login}/>
         </Switch>
       </Router>
     </div>
