@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS addnewuser;
+
 CREATE PROCEDURE addNewUser(
     first_name varchar(50), 
     last_name varchar(50), 
