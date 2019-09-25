@@ -40,6 +40,7 @@ app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
 app.get("/events:id", drewController.getMyEvents);
 app.post("/login", drewController.login);
+app.post("create_user", paulController.createNewUser);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
