@@ -58,11 +58,11 @@ class Login extends Component {
             onChange={this.handleChange}
             name="password"
           ></input>
-          <Link to="/homepage">
+          
             <button className="button-ref-medium" onClick={this.handleLogin}>
               Sign In
             </button>
-          </Link>
+          
           <Link to="/create_user" className="sign-up-link">
             Don't have an account? Click here to sign up!
           </Link>
