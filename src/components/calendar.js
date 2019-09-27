@@ -3,35 +3,36 @@ import axios from "axios";
 import "../styling/react-big-calendar.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import "../styling/petercalendar.css";
 
 const localizer = momentLocalizer(moment);
 
 class calendar extends Component {
   
-  State = {
+  state = {
     events: [
       {
         'title': 'All Day Event very long title',
         'allDay': true,
-        'start': new Date(2015, 3, 0),
-        'end': new Date(2015, 3, 1)
+        'start': new Date(2019, 3, 0),
+        'end': new Date(2019, 3, 1)
       },
       {
         'title': 'Long Event',
-        'start': new Date(2015, 3, 7),
-        'end': new Date(2015, 3, 10)
+        'start': new Date(2019, 3, 7),
+        'end': new Date(2019, 3, 10)
       },
     
       {
         'title': 'DTS STARTS',
-        'start': new Date(2016, 2, 13, 0, 0, 0),
-        'end': new Date(2016, 2, 20, 0, 0, 0)
+        'start': new Date(2019, 2, 13, 0, 0, 0),
+        'end': new Date(2019, 2, 20, 0, 0, 0)
       },
     
       {
         'title': 'DTS ENDS',
-        'start': new Date(2016, 10, 6, 0, 0, 0),
-        'end': new Date(2016, 10, 13, 0, 0, 0)
+        'start': new Date(2019, 10, 6, 0, 0, 0),
+        'end': new Date(2019, 10, 13, 0, 0, 0)
       },
 
       {
@@ -66,8 +67,7 @@ class calendar extends Component {
   render() {
     return (
       
-      <div>
-        <h1>something</h1>
+      <div className="calendarWrapper">
         <Calendar
         selectable
         events={this.state.events}
