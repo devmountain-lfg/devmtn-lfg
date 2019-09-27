@@ -29,7 +29,7 @@ module.exports = {
                     }
                 }
                 
-                return containsNum;
+                return containsChar;
             }
             
             const {firstName, lastName, gender, email, phoneNumber, username, password} = req.body;
@@ -43,11 +43,13 @@ module.exports = {
             if (username === null || username === "") return res.status(400).send('Invalid username');
             if (password === null || password === "" || password.length < 7 || checkForNumber(password) === false) return res.status(400).send('Invalid password. Password must be at least 7 characters long and contain at least one number');
             if (phoneNumber !== null && checkForNonNumbers(phoneNumber) === true) return res.status(400).send('Invalid character in Phone Number');
-
-            await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName,lastName,gender,email,phoneNumber,username,password]);   
+            
+            
+            await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName,lastName,gender,email,phoneNumber,username,password]);
             res.send(`${firstName} ${lastName} has been added`);
             
         } catch (error) {
+            console.log(error)
             res.send(error);            
         }    
 

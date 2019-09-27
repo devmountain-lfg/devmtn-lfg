@@ -27,13 +27,13 @@ class AuthenticatedRoutes extends React.Component {
   render() {
     return (
       <div>
-        <Route path="app/home_page" component={Homepage} />
-        <Route path="app/calendar" component={Calendar} />
-        <Route path="app/manage_events" component={ManageEvents} />
-        <Route path="app/create_event" component={CreateEvents} />
-        <Route path="app/user_setup" component={UserSetup} />
-        <Route path="app/chats" component={Chats} />
-        <Route path="app/settings" component={Settings} />
+        <Route path="/app/home_page" component={Homepage} />
+        <Route path="/app/calendar" component={Calendar} />
+        <Route path="/app/manage_events" component={ManageEvents} />
+        <Route path="/app/create_event" component={CreateEvents} />
+        <Route path="/app/user_setup" component={UserSetup} />
+        <Route path="/app/chats" component={Chats} />
+        <Route path="/app/settings" component={Settings} />
       </div>
     );
   }
