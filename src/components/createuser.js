@@ -13,7 +13,7 @@ class createuser extends Component {
       username: "",
       gender: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       password: "",
       passVerify: "",
       matchingPass: false,
@@ -23,14 +23,25 @@ class createuser extends Component {
 
   handleCreation = async () => {
     try {
-      const { firstName, lastName, gender, email, password, username } = this.state;
-      const body = { firstName, lastName, gender, email, password, username };
-      await axios.post("create-new-user", body).then(response => {
+      if(this.state.matchingPass === false) {
+        alert("Your passwords must match!")
+      }
+      const {
+        firstName,
+        lastName,
+        gender,
+        email,
+        password,
+        username,
+        phoneNumber
+      } = this.state;
+      const body = { firstName, lastName, gender, email, phoneNumber, password, username };
+      await axios.post("create-new-user", body);
         this.setState({ created: true });
         alert("User successfully created!");
         this.props.history.push("/app/home_page");
-      });
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   };
@@ -84,7 +95,14 @@ class createuser extends Component {
             onChange={e => this.setState({ email: e.target.value })}
             required="required"
           ></input>
-
+          <input
+            className="input-ref-large"
+            type="tel"
+            placeholder="Phone Number"
+            onChange={e => this.setState({ phoneNumber: e.target.value })}
+            required="required"
+            pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
+          ></input>
           <input
             className="input-ref-large"
             type="password"
@@ -109,7 +127,6 @@ class createuser extends Component {
           <button
             className="button-ref-medium"
             onClick={this.handleCreation}
-            // disabled={!this.state.matchingPass}
           >
             Create Account
           </button>
