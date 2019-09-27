@@ -51,5 +51,37 @@ module.exports = {
             res.send(error);            
         }    
 
+    },
+
+    filthyFilter: (req, res) => {
+        const badNouns = [' shit ',' bitch ',' ass ',' asshole ',' jackass ',' dick ',' cunt ',' hell ', ' god ', ' pussy ', ' nigger '];
+        const badVerbs = [' fuck '];
+        const badAdjs = [' shitty ',' fucking '];
+        const badInterjections = [' damn '];
+
+        const cleanNouns = [' cupcake ',' ferry ',' princess ',' sweetheart '];
+        const cleanVerbs = [' kiss ',' smile ',' giggle ',' dance ',' love '];
+        const cleanAdjs = [' cute ',' pretty ',' silly '];
+        const cleanInterjections = [' gas planet ',' poop ',' holy smokes ',' gosh '];
+
+        const cleanFilthyWords = (str) => {
+            let text = str.split(' ');
+
+            for (var i = 0; i < text.length; i++) {
+                if (badNouns.includes(text[i])) {
+                    text[i] = cleanNouns[Math.floor(Math.random() * cleanNouns.length)];
+                } 
+                else if (badVerbs.includes(text[i])) {
+                    text[i] = cleanVerbs[Math.floor(Math.random() * cleanVerbs.length)];
+                } 
+                else if (badAdjs.includes(text[i])) {
+                    text[i] = cleanAdjs[Math.floor(Math.random() * cleanAdjs.length)];
+                } else if (badInterjections.includes(text[i])) {
+                    text[i] = cleanInterjections[Math.floor(Math.random() * cleanInterjections.length)];
+                } 
+
+                return text.join(' ');
+            }
+        }
     }
 }
