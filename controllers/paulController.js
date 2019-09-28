@@ -29,7 +29,7 @@ module.exports = {
                     }
                 }
                 
-                return containsNum;
+                return containsChar;
             }
             
             const {firstName, lastName, gender, email, phoneNumber, username, password} = req.body;
@@ -51,5 +51,36 @@ module.exports = {
             res.send(error);            
         }    
 
+    },
+
+    createNewEvent: async (req, res) => {
+        try {
+            const db = req.app.get('db');
+            const {activityId, eventStart, eventEnd, isPublic, maxPlayers} = req.body;
+            let today = new Date();
+            let eventDateStart = new Date(eventStart);
+            let eventDateEnd = new Date(eventEnd);
+            today = today.getTime();
+            eventDateStart = eventDateStart.getTime();
+            eventDateEnd = eventDateEnd.getTime();
+
+            if(!activityId) return res.status(400).send("Please select an activity");
+            if(!eventStart || !eventEnd) return res.status(400).send("Please enter a Start and End date and time");
+            if(eventDateStart < today || eventDateEnd < today) return res.status(400).send("Invalid date. Event date is in the past");
+            if(isPublic === null) return res.status(400).send("Please choose public or private");
+            if(!maxPlayers || maxPlayers < 2) return res.status(400).send("Invalid amount for max players. Must be greater than 1");
+            if(!req.session.user) return res.status(400).send("Please sign in");
+
+            const creatorId = req.session.user.user_id;
+            
+            await db.query("call createNewEvent($1,$2, $3,$4,$5,$6)", [activityId, eventStart, eventEnd, isPublic, maxPlayers, creatorId]);
+            const [activityNameRes] = await db.query(`select activity_name from activities where activity_id = ${activityId}`);
+            const activityName = activityNameRes.activity_name;
+
+            res.send(`Event created: ${activityName} on ${eventStart} at `)
+        } catch (error) {
+            console.log(error)
+         res.send(error);   
+        }
     }
 }
