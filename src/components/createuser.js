@@ -10,9 +10,10 @@ class createuser extends Component {
     this.state = {
       firstName: "",
       lastName: "",
+      username: "",
       gender: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       password: "",
       passVerify: "",
       matchingPass: false,
@@ -22,25 +23,32 @@ class createuser extends Component {
 
   handleCreation = async () => {
     try {
-      console.log(this.state);
-      // const body = {};
-
-      // axios.post("/create_user", body).then(response => {
-      //   this.setState({ created: true });
-      //   this.props.history.push("/app/home_page");
-      // });
+      if(this.state.matchingPass === false) {
+        alert("Your passwords must match!")
+      }
+      const {
+        firstName,
+        lastName,
+        gender,
+        email,
+        password,
+        username,
+        phoneNumber
+      } = this.state;
+      const body = { firstName, lastName, gender, email, phoneNumber, password, username };
+      await axios.post("create-new-user", body);
+        this.setState({ created: true });
+        alert("User successfully created!");
+        this.props.history.push("/app/home_page");
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   };
 
   disabledHandler = () => {
     const { password, passVerify } = this.state;
-    if (password === passVerify) {
-      this.setState(prevState => ({
-        matchingPass: !prevState.matchingPass
-      }));
-    }
+    this.setState({ matchingPass: password === passVerify });
   };
 
   render() {
@@ -51,15 +59,22 @@ class createuser extends Component {
           <input
             className="input-ref-large"
             type="text"
-            placeholder="first"
+            placeholder="First Name"
             onChange={e => this.setState({ firstName: e.target.value })}
             required="required"
           ></input>
           <input
             className="input-ref-large"
             type="text"
-            placeholder="last"
+            placeholder="Last Name"
             onChange={e => this.setState({ lastName: e.target.value })}
+            required="required"
+          ></input>
+          <input
+            className="input-ref-large"
+            type="text"
+            placeholder="LFG User Name"
+            onChange={e => this.setState({ username: e.target.value })}
             required="required"
           ></input>
           <select
@@ -67,35 +82,44 @@ class createuser extends Component {
             name="gender"
             onChange={e => this.setState({ gender: e.target.value })}
           >
-            <option value="" disabled selected>Select your option</option>
-            <option>Male</option>
-            <option>Female</option>
+            <option value="" disabled selected>
+              Select your gender
+            </option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
           </select>
           <input
             className="input-ref-large"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             onChange={e => this.setState({ email: e.target.value })}
             required="required"
           ></input>
-
+          <input
+            className="input-ref-large"
+            type="tel"
+            placeholder="Phone Number"
+            onChange={e => this.setState({ phoneNumber: e.target.value })}
+            required="required"
+            pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
+          ></input>
           <input
             className="input-ref-large"
             type="password"
-            placeholder="password"
-            onChange={e => {
+            placeholder="Password"
+            onChange={async e => {
+              await this.setState({ password: e.target.value });
               this.disabledHandler();
-              this.setState({ password: e.target.value });
             }}
             required="required"
           ></input>
           <input
             className="input-ref-large"
             type="password"
-            placeholder="verifyPass"
-            onChange={e => {
+            placeholder="Verify Password"
+            onChange={async e => {
+              await this.setState({ passVerify: e.target.value });
               this.disabledHandler();
-              this.setState({ passVerify: e.target.value });
             }}
             required="required"
           ></input>
@@ -103,7 +127,6 @@ class createuser extends Component {
           <button
             className="button-ref-medium"
             onClick={this.handleCreation}
-            disabled={!this.state.matchingPass}
           >
             Create Account
           </button>

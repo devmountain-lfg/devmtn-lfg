@@ -6,6 +6,7 @@ import axios from "axios";
 
 class PublicPage extends Component {
   render() {
+    console.log()
     return (
       <div className="publicpage-ref">
         <header className="header-ref">

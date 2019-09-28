@@ -45,8 +45,8 @@ module.exports = {
             if (phoneNumber !== null && checkForNonNumbers(phoneNumber) === true) return res.status(400).send('Invalid character in Phone Number');
 
             await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName,lastName,gender,email,phoneNumber,username,password]);   
-
             res.send(`${firstName} ${lastName} has been added`);
+            
         } catch (error) {
             res.send(error);            
         }    

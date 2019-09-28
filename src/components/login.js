@@ -22,7 +22,6 @@ class Login extends Component {
       };
       if (body.username && body.password) {
         axios.post("/login", body).then(response => {
-          console.log(response.data);
           this.setState({ currentUser: user });
           this.props.history.push("/app/home_page");
         });

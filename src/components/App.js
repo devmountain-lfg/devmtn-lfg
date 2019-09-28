@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import PublicPage from "./publicpage";
 import CreateUser from "./createuser";
@@ -15,19 +15,38 @@ import "../styling/reference.css";
 import Reference from "../reference";
 
 class AuthenticatedRoutes extends React.Component {
-  async componentDidMount() {
-    try {
-      const user = await axios.get("/me");
-    } catch (error) {
-      console.log("Need to login first.", error);
-      this.props.history.push("/public_page");
-    }
-  }
+  state = {
+    user: {},
+    loading: true
+  };
+
+  componentDidMount() {
+    axios
+      .get("/me")
+      .then(response => {
+        this.setState({
+          user: response.data,
+          loading: false
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
+    if(this.state.loading) return <div>Loading...</div>
     return (
       <div>
-        <Route path="/app/home_page" component={Homepage} />
+        <Route
+          path="/app/home_page"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <Homepage/>;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
         <Route path="/app/calendar" component={Calendar} />
         <Route path="/app/manage_events" component={ManageEvents} />
         <Route path="/app/create_event" component={CreateEvents} />
@@ -53,7 +72,7 @@ function App() {
           <Route path="/create_user" component={CreateUser} />
           <Route path="/Reference" component={Reference} />
           <Route path="/public_page" component={PublicPage} />
-          <Route path="/login" component={Login}/>
+          <Route path="/login" component={Login} />
         </Switch>
       </Router>
     </div>
