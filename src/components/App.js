@@ -28,6 +28,7 @@ class AuthenticatedRoutes extends React.Component {
           user: response.data,
           loading: false
         });
+        console.log(this.state.user)
       })
       .catch(err => console.log(err));
   };
@@ -41,7 +42,7 @@ class AuthenticatedRoutes extends React.Component {
           render={() => {
             const { user } = this.state;
             if (user.username) {
-              return <Homepage/>;
+              return <Homepage userInfo={this.state.user}/>;
             } else {
               return <Redirect to="/public_page" />;
             }

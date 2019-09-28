@@ -63,7 +63,9 @@ CREATE PROCEDURE createNewEvent(
     event_date_end TIMESTAMP,
     is_public_event BOOLEAN,
     max_player int,
-    creator_id int
+    creator_id int,
+    event_message varchar,
+    event_location varchar
 )
 LANGUAGE plpgsql    
 AS $$
@@ -94,8 +96,14 @@ BEGIN
             RETURN;
         END IF;
         
-    INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players)
-    VALUES($1,$2,$3,$4,$6,$5);
+    if $8 is null or $8 = ''
+        THEN
+            RAISE NOTICE 'Invalid location';
+            RETURN;
+        END IF;
+        
+    INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players,event_message,event_location)
+    VALUES($1,$2,$3,$4,$6,$5,$7,$8);
     
      select MAX(e.event_id) from events e where e.creator_id = $6 INTO new_event_id;
     
