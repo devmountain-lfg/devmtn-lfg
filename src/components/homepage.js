@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SingleEvent from "./singleEvent";
+import UserEvents from "./userEvents";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
@@ -8,16 +8,8 @@ class HomePage extends Component {
     super();
 
     this.state = {
-      myEvents: [],
-      id: ""
+      myEvents: []
     };
-  }
-
-  componentDidMount(id) {
-    axios.get(`/events/${id}`).then(response => {
-      console.log(response.data);
-      this.setState({ myEvents: response.data });
-    });
   }
 
   handleLogout = () => {
@@ -35,7 +27,7 @@ class HomePage extends Component {
         <div className="calendar-ref">Calendar will go here</div>
         <div className="my-events-ref">
           <div className="event-title">Events in your area</div>
-          <SingleEvent />
+          <UserEvents userInfo={this.props.userInfo}/>
         </div>
         <footer className="footer-ref">
           <Link to="/app/home_page">
