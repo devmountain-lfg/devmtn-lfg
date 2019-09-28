@@ -67,7 +67,9 @@ CREATE PROCEDURE createNewEvent(
 )
 LANGUAGE plpgsql    
 AS $$
+DECLARE new_event_id INT;
 BEGIN
+
     if $2 < NOW() or $3 < NOW()
         THEN 
            RAISE NOTICE 'Invalid event date. Must be in the future';
@@ -94,6 +96,11 @@ BEGIN
         
     INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players)
     VALUES($1,$2,$3,$4,$6,$5);
+    
+     select MAX(e.event_id) from events e where e.creator_id = $6 INTO new_event_id;
+    
+    INSERT INTO user_events(event_id,user_id)
+    VALUES(new_event_id,$6);
     
     RETURN;
 END;
