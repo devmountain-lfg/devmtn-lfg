@@ -80,5 +80,17 @@ module.exports = {
       res.status(500).send(err);
       console.log(`here is error: ${err}`);
     }
+  },
+
+  getActivities: async (req, res) => {
+    try {
+      const db = req.app.get("db");
+      const query = 'SELECT * FROM activities'
+      const results = await db.query(query);
+      res.status(200).send(results);
+    } catch(err) {
+      console.log(err);
+      res.status(500).send(`Here is error: ${err}`)
+    }
   }
 };
