@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
 
-class SingleEvent extends Component {
+class UserEvents extends Component {
   constructor() {
     super();
 
@@ -13,11 +13,14 @@ class SingleEvent extends Component {
   }
 
   componentDidMount() {
-    axios.get("/current_events").then(response => {
+    console.log(this.props.userInfo)
+    axios.get(`/events/${this.props.userInfo.user_id}`).then(response => {
       console.log(response.data);
       this.setState({ events: response.data });
     });
+    console.log(this.state.events)
   }
+  
   render() {
     console.log(this.state.events)
     const currentEvents = this.state.events.map((event) => {
@@ -44,4 +47,4 @@ class SingleEvent extends Component {
   }
 }
 
-export default SingleEvent;
+export default UserEvents;

@@ -56,7 +56,7 @@ module.exports = {
   getCurrentEvents: async (req, res) => {
     try {
       const db = req.app.get("db");
-      const query = `SELECT * FROM events`;
+      const query = `SELECT * FROM current_events_view`;
       const results = await db.query(query);
       res.status(200).send(results);
     } catch (err) {
@@ -67,14 +67,11 @@ module.exports = {
 
   getMyEvents: async (req, res) => {
     try {
-    const { user_id } = req.params;
+    const user_id = req.params.id;
     const db = req.app.get("db");
-    const query = `SELECT e.activity_id, e.event_date, e.public_event, e.creator_id, e.max_players
-    FROM events as e 
-    JOIN 
-    user_events ON user_events.event_id = e.event_id
-    WHERE user_events.user_id = ${user_id};`;
-      const results = await db.query(query);
+    const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id};`;
+
+    const results = await db.query(query);
       res.status(200).send(results);
     } catch (err) {
       res.status(500).send(err);

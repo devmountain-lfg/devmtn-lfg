@@ -34,6 +34,7 @@ class AuthenticatedRoutes extends React.Component {
           user: response.data,
           loading: false
         });
+        console.log(this.state.user)
       })
       .catch(err => console.log(err));
   }
