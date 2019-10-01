@@ -25,7 +25,12 @@ select u.user_id,
        u.gender,
        a.activity_name,
        e.event_date_start,
-       e.event_date_end
+       e.event_date_end,
+       e.event_message,
+       e.event_location,
+       e.max_players,
+       pc.current_player_count,
+       concat(u.first_name, ' ', u.last_name) creator_name
        
 from users u
      inner join user_events ue
@@ -34,6 +39,8 @@ from users u
      on ue.event_id = e.event_id
      inner join activities a
      on e.activity_id = a.activity_id
+     inner join (select ue.event_id,count(ue.event_id) current_player_count from user_events ue group by ue.event_id) pc
+     on e.event_id = pc.event_id
 ;
 CREATE VIEW current_events_view
 AS
@@ -44,7 +51,9 @@ select a.activity_name,
        a.min_players_required,
        e.max_players,
        pc.player_count current_player_count,
-       concat(u.first_name, ' ', u.last_name) creator_name
+       concat(u.first_name, ' ', u.last_name) creator_name,
+       e.event_message,
+       e.event_location
        
 from events e
      inner join activities a
