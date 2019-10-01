@@ -60,7 +60,7 @@ class createEvent extends Component {
         max_player,
         creator_id
       };
-      await axios.post("create_new_event", body);
+      await axios.post("create_event", body);
       this.setState({ created_event: true });
       alert("Event successfully created!");
       this.props.history.push("/app/home_page");
