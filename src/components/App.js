@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import axios from "axios";
 import PublicPage from "./publicpage";
 import CreateUser from "./createuser";
@@ -31,10 +37,10 @@ class AuthenticatedRoutes extends React.Component {
         console.log(this.state.user)
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
-    if(this.state.loading) return <div>Loading...</div>
+    if (this.state.loading) return <div>Loading...</div>;
     return (
       <div>
         <Route
@@ -42,18 +48,78 @@ class AuthenticatedRoutes extends React.Component {
           render={() => {
             const { user } = this.state;
             if (user.username) {
-              return <Homepage userInfo={this.state.user}/>;
+              return <Homepage />;
             } else {
               return <Redirect to="/public_page" />;
             }
           }}
         />
-        <Route path="/app/calendar" component={Calendar} />
-        <Route path="/app/manage_events" component={ManageEvents} />
-        <Route path="/app/create_event" component={CreateEvents} />
-        <Route path="/app/user_setup" component={UserSetup} />
-        <Route path="/app/chats" component={Chats} />
-        <Route path="/app/settings" component={Settings} />
+        <Route
+          path="/app/calendar"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <Calendar />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/manage_events"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <ManageEvents />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/create_event"
+          render={props => {
+            const { user } = this.state;
+            if (user.username) {
+              return <CreateEvents {...props} user={this.state.user} />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/user_setup"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <UserSetup />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/chats"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <Chats />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/settings"
+          render={() => {
+            const { user } = this.state;
+            if (user.username) {
+              return <Settings />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
       </div>
     );
   }
