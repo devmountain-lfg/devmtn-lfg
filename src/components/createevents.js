@@ -15,6 +15,13 @@ class createEvent extends Component {
       event_date_end: "",
       is_public_event: false,
       max_player: 0,
+      message: "",
+      locationStreet_one: "",
+      locationStreet_two: null,
+      street_submit: "",
+      locationCity: "",
+      locationZip: 0,
+      locationState: "",
       created_event: false
     };
   }
@@ -39,6 +46,14 @@ class createEvent extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  streetGenerator = (str_one, str_two) => {
+      if(!str_two) {
+        return str_one
+      } else {
+        return `${str_one}, ${str_two}`
+      };
+  }
+
   handleCreation = async () => {
     try {
       if (!this.state.activity_id) {
@@ -49,18 +64,26 @@ class createEvent extends Component {
         event_date_start,
         event_date_end,
         is_public_event,
-        max_player
-      } = this.state;
-      const creator_id = this.state.creator.user_id;
-      const body = {
-        activity_id,
-        event_date_start,
-        event_date_end,
-        is_public_event,
         max_player,
-        creator_id
+        message,
+        locationStreet_one,
+        locationStreet_two,
+        locationCity,
+        locationZip,
+        locationState
+        } = this.state;
+        const realStreet = this.streetGenerator(locationStreet_one, locationStreet_two);
+      const body = {
+        activityId: activity_id,
+        eventStart: event_date_start,
+        eventEnd: event_date_end,
+        isPublic: is_public_event,
+        maxPlayers: max_player,
+        message: message,
+        location: `${realStreet}, ${locationCity}, ${locationState}, ${locationZip}`
       };
-      await axios.post("create_event", body);
+      const results = await axios.post("/create_event", body);
+      console.log(results);
       this.setState({ created_event: true });
       alert("Event successfully created!");
       this.props.history.push("/app/home_page");
@@ -80,7 +103,7 @@ class createEvent extends Component {
     return (
       <div className="publicpage-ref">
         <div className="welcome-back">Let's create your event!</div>
-        <div className="login-logout">
+        <div className="login-logout" style={{ height: "700px" }}>
           <select
             className="input-ref-large"
             name="activity_id"
@@ -127,11 +150,68 @@ class createEvent extends Component {
             type="number"
             placeholder="Max number of players"
             onChange={this.handleChange}
-            required="required"
+            required
             name="max_player"
           ></input>
+          <textarea
+            className="input-ref-large"
+            type="text"
+            placeholder="Event Description"
+            onChange={this.handleChange}
+            required
+            name="message"
+            cols="33"
+            rows="5"
+            style={{ height: "100px" }}
+          ></textarea>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+              height: "150px",
+              width: "350px"
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Street Address #1"
+              name="locationStreet_one"
+              style={{ border: "1px solid black", height: "25px" }}
+              onChange={this.handleChange}
+            ></input>{" "}
+            <input
+              type="text"
+              placeholder="Street Address #2"
+              name="locationStreet_two"
+              style={{ border: "1px solid black", height: "25px" }}
+              onChange={this.handleChange}
+            ></input>{" "}
+            <input
+              type="text"
+              placeholder="City"
+              name="locationCity"
+              style={{ border: "1px solid black", height: "25px" }}
+              onChange={this.handleChange}
+            ></input>{" "}
+            <input
+              type="text"
+              placeholder="State"
+              name="locationState"
+              style={{ border: "1px solid black", height: "25px" }}
+              onChange={this.handleChange}
+            ></input>{" "}
+            <input
+              type="text"
+              placeholder="ZIP"
+              name="locationZip"
+              style={{ border: "1px solid black", height: "25px" }}
+              onChange={this.handleChange}
+            ></input>{" "}
+          </div>
           {/* <Link to="/homepage"> */}
-          <button className="button-ref-medium" onClick={this.handleCreation}>
+          <button className="button-ref-medium" onClick={this.handleCreation} style={{backgroundColor: "#E1DFE5"}}>
             Create Event
           </button>
           {/* </Link> */}
