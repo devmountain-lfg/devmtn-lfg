@@ -59,7 +59,7 @@ class AuthenticatedRoutes extends React.Component {
           render={() => {
             const { user } = this.state;
             if (user.username) {
-              return <Calendar />;
+              return <Calendar userInfo={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
