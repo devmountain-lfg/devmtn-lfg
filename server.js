@@ -43,6 +43,7 @@ app.post("/login", drewController.login);
 app.post("create_user", paulController.createNewUser);
 app.post("/create_event", paulController.createNewEvent);
 app.get("/logout", drewController.logout);
+app.get("/activities", drewController.getActivities);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
