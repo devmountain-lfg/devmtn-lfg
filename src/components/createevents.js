@@ -27,6 +27,7 @@ class createEvent extends Component {
     axios
       .get("/activities")
       .then(response => {
+        console.log(response.data);
         this.setState({
           activities: response.data
         });
