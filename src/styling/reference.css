@@ -45,6 +45,7 @@
   width: 300px;
   border: 1px solid black;
   margin: 2px;
+  resize: none;
 }
 
 .all-buttons-ref {
@@ -70,6 +71,7 @@
   width: 150px;
   height: 50px;
   margin: 2px;
+  background-color: "#E1DFE5"
 }
 .button-ref-large {
   display: flex;

@@ -40,7 +40,7 @@ app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
 app.get("/events/:id", drewController.getMyEvents);
 app.post("/login", drewController.login);
-app.post("create_user", paulController.createNewUser);
+app.post("/create_user", paulController.createNewUser);
 app.post("/create_event", paulController.createNewEvent);
 app.get("/logout", drewController.logout);
 app.get("/activities", drewController.getActivities);
