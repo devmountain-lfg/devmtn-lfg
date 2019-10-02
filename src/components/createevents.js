@@ -47,12 +47,12 @@ class createEvent extends Component {
   };
 
   streetGenerator = (str_one, str_two) => {
-      if(!str_two) {
-        return str_one
-      } else {
-        return `${str_one}, ${str_two}`
-      };
-  }
+    if (!str_two) {
+      return str_one;
+    } else {
+      return `${str_one}, ${str_two}`;
+    }
+  };
 
   handleCreation = async () => {
     try {
@@ -71,8 +71,11 @@ class createEvent extends Component {
         locationCity,
         locationZip,
         locationState
-        } = this.state;
-        const realStreet = this.streetGenerator(locationStreet_one, locationStreet_two);
+      } = this.state;
+      const realStreet = this.streetGenerator(
+        locationStreet_one,
+        locationStreet_two
+      );
       const body = {
         activityId: activity_id,
         eventStart: event_date_start,
@@ -211,7 +214,11 @@ class createEvent extends Component {
             ></input>{" "}
           </div>
           {/* <Link to="/homepage"> */}
-          <button className="button-ref-medium" onClick={this.handleCreation} style={{backgroundColor: "#E1DFE5"}}>
+          <button
+            className="button-ref-medium"
+            onClick={this.handleCreation}
+            style={{ backgroundColor: "#E1DFE5" }}
+          >
             Create Event
           </button>
           {/* </Link> */}
