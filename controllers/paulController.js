@@ -84,5 +84,61 @@ module.exports = {
             console.log(error)
          res.send(error);   
         }
+    },
+
+    joinEvent: async (req, res) => {
+        try {
+            if(!req.session.user) return res.status(400).send('You are not signed in');
+            if(!req.body.eventId) return res.status(400).send('Please select an event');
+            const db = req.app.get('db');
+            const userId = req.session.user.user_id;
+            const eventId = req.body.eventId;
+    
+            let sqlResponse = await db.query("call joinEvent($1,$2)", [userId, eventId]); 
+            sqlResponse = 'You have successfully joined this event';
+            res.send(sqlResponse);
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    },
+
+    unjoinEvent: async (req, res) => {
+        try {
+            if(!req.session.user) return res.status(400).send('You are not signed in');
+            if(!req.body.eventId) return res.status(400).send('Please select an event');
+            const db = req.app.get('db');
+            const userId = req.session.user.user_id;
+            const eventId = req.body.eventId;
+    
+            let sqlResponse = await db.query("call unjoinEvent($1,$2)", [userId, eventId]); 
+            sqlResponse = 'You have successfully unjoined this event';
+            res.send(sqlResponse);
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    },
+
+    updateUser: async (req, res) => {
+        try {
+            const db = req.app.get('db');
+            if(!req.session.user) return res.status(400).send('Please sign in');
+            const userId = req.session.user.user_id;
+            const {first_name, last_name, gender, email, phone_number, username, universal_distance} = req.body;
+
+            if (gender !== null && gender !== "M" && gender !== "F") res.status(400).send('Invalid gender. Please enter M, F or leave blank');
+            if (email && !email.includes('@')) return res.status(400).send('Invalid email');
+
+            await db.query("call updateUser($1,$2,$3,$4,$5,$6,$7,$8)", [userId, first_name, last_name, gender, email, phone_number,username, universal_distance]);
+
+            res.send('Account successfully updated');
+        } catch (error) {
+            console.log(error);
+            res.send(error);            
+        }
+
+
+
     }
 }
