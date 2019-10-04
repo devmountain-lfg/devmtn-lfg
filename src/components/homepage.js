@@ -3,6 +3,7 @@ import UserEvents from "./userEvents";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
+import Calendar from "./calendarComponent";
 class HomePage extends Component {
   constructor() {
     super();
@@ -24,7 +25,9 @@ class HomePage extends Component {
             Sign Out
           </button>
         </header>
-        <div className="calendar-ref">Calendar will go here</div>
+        <div className="calendar-ref">
+          <Calendar userInfo={this.props.userInfo} myEvents={this.state.myEvents}/>
+        </div>
         <div className="my-events-ref">
           <div className="event-title">Events in your area</div>
           <UserEvents userInfo={this.props.userInfo}/>
