@@ -38,7 +38,9 @@ app.use(
 
 app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
-app.get("/events/:id", drewController.getMyEvents);
+app.get("/events_created", drewController.getMyCreatedEvents);
+app.get("/events_joined", drewController.getJoinedEvents);
+app.get("/events", drewController.getAllMyEvents);
 app.post("/login", drewController.login);
 app.post("/create_user", paulController.createNewUser);
 app.post("/create_event", paulController.createNewEvent);

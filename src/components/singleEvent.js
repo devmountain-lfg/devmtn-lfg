@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
+import moment from 'moment';
 
 class SingleEvent extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class SingleEvent extends Component {
             </div>
           </div>
           <div className="message">{event.event_message}</div>
-          <div>{event.event_date_start}</div>
+          <div>{moment(event.event_date_start).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
           <div>{event.event_location}</div>
         </div>
       );

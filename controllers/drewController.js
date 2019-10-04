@@ -65,9 +65,23 @@ module.exports = {
     }
   },
 
-  getMyEvents: async (req, res) => {
+  getMyCreatedEvents: async (req, res) => {
     try {
-    const user_id = req.params.id;
+    const user_id = req.query.user_id;
+    const db = req.app.get("db");
+    const query = `SELECT * FROM user_events_view u WHERE u.creator_id = ${user_id};`;
+
+    const results = await db.query(query);
+      res.status(200).send(results);
+    } catch (err) {
+      res.status(500).send(err);
+      console.log(`here is error: ${err}`);
+    }
+  },
+
+  getJoinedEvents: async (req, res) => {
+    try {
+    const user_id = req.query.user_id;
     const db = req.app.get("db");
     const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id};`;
 
@@ -78,6 +92,22 @@ module.exports = {
       console.log(`here is error: ${err}`);
     }
   },
+
+  getAllMyEvents: async (req, res) => {
+    try {
+    const user_id = req.query.user_id;
+    console.log('this is req', req);
+    const db = req.app.get("db");
+    const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id} OR u.creator_id = ${user_id};`;
+
+    const results = await db.query(query);
+      res.status(200).send(results);
+    } catch (err) {
+      res.status(500).send(err);
+      console.log(`here is error: ${err}`);
+    }
+  },
+
 
   getActivities: async (req, res) => {
     try {

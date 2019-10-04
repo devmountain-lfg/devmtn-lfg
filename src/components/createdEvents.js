@@ -4,7 +4,7 @@ import "../styling/publicpage.css";
 import axios from "axios";
 import moment from "moment";
 
-class UserEvents extends Component {
+class CreatedEvents extends Component {
   constructor() {
     super();
 
@@ -14,13 +14,13 @@ class UserEvents extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo);
+    console.log('this is props on CreatedEvents', this.props.userInfo);
     axios
-      .get(`/events`, { params: { user_id: this.props.userInfo.user_id } })
-      .then(() => {
-        return axios.get("/current_events").then(response => {
-          this.setState({ events: response.data });
-        });
+      .get(`/events_created`, {
+        params: { user_id: this.props.userInfo.user_id }
+      })
+      .then(response => {
+        this.setState({ events: response.data });
       });
   }
 
@@ -56,4 +56,4 @@ class UserEvents extends Component {
   }
 }
 
-export default UserEvents;
+export default CreatedEvents;
