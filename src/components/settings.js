@@ -50,7 +50,7 @@ class Settings extends Component {
         password: user_password,
         username: username
       };
-      await axios.post("/update_user", body);
+      await axios.put("/update_user", body);
       alert("User successfully updated!");
       this.props.history.push("/app/home_page");
     } catch (error) {
