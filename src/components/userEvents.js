@@ -14,10 +14,10 @@ class UserEvents extends Component {
   componentDidMount() {
     console.log(this.props.userInfo);
     axios.get(`/events/${this.props.userInfo.user_id}`).then(response => {
-      console.log(response.data);
-      this.setState({ events: response.data });
+      return axios.get("/current_events").then(response => {
+        this.setState({ events: response.data });
+      });
     });
-    console.log(this.state.events);
   }
 
   render() {
