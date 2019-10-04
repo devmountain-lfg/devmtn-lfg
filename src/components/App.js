@@ -44,10 +44,10 @@ class AuthenticatedRoutes extends React.Component {
       <div>
         <Route
           path="/app/home_page"
-          render={() => {
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
-              return <Homepage userInfo={this.state.user} />;
+              return <Homepage {...props} userInfo={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
@@ -55,10 +55,10 @@ class AuthenticatedRoutes extends React.Component {
         />
         <Route
           path="/app/calendar"
-          render={() => {
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
-              return <Calendar userInfo={this.state.user} />;
+              return <Calendar {...props} userInfo={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }

@@ -13,8 +13,8 @@ class calendarComponent extends Component {
   }
   getEvents = async () => {
     const response = await axios.get(`/events/${this.props.userInfo.user_id}`);
+    if (response.data.length > 0)
     {
-      if (response.data.length > 0) {
       this.setState({
         events: response.data.map(item => ({
           id: item.id,
@@ -25,23 +25,28 @@ class calendarComponent extends Component {
           description: item.description
         }))
       });
-    }
     };
   }
 
+  handleClick = async (props) => {
+    this.props.history.push("/app/calendar");
+  }
 
   async componentDidMount() {
     this.getEvents();
   }
 
+ 
 
   render() {
     return (
         <Calendar
+          selectable
           events={this.state.events}
           showMultiDayTimes
           localizer={localizer}
           views={{ month: true}}
+          onSelectSlot={this.handleClick}
         />
     );
   }

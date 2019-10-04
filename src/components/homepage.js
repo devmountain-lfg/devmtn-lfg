@@ -13,6 +13,8 @@ class HomePage extends Component {
     };
   }
 
+  
+
   handleLogout = () => {
     axios.get("/logout").then(this.props.history.push("/home_page"));
   };
@@ -21,12 +23,12 @@ class HomePage extends Component {
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
-          <button className="button-ref-medium" onClick={this.handleLogout}>
+          <button className="button-ref-medium">
             Sign Out
           </button>
         </header>
-        <div className="calendar-ref">
-          <Calendar userInfo={this.props.userInfo} myEvents={this.state.myEvents}/>
+        <div className="calendar-ref" >
+          <Calendar {...this.props} userInfo={this.props.userInfo}  />
         </div>
         <div className="my-events-ref">
           <div className="event-title">Events in your area</div>
