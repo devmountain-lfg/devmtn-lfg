@@ -13,10 +13,7 @@ class Settings extends Component {
       username: "",
       gender: "",
       email: "",
-      phone_number: "",
-      user_password: "",
-      passVerify: "",
-      matchingPass: false
+      phone_number: ""
     };
   }
 
@@ -38,8 +35,7 @@ class Settings extends Component {
         email,
         username,
         gender,
-        phone_number,
-        user_password
+        phone_number
       } = this.state;
       const body = {
         firstName: first_name,
@@ -47,7 +43,6 @@ class Settings extends Component {
         gender: gender,
         email: email,
         phoneNumber: phone_number,
-        password: user_password,
         username: username
       };
       await axios.put("/update_user", body);
@@ -56,11 +51,6 @@ class Settings extends Component {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  disabledHandler = () => {
-    const { password, passVerify } = this.state;
-    this.setState({ matchingPass: password === passVerify });
   };
 
   handleChange = e => {
@@ -74,8 +64,7 @@ class Settings extends Component {
       email,
       username,
       gender,
-      phone_number,
-      user_password
+      phone_number
     } = this.state.currentUser;
     return (
       <div className="publicpage-ref">
@@ -128,27 +117,6 @@ class Settings extends Component {
             value={phone_number}
             onChange={e => this.handleChange(e)}
             pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
-          ></input>
-          <input
-            className="input-ref-large"
-            type="password"
-            name="user_password"
-            value={user_password}
-            onChange={async e => {
-              await this.handleChange(e);
-              this.disabledHandler();
-            }}
-          ></input>
-          <input
-            className="input-ref-large"
-            type="password"
-            name="passVerify"
-            placeholder="Verify Password"
-            onChange={async e => {
-              await this.handleChange(e);
-              this.disabledHandler();
-            }}
-            required="required"
           ></input>
 
           <button className="button-ref-medium" onClick={this.handleCreation}>

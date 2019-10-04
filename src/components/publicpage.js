@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SingleEvent from "./singleEvent";
 import "../styling/publicpage.css";
-import axios from "axios";
 
 class PublicPage extends Component {
   render() {
-    console.log()
+    console.log();
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
