@@ -10,11 +10,11 @@ const localizer = momentLocalizer(moment);
 class calendar extends Component {
   state = {
     events: []
-  }
+  };
   getEvents = async () => {
     const response = await axios.get(`/events/${this.props.userInfo.user_id}`);
-    {
-      if (response.data.length > 0) {
+
+    if (response.data.length > 0) {
       this.setState({
         events: response.data.map(item => ({
           id: item.id,
@@ -26,9 +26,7 @@ class calendar extends Component {
         }))
       });
     }
-    };
-  }
-
+  };
 
   async componentDidMount() {
     this.getEvents();
@@ -49,9 +47,11 @@ class calendar extends Component {
           showMultiDayTimes
           localizer={localizer}
           step={15}
-          onSelectEvent={event => alert(`Start Time ${event.start}
+          onSelectEvent={event =>
+            alert(`Start Time ${event.start}
           End Time ${event.end}
-          Location "("to be figured out")"`)}
+          Location "("to be figured out")"`)
+          }
         />
       </div>
     );

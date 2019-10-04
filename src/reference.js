@@ -8,7 +8,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import React from "react";
 import "./styling/reference.css";
-import { Checkbox } from "@material-ui/core";
 
 function Reference(props) {
   return (
