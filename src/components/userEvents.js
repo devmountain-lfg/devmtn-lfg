@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
 
@@ -13,23 +12,25 @@ class UserEvents extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo)
+    console.log(this.props.userInfo);
     axios.get(`/events/${this.props.userInfo.user_id}`).then(response => {
       console.log(response.data);
       this.setState({ events: response.data });
     });
-    console.log(this.state.events)
+    console.log(this.state.events);
   }
-  
+
   render() {
-    console.log(this.state.events)
-    const currentEvents = this.state.events.map((event) => {
+    console.log(this.state.events);
+    const currentEvents = this.state.events.map(event => {
       return (
         <div className="event" key={event.event_id}>
           <div className="event-top">
             <div className="creator-ref">
               <div className="creator">{event.creator_name}</div>
-              <div className="people">{event.current_player_count}/{event.max_players}</div>
+              <div className="people">
+                {event.current_player_count}/{event.max_players}
+              </div>
             </div>
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
