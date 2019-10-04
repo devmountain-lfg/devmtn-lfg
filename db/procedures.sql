@@ -1,5 +1,9 @@
 DROP PROCEDURE IF EXISTS addnewuser;
 DROP PROCEDURE IF EXISTS createNewEvent;
+DROP PROCEDURE IF EXISTS joinEvent;
+DROP PROCEDURE IF EXISTS unJoinEvent;
+DROP PROCEDURE IF EXISTS updateUser;
+
 
 CREATE PROCEDURE addNewUser(
     first_name varchar(50), 
@@ -136,6 +140,10 @@ BEGIN
 END;
 $$;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 CREATE PROCEDURE joinEvent(
     user_id int, 
     event_id int
@@ -270,4 +278,8 @@ BEGIN
 
     RETURN;
 END;
+<<<<<<< HEAD
 $$;
+=======
+$$;
+>>>>>>> master
