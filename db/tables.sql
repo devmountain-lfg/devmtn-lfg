@@ -44,7 +44,11 @@ CREATE TABLE events (
     creator_id int REFERENCES users(user_id),
     max_players int,
     event_message varchar,
-    event_location varchar
+    event_address_1 varchar,
+    event_address_2 varchar,
+    event_city varchar(50),
+    event_state varchar(2),
+    event_zip varchar(10)
 )
 ;
 CREATE TABLE user_events (

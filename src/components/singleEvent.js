@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
 import moment from 'moment';
@@ -9,7 +8,8 @@ class SingleEvent extends Component {
     super();
 
     this.state = {
-      events: []
+      events: [],
+      joined: false
     };
   }
 
@@ -19,20 +19,35 @@ class SingleEvent extends Component {
       this.setState({ events: response.data });
     });
   }
+
+  handleJoin = id => {
+    axios.put(`/events/${id}`).then(this.setState({ joined: true }));
+  };
+
+  handleCancel = id => {
+    axios.put("/cancled").then({ joined: false });
+  };
+
   render() {
-    console.log(this.state.events)
-    const currentEvents = this.state.events.map((event) => {
+    console.log(this.state.events);
+    const currentEvents = this.state.events.map(event => {
       return (
         <div className="event" key={event.event_id}>
           <div className="event-top">
             <div className="creator-ref">
               <div className="creator">{event.creator_name}</div>
-              <div className="people">{event.current_player_count}/{event.max_players}</div>
+              <div className="people">
+                {event.current_player_count}/{event.max_players}
+              </div>
             </div>
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
               <button>DM</button>
-              <button>Join</button>
+              {this.state.joined ? (
+                <button onClick={this.handleJoin}>Join</button>
+              ) : (
+                <button onClick={this.handleCancel}>Cancel</button>
+              )}
             </div>
           </div>
           <div className="message">{event.event_message}</div>
