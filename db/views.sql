@@ -44,8 +44,7 @@ from users u
 ;
 CREATE VIEW current_events_view
 AS
-select e.event_id,
-       a.activity_name,
+select a.activity_name,
        e.created_date,
        e.event_date_start,
        e.event_date_end,
