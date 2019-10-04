@@ -84,7 +84,11 @@ class createEvent extends Component {
         isPublic: is_public_event,
         maxPlayers: max_player,
         message: message,
-        location: `${realStreet}, ${locationCity}, ${locationState}, ${locationZip}`
+        address1: locationStreet_one,
+        address2: locationStreet_two, 
+        city: locationCity, 
+        state: locationState, 
+        zip: locationZip
       };
       const results = await axios.post("/create_event", body);
       console.log(results);

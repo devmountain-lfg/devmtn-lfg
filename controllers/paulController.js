@@ -89,7 +89,7 @@ module.exports = {
 
 
             const creatorId = req.session.user.user_id;
-            
+            console.log(req.body)
             await db.query("call createnewevent($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)", [activityId, eventStart, eventEnd, isPublic, maxPlayers, creatorId, message, address1, address2, city, state, zip]);
             const [activityNameRes] = await db.query(`select activity_name from activities where activity_id = ${activityId}`);
             const activityName = activityNameRes.activity_name;
