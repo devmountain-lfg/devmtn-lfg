@@ -69,7 +69,11 @@ CREATE PROCEDURE createNewEvent(
     max_player int,
     creator_id int,
     event_message varchar,
-    event_location varchar
+    event_address_1 varchar,
+    event_address_2 varchar,
+    event_city varchar(50),
+    event_state varchar(2),
+    event_zip varchar(10)
 )
 LANGUAGE plpgsql    
 AS $$
@@ -102,12 +106,30 @@ BEGIN
         
     if $8 is null or $8 = ''
         THEN
-            RAISE NOTICE 'Invalid location';
+            RAISE NOTICE 'Invalid address';
             RETURN;
         END IF;
         
-    INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players,event_message,event_location)
-    VALUES($1,$2,$3,$4,$6,$5,$7,$8);
+    if $10 is null or $10 = ''
+        THEN
+            RAISE NOTICE 'Invalid city';
+            RETURN;
+        END IF;
+        
+    if $11 is null or $11 = ''
+        THEN
+            RAISE NOTICE 'Invalid state';
+            RETURN;
+        END IF;
+        
+    if $12 is null or $12 = ''
+        THEN
+            RAISE NOTICE 'Invalid zip';
+            RETURN;
+        END IF;
+        
+    INSERT INTO events(activity_id,event_date_start,event_date_end,public_event,creator_id,max_players,event_message,event_address_1,event_address_2,event_city,event_state,event_zip)
+    VALUES($1,$2,$3,$4,$6,$5,$7,$8,$9,$10,$11,$12);
     
      select MAX(e.event_id) from events e where e.creator_id = $6 INTO new_event_id;
     
@@ -118,7 +140,10 @@ BEGIN
 END;
 $$;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 CREATE PROCEDURE joinEvent(
     user_id int, 
     event_id int
@@ -162,6 +187,7 @@ BEGIN
     RETURN;
 END;
 $$;
+
 
 CREATE PROCEDURE updateUser(
     user_id int, 
@@ -252,4 +278,8 @@ BEGIN
 
     RETURN;
 END;
+<<<<<<< HEAD
 $$;
+=======
+$$;
+>>>>>>> master

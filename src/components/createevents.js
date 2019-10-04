@@ -60,6 +60,7 @@ class createEvent extends Component {
       if (!this.state.activity_id) {
         alert("Please select an activity!");
       }
+
       const {
         activity_id,
         event_date_start,
@@ -73,10 +74,7 @@ class createEvent extends Component {
         locationZip,
         locationState
       } = this.state;
-      const realStreet = this.streetGenerator(
-        locationStreet_one,
-        locationStreet_two
-      );
+
       const body = {
         activityId: activity_id,
         eventStart: event_date_start,
@@ -84,8 +82,13 @@ class createEvent extends Component {
         isPublic: is_public_event,
         maxPlayers: max_player,
         message: message,
-        location: `${realStreet}, ${locationCity}, ${locationState}, ${locationZip}`
+        address1: locationStreet_one,
+        address2: locationStreet_two, 
+        city: locationCity, 
+        state: locationState, 
+        zip: locationZip
       };
+
       const results = await axios.post("/create_event", body);
       console.log(results);
       this.setState({ created_event: true });
@@ -126,6 +129,7 @@ class createEvent extends Component {
               onChange={this.handleChange}
               required="required"
               name="event_date_start"
+              value={this.state.event_date_start}
             ></input>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
