@@ -58,7 +58,7 @@ class createEvent extends Component {
   handleCreation = async () => {
     try {
       if (!this.state.activity_id) {
-        alert("Please select an activity!");
+        return alert("Please select an activity!");
       }
 
       const {

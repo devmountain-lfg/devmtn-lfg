@@ -9,6 +9,7 @@ class PublicPage extends Component {
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
+        Check out these events, fam!
           <Link to="/login">
             <button className="button-ref-medium">Sign In</button>
           </Link>

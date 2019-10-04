@@ -66,10 +66,10 @@ class AuthenticatedRoutes extends React.Component {
         />
         <Route
           path="/app/manage_events"
-          render={() => {
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
-              return <ManageEvents />;
+              return <ManageEvents {...props} user={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
