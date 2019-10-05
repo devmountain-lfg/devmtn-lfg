@@ -3,6 +3,7 @@ import UserEvents from "./userEvents";
 import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
+import Calendar from "./calendarComponent";
 class HomePage extends Component {
   constructor() {
     super();
@@ -12,6 +13,8 @@ class HomePage extends Component {
     };
   }
 
+  
+
   handleLogout = () => {
     axios.get("/logout").then(this.props.history.push("/home_page"));
   };
@@ -20,11 +23,13 @@ class HomePage extends Component {
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
-          <button className="button-ref-medium" onClick={this.handleLogout}>
+          <button className="button-ref-medium">
             Sign Out
           </button>
         </header>
-        <div className="calendar-ref">Calendar will go here</div>
+        <div className="calendar-ref" >
+          <Calendar {...this.props} userInfo={this.props.userInfo}  />
+        </div>
         <div className="my-events-ref">
           <div className="event-title">Events in your area</div>
           <UserEvents userInfo={this.props.userInfo}/>
