@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../styling/publicpage.css";
-import UserEvents from "./userEvents";
-import JoinedEvents from "./joinedEvents";
-import CreatedEvents from "./createdEvents";
+import "../../styling/publicpage.css";
+import UserEvents from "../individual_events/userEvents";
+import JoinedEvents from "../individual_events/joinedEvents";
+import CreatedEvents from "../individual_events/createdEvents";
 
 class ManageEvents extends Component {
   constructor() {
@@ -43,7 +43,7 @@ class ManageEvents extends Component {
         </div>
         <div className="my-events-ref">
           <div className="event-title">Your Other Events</div>
-          <JoinedEvents userInfo={this.state.userInfo} />{" "}
+          <JoinedEvents userInfo={this.state.userInfo} />
         </div>
         <footer className="footer-ref">
           <Link to="/app/home_page">

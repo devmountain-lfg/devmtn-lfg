@@ -7,13 +7,14 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import PublicPage from "./publicpage";
-import CreateUser from "./createuser";
-import UserSetup from "./usersetup";
-import CreateEvents from "./createevents";
-import ManageEvents from "./manageevents";
+import CreateUser from "./settings_components/createuser";
+import UserSetup from "./settings_components/usersetup";
+import CreateEvents from "./settings_components/createevents";
+import ChangeEvent from "./settings_components/changeevent";
+import ManageEvents from "./settings_components/manageevents";
 import Calendar from "./calendar";
 import Homepage from "./homepage";
-import Settings from "./settings";
+import Settings from "./settings_components/settings";
 import Chats from "./chat";
 import Login from "./login";
 import "../styling/reference.css";
@@ -44,7 +45,7 @@ class AuthenticatedRoutes extends React.Component {
       <div>
         <Route
           path="/app/home_page"
-          render={(props) => {
+          render={props => {
             const { user } = this.state;
             if (user.username) {
               return <Homepage {...props} userInfo={this.state.user} />;
@@ -55,7 +56,7 @@ class AuthenticatedRoutes extends React.Component {
         />
         <Route
           path="/app/calendar"
-          render={(props) => {
+          render={props => {
             const { user } = this.state;
             if (user.username) {
               return <Calendar {...props} userInfo={this.state.user} />;
@@ -66,7 +67,7 @@ class AuthenticatedRoutes extends React.Component {
         />
         <Route
           path="/app/manage_events"
-          render={(props) => {
+          render={props => {
             const { user } = this.state;
             if (user.username) {
               return <ManageEvents {...props} user={this.state.user} />;
@@ -81,6 +82,17 @@ class AuthenticatedRoutes extends React.Component {
             const { user } = this.state;
             if (user.username) {
               return <CreateEvents {...props} user={this.state.user} />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/change_event/:event_id"
+          render={props => {
+            const { user } = this.state;
+            if (user.username) {
+              return <ChangeEvent {...props} user={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
@@ -137,7 +149,12 @@ function App() {
           <Route path="/app" component={AuthenticatedRoutes} />
           <Route path="/create_user" component={CreateUser} />
           <Route path="/Reference" component={Reference} />
-          <Route path="/public_page" component={PublicPage} />
+          <Route
+            path="/public_page"
+            render={props => {
+              return <PublicPage {...props} />;
+            }}
+          />
           <Route path="/login" component={Login} />
         </Switch>
       </Router>

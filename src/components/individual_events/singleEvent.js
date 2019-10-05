@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "../styling/publicpage.css";
+import "../../styling/publicpage.css";
 import axios from "axios";
 import moment from "moment";
 
-class UserEvents extends Component {
+class SingleEvent extends Component {
   constructor() {
     super();
 
@@ -13,18 +13,20 @@ class UserEvents extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo);
-    axios
-      .get(`/events`, { params: { user_id: this.props.userInfo.user_id } })
-      .then(() => {
-        return axios.get("/current_events").then(response => {
-          this.setState({ events: response.data });
-        });
-      });
+    axios.get("/current_events").then(response => {
+      console.log(response.data);
+      this.setState({ events: response.data });
+    });
   }
 
+  handleAttempt = () => {
+    alert(
+      "We'd love for you to particpate in these activities. Please sign in or create an account in order to do so!"
+    );
+    this.props.history.push("/login");
+  };
+
   render() {
-    console.log(this.state.events);
     const currentEvents = this.state.events.map(event => {
       return (
         <div className="event" key={event.event_id}>
@@ -38,7 +40,7 @@ class UserEvents extends Component {
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
               <button>DM</button>
-              <button>Join</button>
+              <button onClick={this.handleAttempt}>Join</button>
             </div>
           </div>
           <div className="message">{event.event_message}</div>
@@ -55,4 +57,4 @@ class UserEvents extends Component {
   }
 }
 
-export default UserEvents;
+export default SingleEvent;
