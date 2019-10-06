@@ -3,6 +3,7 @@ DROP PROCEDURE IF EXISTS createNewEvent;
 DROP PROCEDURE IF EXISTS joinEvent;
 DROP PROCEDURE IF EXISTS unJoinEvent;
 DROP PROCEDURE IF EXISTS updateUser;
+DROP PROCEDURE IF EXISTS updateEvent;
 
 
 CREATE PROCEDURE addNewUser(
@@ -140,10 +141,6 @@ BEGIN
 END;
 $$;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 CREATE PROCEDURE joinEvent(
     user_id int, 
     event_id int
@@ -278,8 +275,108 @@ BEGIN
 
     RETURN;
 END;
-<<<<<<< HEAD
 $$;
-=======
+
+CREATE PROCEDURE updateEvent(
+    activity_id int, 
+    event_date_start TIMESTAMP,
+    event_date_end TIMESTAMP,
+    is_public_event BOOLEAN,
+    max_player int,
+    event_message varchar,
+    event_address_1 varchar,
+    event_address_2 varchar,
+    event_city varchar(50),
+    event_state varchar(2),
+    event_zip varchar(10),
+    event_id int
+)
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+
+    if $1 is null
+        THEN
+            $1 = (select e.activity_id from events e where e.event_id = $12);
+        END IF;
+        
+    if $2 is null
+        THEN
+            $2 = (select e.event_date_start from events e where e.event_id = $12);
+        END IF;
+        
+    if $3 is null
+        THEN
+            $3 = (select e.event_date_end from events e where e.event_id = $12);
+        END IF;
+        
+    if $4 is null
+        THEN
+            $4 = (select e.public_event from events e where e.event_id = $12);
+        END IF;
+        
+    if $5 is null
+        THEN
+            $5 = (select e.max_players from events e where e.event_id = $12);
+        END IF;
+        
+    if $6 is null or $6 = ''
+        THEN
+            $6 = (select e.event_message from events e where e.event_id = $12);
+        END IF;
+        
+    if $7 is null or $7 = ''
+        THEN
+            $7= (select e.event_address_1 from events e where e.event_id = $12);
+        END IF;
+        
+    if $8 is null or $8 = ''
+        THEN
+            $8 = (select e.event_address_2 from events e where e.event_id = $12);
+        END IF;
+        
+    if $9 is null or $9 = ''
+        THEN
+            $9 = (select e.event_city from events e where e.event_id = $12);
+        END IF;
+        
+    if $10 is null or $10 = ''
+        THEN
+            $10 = (select e.event_state from events e where e.event_id = $12);
+        END IF;
+        
+    if $11 is null or $11 = ''
+        THEN
+            $11 = (select e.event_zip from events e where e.event_id = $12);
+        END IF;
+
+    --if (select count(*) from activities a where a.activity_id = $1) < 1
+      --  THEN
+        --    RAISE NOTICE 'Invalid activity id';
+          --  RETURN;
+        --END IF;
+        
+    if $5 < (select min_players_required from activities a where a.activity_id = $1)
+        THEN 
+            RAISE NOTICE 'Max Players is less than min players required';
+            RETURN;
+        END IF;
+
+
+    UPDATE events e
+    SET activity_id = $1,
+        event_date_start = $2,
+        event_date_end = $3,
+        public_event = $4,
+        max_players = $5,
+        event_message = $6,
+        event_address_1 = $7,
+        event_address_2 = $8,
+        event_city = $9,
+        event_state = $10,
+        event_zip = $11
+    WHERE e.event_id = $12;
+    
+    RETURN;
+END;
 $$;
->>>>>>> master
