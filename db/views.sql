@@ -19,7 +19,8 @@ from users u
 ;
 CREATE VIEW user_events_view
 AS
-select u.user_id,
+select e.event_id,
+       u.user_id,
        u.first_name,
        u.last_name,
        u.gender,
