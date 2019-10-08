@@ -7,6 +7,7 @@
   width: 100vw;
   overflow-y: scroll;
   background: #e1dfe6;
+  font-family: "Heebo", sans-serif;
 }
 
 .body-ref {
@@ -16,6 +17,7 @@
   width: 100vw;
   height: 100%;
   overflow-y: scroll;
+  font-family: "Heebo", sans-serif;
 }
 
 .all-inputs-ref {
@@ -26,6 +28,7 @@
   min-height: 150px;
   border: 1px solid black;
   overflow-y: scroll;
+  font-family: "Heebo", sans-serif;
 }
 
 .input-ref-small {
@@ -33,18 +36,22 @@
   width: 125px;
   border: 1px solid black;
   margin: 2px;
+  font-family: "Heebo", sans-serif;
 }
 .input-ref-medium {
   height: 25px;
   width: 200px;
   border: 1px solid black;
   margin: 2px;
+  font-family: "Heebo", sans-serif;
 }
 .input-ref-large {
   height: 25px;
   width: 300px;
   border: 1px solid black;
   margin: 2px;
+  resize: none;
+  font-family: "Heebo", sans-serif;
 }
 
 .all-buttons-ref {
@@ -55,6 +62,7 @@
   border: 1px solid black;
   overflow-y: scroll;
   min-height: 150px;
+  font-family: "Heebo", sans-serif;
 }
 
 .button-ref-small {
@@ -63,6 +71,7 @@
   margin: 2px;
   width: 75px;
   height: 25px;
+  font-family: "Heebo", sans-serif;
 }
 .button-ref-medium {
   display: flex;
@@ -70,6 +79,8 @@
   width: 150px;
   height: 50px;
   margin: 2px;
+  background-color: "#E1DFE5";
+  font-family: "Heebo", sans-serif;
 }
 .button-ref-large {
   display: flex;
@@ -77,6 +88,7 @@
   width: 300px;
   height: 75px;
   margin: 2px;
+  font-family: "Heebo", sans-serif;
 }
 
 .all-dropdowns-ref {
@@ -87,11 +99,13 @@
   border: 1px solid black;
   overflow-y: scroll;
   min-height: 150px;
+  font-family: "Heebo", sans-serif;
 }
 
 .dropdown-ref {
   height: 25px;
   width: 150px;
+  font-family: "Heebo", sans-serif;
 }
 
 .all-checkboxs-ref {
@@ -102,11 +116,13 @@
   border: 1px solid black;
   overflow-y: scroll;
   min-height: 150px;
+  font-family: "Heebo", sans-serif;
 }
 
 .checkbox-ref {
   height: 20px;
   width: 20px;
+  font-family: "Heebo", sans-serif;
 }
 
 .all-colors-ref {
@@ -117,6 +133,7 @@
   border: 1px solid black;
   overflow-y: scroll;
   min-height: 150px;
+  font-family: "Heebo", sans-serif;
 }
 
 .color-ref-one {
@@ -125,6 +142,7 @@
   margin: 2px;
   border: 1px solid black;
   background: #faf7ff;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-two {
   height: 20px;
@@ -132,6 +150,7 @@
   margin: 2px;
   border: 1px solid black;
   background: #e1dfe6;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-three {
   height: 20px;
@@ -139,6 +158,7 @@
   margin: 2px;
   border: 1px solid black;
   background: #bcbabf;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-four {
   height: 20px;
@@ -146,6 +166,7 @@
   margin: 2px;
   border: 1px solid black;
   background: #7d7c80;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-five {
   height: 20px;
@@ -154,6 +175,7 @@
   border: 1px solid black;
   color: white;
   background: #3f3e40;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-six {
   height: 20px;
@@ -162,6 +184,7 @@
   border: 1px solid black;
   color: white;
   background: #2a397c;
+  font-family: "Heebo", sans-serif;
 }
 .color-ref-seven {
   height: 20px;
@@ -170,4 +193,5 @@
   border: 1px solid black;
   color: white;
   background: #1a3dd8;
+  font-family: "Heebo", sans-serif;
 }

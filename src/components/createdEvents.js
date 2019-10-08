@@ -1,32 +1,28 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../styling/publicpage.css";
 import axios from "axios";
-import moment from 'moment';
+import moment from "moment";
 
-class SingleEvent extends Component {
+class CreatedEvents extends Component {
   constructor() {
     super();
 
     this.state = {
-      events: [],
-      joined: false
+      events: []
     };
   }
 
   componentDidMount() {
-    axios.get("/current_events").then(response => {
-      console.log(response.data);
-      this.setState({ events: response.data });
-    });
+    console.log('this is props on CreatedEvents', this.props.userInfo);
+    axios
+      .get(`/events_created`, {
+        params: { user_id: this.props.userInfo.user_id }
+      })
+      .then(response => {
+        this.setState({ events: response.data });
+      });
   }
-
-  handleJoin = id => {
-    axios.put(`/events/${id}`).then(this.setState({ joined: true }));
-  };
-
-  handleCancel = id => {
-    axios.put("/cancled").then({ joined: false });
-  };
 
   render() {
     console.log(this.state.events);
@@ -43,15 +39,15 @@ class SingleEvent extends Component {
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
               <button>DM</button>
-              {this.state.joined ? (
-                <button onClick={this.handleJoin}>Join</button>
-              ) : (
-                <button onClick={this.handleCancel}>Cancel</button>
-              )}
+              <button>Join</button>
             </div>
           </div>
           <div className="message">{event.event_message}</div>
-          <div>{moment(event.event_date_start).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
+          <div>
+            {moment(event.event_date_start).format(
+              "dddd, MMMM Do YYYY, h:mm:ss a"
+            )}
+          </div>
           <div>{event.event_location}</div>
         </div>
       );
@@ -60,4 +56,4 @@ class SingleEvent extends Component {
   }
 }
 
-export default SingleEvent;
+export default CreatedEvents;

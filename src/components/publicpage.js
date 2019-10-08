@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SingleEvent from "./singleEvent";
 import "../styling/publicpage.css";
-import axios from "axios";
 
 class PublicPage extends Component {
   render() {
+    console.log();
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
+        Check out these events, fam!
           <Link to="/login">
             <button className="button-ref-medium">Sign In</button>
           </Link>

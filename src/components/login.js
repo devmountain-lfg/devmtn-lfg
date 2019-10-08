@@ -10,7 +10,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      currentUser: ""
+      currentUser: []
     };
   }
 
@@ -22,7 +22,6 @@ class Login extends Component {
       };
       if (body.username && body.password) {
         axios.post("/login", body).then(response => {
-          console.log(response.data);
           this.setState({ currentUser: user });
           this.props.history.push("/app/home_page");
         });
@@ -58,11 +57,11 @@ class Login extends Component {
             onChange={this.handleChange}
             name="password"
           ></input>
-          <Link to="/homepage">
+          
             <button className="button-ref-medium" onClick={this.handleLogin}>
               Sign In
             </button>
-          </Link>
+          
           <Link to="/create_user" className="sign-up-link">
             Don't have an account? Click here to sign up!
           </Link>

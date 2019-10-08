@@ -7,14 +7,14 @@ import "../styling/petercalendar.css";
 
 const localizer = momentLocalizer(moment);
 
-class calendar extends Component {
+class calendarComponent extends Component {
   state = {
     events: []
-  };
+  }
   getEvents = async () => {
     const response = await axios.get(`/events/${this.props.userInfo.user_id}`);
-
-    if (response.data.length > 0) {
+    if (response.data.length > 0)
+    {
       this.setState({
         events: response.data.map(item => ({
           id: item.id,
@@ -25,42 +25,31 @@ class calendar extends Component {
           description: item.description
         }))
       });
-    }
-  };
+    };
+  }
 
   handleClick = async (props) => {
-    this.props.history.push("/app/home_page");
+    this.props.history.push("/app/calendar");
   }
 
   async componentDidMount() {
     this.getEvents();
   }
 
-  // eventSelect = event => {
-  // const r = window(`Start Time ${event.start}
-  // End Time ${event.end}
-  // Location (to be figured out) `);
-  // };
+ 
 
   render() {
     return (
-      <div className="calendarWrapper">
-        <button onClick={this.handleClick}>Back to my Events</button>
         <Calendar
           selectable
           events={this.state.events}
           showMultiDayTimes
           localizer={localizer}
-          step={15}
-          onSelectEvent={event =>
-            alert(`Start Time ${event.start}
-          End Time ${event.end}
-          Location "("to be figured out")"`)
-          }
+          views={{ month: true}}
+          onSelectSlot={this.handleClick}
         />
-      </div>
     );
   }
 }
 
-export default calendar;
+export default calendarComponent;

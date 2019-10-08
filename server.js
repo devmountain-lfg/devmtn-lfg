@@ -38,17 +38,26 @@ app.use(
 
 app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
-app.get("/events:id", drewController.getMyEvents);
+app.get("/events_created", drewController.getMyCreatedEvents);
+app.get("/events_joined", drewController.getJoinedEvents);
+app.get("/events", drewController.getAllMyEvents);
 app.post("/login", drewController.login);
+app.post("/create_user", paulController.createNewUser);
+app.post("/create_event", paulController.createNewEvent);
+app.get("/logout", drewController.logout);
+app.post("/join_event", paulController.joinEvent);
+app.delete("/unjoin_event/:event_id", paulController.unjoinEvent);
+app.put("/update_user", paulController.updateUser);
+app.get("/activities", drewController.getActivities);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
-app.post("/create-new-user", paulController.createNewUser);
+
 
 
 app.listen(process.env.PORT || 8080, function() {
