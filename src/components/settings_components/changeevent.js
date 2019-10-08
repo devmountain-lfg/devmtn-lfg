@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../styling/publicpage.css";
+import "../../styling/publicpage.css";
 import axios from "axios";
 
-class createEvent extends Component {
+class changeEvent extends Component {
   constructor() {
     super();
 
     this.state = {
-      activities: [],
       creator: {},
       activity_id: null,
       event_date_start: "",
@@ -30,17 +29,30 @@ class createEvent extends Component {
     this.componentStartUp();
   }
 
-  componentStartUp() {
+  async componentStartUp() {
+    const eventId = this.props.match.params.event_id;
+    await this.setState({creator: this.props.user});
     axios
-      .get("/activities")
+      .get("/event", {params: {event_id: eventId}})
       .then(response => {
-        console.log(response.data);
-        this.setState({
-          activities: response.data
-        });
+        console.log('this is the response from startup', response.data);
+        // this.setState({
+        //   activity_id: null,
+        //   event_date_start: "",
+        //   event_date_end: "",
+        //   is_public_event: false,
+        //   max_player: 0,
+        //   message: "",
+        //   locationStreet_one: "",
+        //   locationStreet_two: null,
+        //   street_submit: "",
+        //   locationCity: "",
+        //   locationZip: 0,
+        //   locationState: "",
+        //   created_event: false
+        //     });
       })
       .catch(err => console.log(err));
-    this.setState({ creator: this.props.user });
   }
 
   handleChange = e => {
@@ -55,7 +67,7 @@ class createEvent extends Component {
     }
   };
 
-  handleCreation = async () => {
+  handleChangeEvent = async () => {
     try {
       if (!this.state.activity_id) {
         return alert("Please select an activity!");
@@ -221,7 +233,7 @@ class createEvent extends Component {
           {/* <Link to="/homepage"> */}
           <button
             className="button-ref-medium"
-            onClick={this.handleCreation}
+            onClick={this.handleChangeEvent}
             style={{ backgroundColor: "#E1DFE5" }}
           >
             Create Event
@@ -236,4 +248,4 @@ class createEvent extends Component {
   }
 }
 
-export default createEvent;
+export default changeEvent;
