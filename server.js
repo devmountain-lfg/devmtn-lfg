@@ -49,6 +49,7 @@ app.post("/join_event", paulController.joinEvent);
 app.delete("/unjoin_event/:event_id", paulController.unjoinEvent);
 app.put("/update_user", paulController.updateUser);
 app.get("/activities", drewController.getActivities);
+app.post("/filthy_filter", paulController.filthyFilter);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
