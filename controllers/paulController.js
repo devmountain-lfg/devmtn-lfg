@@ -1,20 +1,6 @@
 const bcrypt = require("bcrypt");
 
 module.exports = {
-<<<<<<< HEAD
-  createNewUser: async (req, res) => {
-    try {
-      const db = req.app.get("db");
-      const checkForNumber = str => {
-        const numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let containsNum = false;
-
-        for (var i = 0; i < str.length; i++) {
-          if (str.includes(numArr[i])) {
-            containsNum = true;
-            return;
-          }
-=======
     createNewUser: async (req, res) => {
         try {
             const db = req.app.get('db');
@@ -167,7 +153,6 @@ module.exports = {
         } catch (error) {
             console.log(error);
             res.send(error);
->>>>>>> master
         }
 
         return containsNum;
