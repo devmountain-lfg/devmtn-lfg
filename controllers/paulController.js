@@ -38,7 +38,7 @@ module.exports = {
 
             if (firstName === null || firstName === "") return res.status(400).send('Please enter your first name');
             if (lastName === null || lastName === "") return res.status(400).send('Please enter your last name');
-            if (gender !== null && gender !== "M" && gender !== "F") res.status(400).send('Invalid gender. Please enter M, F or leave blank');
+            if (gender !== null && gender !== "M" && gender !== "F") return res.status(400).send('Invalid gender. Please enter M, F or leave blank');
             if (email === null || email === "" || !email.includes('@')) return res.status(400).send('Invalid email');
             if (username === null || username === "") return res.status(400).send('Invalid username');
             if (password === null || password === "" || password.length < 7 || checkForNumber(password) === false) return res.status(400).send('Invalid password. Password must be at least 7 characters long and contain at least one number');
@@ -198,7 +198,7 @@ module.exports = {
             const userId = req.session.user.user_id;
             const {first_name, last_name, gender, email, phone_number, username, universal_distance} = req.body; 
 
-            if (gender !== null && gender !== "M" && gender !== "F") res.status(400).send('Invalid gender. Please enter M, F or leave blank');
+            if (gender !== null && gender !== "M" && gender !== "F") return res.status(400).send('Invalid gender. Please enter M, F or leave blank');
             if (email && !email.includes('@')) return res.status(400).send('Invalid email');
 
             await db.query("call updateUser($1,$2,$3,$4,$5,$6,$7,$8)", [userId, first_name, last_name, gender, email, phone_number,username, universal_distance]);
@@ -208,8 +208,60 @@ module.exports = {
             console.log(error);
             res.send(error);            
         }
+    },
+
+    updateEvent: async (req, res) => {
+        try {
+            const db = req.app.get('db');
+            if(!req.session.user) return res.status(400).send('Please sign in');
+            const userId = req.session.user.user_id;
+            const {
+                activityId, 
+                eventStart, 
+                eventEnd, 
+                isPublic, 
+                maxPlayers, 
+                message, 
+                address1,
+                address2,
+                city,
+                state,
+                zip,
+                eventId
+            } = req.body;
+
+            const [eventCreator] = await db.query(`select e.creator_id from events e where e.event_id = ${eventId}`)
+            const creatorId = eventCreator.creator_id;
+
+            if(userId !== creatorId) return res.status(400).send("You are not the creator of this event");
+
+            let today = new Date();
+            today = today.getTime();
+            let eventDateStart;
+            let eventDateEnd;
+
+            if(eventStart) {
+                eventDateStart = new Date(eventStart);
+                eventDateStart = eventDateStart.getTime();
+            } 
+            else eventDateStart = eventStart;
+
+            if(eventEnd) {
+                eventDateEnd = new Date(eventEnd);
+                eventDateEnd = eventDateEnd.getTime();
+            } 
+            else eventDateEnd = eventEnd;
 
 
+            if (eventDateStart && eventDateStart < today) return res.status(400).send('Invalid date. Please select a future date');
+            if (eventDateEnd && eventDateEnd < today) return res.status(400).send('Invalid date. Please select a future date');
+            
+            await db.query("call updateEvent($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)", [activityId, eventStart, eventEnd, isPublic, maxPlayers, message, address1, address2, city, state, zip, eventId]);
 
+            res.send('Event successfully updated');
+        } catch (error) {
+            console.log(error);
+            res.send(error);            
+        }
     }
 }
