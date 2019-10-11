@@ -109,10 +109,10 @@ class changeEvent extends Component {
         state: locationState,
         zip: locationZip
       };
-      const results = await axios.post("/create_event", body);
+      const results = await axios.put("/update_event", body);
       console.log(results);
       this.setState({ created_event: true });
-      alert("Event successfully created!");
+      alert("Event successfully changed!");
       this.props.history.push("/app/home_page");
     } catch (error) {
       alert(error);
