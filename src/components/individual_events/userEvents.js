@@ -15,10 +15,8 @@ class UserEvents extends Component {
   componentDidMount() {
     axios
       .get(`/events`, { params: { user_id: this.props.userInfo.user_id } })
-      .then(() => {
-        return axios.get("/current_events").then(response => {
-          this.setState({ events: response.data });
-        });
+      .then(response => {
+        this.setState({ events: response.data });
       });
   }
 
