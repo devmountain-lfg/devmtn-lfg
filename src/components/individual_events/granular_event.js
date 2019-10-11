@@ -77,7 +77,7 @@ class GranularEvent extends Component {
               <button>DM</button>
               {this.state.joined === true ? (
                 <button onClick={() => this.handleCancel(event.event_id)}>
-                  Cancel
+                  Unjoin
                 </button>
               ) : (
                 <button onClick={() => this.handleJoin(event.event_id)}>
