@@ -64,10 +64,28 @@ module.exports = {
         const cleanAdjs = ['cute','pretty','silly'];
         const cleanInterjections = ['gas planet','poop','holy smokes','gosh'];
 
+        Array.prototype.remove = function() {
+            var what, a = arguments, L = a.length, ax;
+            while (L && this.length) {
+                what = a[--L];
+                while ((ax = this.indexOf(what)) !== -1) {
+                    this.splice(ax, 1);
+                }
+            }
+            console.log('This = ', this, 'indexOf = ', ax)
+            return this;
+        };
+
         const cleanFilthyWords = (str) => {
             let text = str.split(' ');
 
             for (var i = 0; i < text.length; i++) {
+                let a = '';
+                if (text[i].includes("!")) text[i] = text[i].split('').remove("!").join('');
+                if (text[i].includes(".")) text[i] = text[i].split('').remove(".").join('');
+                if (text[i].includes(",")) text[i] = text[i].split('').remove(",").join('');
+                if (text[i].includes("?")) text[i] = text[i].split('').remove("?").join('');
+
                 if (badNouns.includes(text[i].toLowerCase())) {
                     text[i] = cleanNouns[Math.floor(Math.random() * cleanNouns.length)];
                 } 
