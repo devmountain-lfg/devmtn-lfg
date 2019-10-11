@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../styling/publicpage.css";
-import UserEvents from "../individual_events/userEvents";
 import JoinedEvents from "../individual_events/joinedEvents";
 import CreatedEvents from "../individual_events/createdEvents";
 
