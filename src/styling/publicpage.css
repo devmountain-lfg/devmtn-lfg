@@ -198,6 +198,7 @@
   align-items: center;
   margin-bottom: 5px;
   max-width: 1024px;
+  overflow-y: auto;
 }
 
 .event-date {
