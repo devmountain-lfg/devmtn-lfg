@@ -265,5 +265,27 @@ module.exports = {
             console.log(error);
             res.send(error);            
         }
+    },
+
+    deleteEvent: async (req, res) => {
+        try {
+            if(!req.session.user) return res.status(400).send('Please sign in');
+            const db = req.app.get("db");
+            const eventId = req.params.event_id;
+            if(!eventId) return res.status(400).send('Please select an event');
+            const [event] = await db.events.where('event_id = $1', [eventId]);
+            const creatorId = event.creator_id;
+    console.log(creatorId)
+            if(req.session.user.user_id != creatorId) return res.status(400).send('You are not the creator');
+
+            const deleteEventResponse = await db.query('call deleteEvent($1)', [eventId]);
+            console.log(deleteEventResponse)
+            
+            res.send('Event deleted');
+        } catch (error) {
+            console.log(error);            
+            res.send(error);            
+        }    
+
     }
 }

@@ -4,6 +4,7 @@ DROP PROCEDURE IF EXISTS joinEvent;
 DROP PROCEDURE IF EXISTS unJoinEvent;
 DROP PROCEDURE IF EXISTS updateUser;
 DROP PROCEDURE IF EXISTS updateEvent;
+DROP PROCEDURE IF EXISTS deleteEvent;
 
 
 CREATE PROCEDURE addNewUser(
@@ -377,6 +378,27 @@ BEGIN
         event_zip = $11
     WHERE e.event_id = $12;
     
+    RETURN;
+END;
+$$;
+
+CREATE PROCEDURE deleteEvent( 
+    event_id int
+)
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+
+    if (select count(*) from events e where e.event_id = $1) < 1
+        THEN 
+           RAISE NOTICE 'Event does not exist';
+           RETURN;
+        END IF;
+    
+
+    DELETE FROM user_events ue WHERE ue.event_id = $1;
+    DELETE FROM events e WHERE e.event_id = $1;
+
     RETURN;
 END;
 $$;
