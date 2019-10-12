@@ -7,8 +7,8 @@ module.exports = {
 
       const db = req.app.get("db");
 
-      const [user] = await db.users.where("email=$1 OR username=$1", [
-        req.body.username
+      const [user] = await db.users.where("LOWER(email)=$1 OR LOWER(username)=$1", [
+        req.body.username.toLowerCase()
       ]);
       console.log(user);
 
