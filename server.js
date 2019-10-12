@@ -47,10 +47,12 @@ app.post("/create_user", paulController.createNewUser);
 app.post("/create_event", paulController.createNewEvent);
 app.get("/logout", drewController.logout);
 app.post("/join_event", paulController.joinEvent);
-app.delete("/unjoin_event/:event_id", paulController.unjoinEvent);
+app.delete("/unjoin_event", paulController.unjoinEvent);
+app.delete("/event", drewController.deleteEvent);
 app.put("/update_user", paulController.updateUser);
 app.get("/activities", drewController.getActivities);
 app.post("/filthy_filter", paulController.filthyFilter);
+app.put("/update_event", paulController.updateEvent);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });

@@ -21,7 +21,7 @@ class SingleEvent extends Component {
 
   handleAttempt = () => {
     alert(
-      "We'd love for you to particpate in these activities. Please sign in or create an account in order to do so!"
+      "We'd love for you to participate in these activities. Please sign in or create an account in order to do so!"
     );
     this.props.history.push("/login");
   };
@@ -39,8 +39,8 @@ class SingleEvent extends Component {
             </div>
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
-              <button>DM</button>
-              <button onClick={this.handleAttempt}>Join</button>
+              <button  className="button-ref-small" onClick={this.handleAttempt}>DM</button>
+              <button  className="button-ref-small" onClick={this.handleAttempt}>Join</button>
             </div>
           </div>
           <div className="message">{event.event_message}</div>

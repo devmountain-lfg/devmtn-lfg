@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar";
 
 class Settings extends Component {
   constructor() {
     super();
 
     this.state = {
-      currentUser: "",
       first_name: "",
       last_name: "",
       username: "",
@@ -20,15 +20,27 @@ class Settings extends Component {
   componentDidMount() {
     axios.get("/me").then(response => {
       console.log(response.data);
-      this.setState({ currentUser: response.data });
+      const {
+        first_name,
+        last_name,
+        username,
+        gender,
+        email,
+        phone_number
+      } = response.data;
+      this.setState({
+        first_name,
+        last_name,
+        username,
+        gender,
+        email,
+        phone_number
+      });
     });
   }
 
-  handleCreation = async () => {
+  handleUpdate = async () => {
     try {
-      if (this.state.matchingPass === false) {
-        alert("Your passwords must match!");
-      }
       const {
         first_name,
         last_name,
@@ -38,26 +50,27 @@ class Settings extends Component {
         phone_number
       } = this.state;
       const body = {
-        firstName: first_name,
-        lastName: last_name,
+        first_name: first_name,
+        last_name: last_name,
         gender: gender,
         email: email,
-        phoneNumber: phone_number,
+        phone_number: phone_number,
         username: username
       };
       await axios.put("/update_user", body);
       alert("User successfully updated!");
       this.props.history.push("/app/home_page");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
   handleChange = e => {
-    this.setState({ currentUser: { [e.target.name]: e.target.value } });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
+    console.log(this.state);
     const {
       first_name,
       last_name,
@@ -65,7 +78,7 @@ class Settings extends Component {
       username,
       gender,
       phone_number
-    } = this.state.currentUser;
+    } = this.state;
     return (
       <div className="publicpage-ref">
         <div className="welcome-back">Settings</div>
@@ -97,11 +110,15 @@ class Settings extends Component {
             value={gender}
             onChange={e => this.handleChange(e)}
           >
-            <option value={gender} disabled selected>
+            <option value="" name="gender" disabled selected>
               Select your gender
             </option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
+            <option value="M" name="gender">
+              Male
+            </option>
+            <option value="F" name="gender">
+              Female
+            </option>
           </select>
           <input
             className="input-ref-large"
@@ -119,24 +136,14 @@ class Settings extends Component {
             pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
           ></input>
 
-          <button className="button-ref-medium" onClick={this.handleCreation}>
+          <button className="button-ref-medium" onClick={this.handleUpdate}>
             Save
           </button>
         </div>
-        <footer className="footer-ref">
-          <Link to="/app/home_page">
-            <button className="home-button-ref">Home</button>
-          </Link>
-          <Link to="/app/create_event">
-            <button className="add-event-ref">+</button>
-          </Link>
-          <Link to="/app/settings">
-            <button className="account-settings-ref">=</button>
-          </Link>
-        </footer>
+        <Navbar />
       </div>
     );
   }
 }
 
-export default Settings;
+export default withRouter(Settings);

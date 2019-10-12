@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../../styling/publicpage.css";
 import axios from "axios";
 import GranularEvent from "./granular_event";

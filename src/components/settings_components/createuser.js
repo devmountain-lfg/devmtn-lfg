@@ -23,8 +23,8 @@ class createuser extends Component {
 
   handleCreation = async () => {
     try {
-      if(this.state.matchingPass === false) {
-        alert("Your passwords must match!")
+      if (this.state.matchingPass === false) {
+        alert("Your passwords must match!");
       }
       const {
         firstName,
@@ -35,11 +35,19 @@ class createuser extends Component {
         username,
         phoneNumber
       } = this.state;
-      const body = { firstName, lastName, gender, email, phoneNumber, password, username };
+      const body = {
+        firstName,
+        lastName,
+        gender,
+        email,
+        phoneNumber,
+        password,
+        username
+      };
       await axios.post("create-new-user", body);
-        this.setState({ created: true });
-        alert("User successfully created!");
-        this.props.history.push("/app/home_page");
+      this.setState({ created: true });
+      alert("User successfully created!");
+      this.props.history.push("/app/home_page");
     } catch (error) {
       alert(error);
       console.error(error);
@@ -123,15 +131,14 @@ class createuser extends Component {
             }}
             required="required"
           ></input>
-          {/* <Link to="/homepage"> */}
-          <button
-            className="button-ref-medium"
-            onClick={this.handleCreation}
-          >
+          <button className="button-ref-medium" onClick={this.handleCreation}>
             Create Account
           </button>
-          {/* </Link> */}
-          <Link to="/login" className="sign-up-link">
+          <Link
+            to="/login"
+            className="sign-up-link"
+            style={{ textDecoration: "none" }}
+          >
             Already have an account? Click here to sign in!
           </Link>
         </div>
