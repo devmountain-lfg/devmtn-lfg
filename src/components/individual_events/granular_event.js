@@ -99,12 +99,12 @@ class GranularEvent extends Component {
           )}
         </div>
         <div className="message">{event.event_message}</div>
-        <div>
+        <div className="event-date">
           {moment(event.event_date_start).format(
             "dddd, MMMM Do YYYY, h:mm:ss a"
           )}
         </div>
-        <div>{event.event_location}</div>
+        <div className="event-location">{event.event_location}</div>
       </div>
     );
   }
