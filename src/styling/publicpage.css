@@ -13,7 +13,7 @@
   display: flex;
   height: 75px;
   width: 100vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   background: transparent;
   /* box-shadow: 3px 7px 13px #3f3e4044; */
   font-family: "Heebo", sans-serif;
@@ -223,7 +223,7 @@
   height: 350px;
   width: 100vw;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow: hidden;
   font-family: "Heebo", sans-serif;
   align-items: center;
   margin-bottom: 5px;
