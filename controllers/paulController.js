@@ -33,14 +33,15 @@ module.exports = {
             }
             
             const {firstName, lastName, gender, email, phoneNumber, username, password} = req.body;
-            
-            // ToDo: Add check for already existing email and username in DB.
+            // const [usernameCount] = await db.query(`select COUNT(*) from users where username = ${username}`);
 
+            // ToDo: Add check for already existing email and username in DB.
             if (firstName === null || firstName === "") return res.status(400).send('Please enter your first name');
             if (lastName === null || lastName === "") return res.status(400).send('Please enter your last name');
             if (gender !== null && gender !== "M" && gender !== "F") return res.status(400).send('Invalid gender. Please enter M, F or leave blank');
             if (email === null || email === "" || !email.includes('@')) return res.status(400).send('Invalid email');
             if (username === null || username === "") return res.status(400).send('Invalid username');
+            // if (usernameCount > 0) return res.status(400).send('username is unavailable');
             if (password === null || password === "" || password.length < 7 || checkForNumber(password) === false) return res.status(400).send('Invalid password. Password must be at least 7 characters long and contain at least one number');
             if (phoneNumber !== null && checkForNonNumbers(phoneNumber) === true) return res.status(400).send('Invalid character in Phone Number');
 

@@ -12,7 +12,7 @@ class calendar extends Component {
     events: []
   };
   getEvents = async () => {
-    const response = await axios.get(`/events/${this.props.userInfo.user_id}`);
+    const response = await axios.get(`/events/?user_id=${this.props.userInfo.user_id}`);
 
     if (response.data.length > 0) {
       this.setState({
