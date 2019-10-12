@@ -11,6 +11,7 @@ class changeEvent extends Component {
     this.state = {
       creator: {},
       activities: [],
+      event_id: null,
       activity_id: null,
       activity_name: "",
       event_date_start: "",
@@ -23,7 +24,8 @@ class changeEvent extends Component {
       locationCity: "",
       locationZip: 0,
       locationState: "",
-      loading: true
+      loading: true,
+      changed_event: false
     };
   }
 
@@ -41,7 +43,7 @@ class changeEvent extends Component {
 
   async componentStartUp() {
     const eventId = this.props.match.params.event_id;
-    await this.setState({ creator: this.props.user });
+    await this.setState({ creator: this.props.user, event_id: eventId });
     await axios
       .get("/event", { params: { event_id: eventId } })
       .then(res => {
@@ -84,6 +86,7 @@ class changeEvent extends Component {
       }
       const {
         activity_id,
+        event_id,
         event_date_start,
         event_date_end,
         is_public_event,
@@ -98,6 +101,7 @@ class changeEvent extends Component {
 
       const body = {
         activityId: activity_id,
+        eventId: event_id,
         eventStart: event_date_start,
         eventEnd: event_date_end,
         isPublic: is_public_event,
@@ -109,9 +113,8 @@ class changeEvent extends Component {
         state: locationState,
         zip: locationZip
       };
-      const results = await axios.put("/update_event", body);
-      console.log(results);
-      this.setState({ created_event: true });
+      await axios.put("/update_event", body);
+      await this.setState({ changed_event: true });
       alert("Event successfully changed!");
       this.props.history.push("/app/home_page");
     } catch (error) {
