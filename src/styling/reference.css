@@ -34,24 +34,33 @@
 .input-ref-small {
   height: 25px;
   width: 125px;
-  border: 1px solid black;
   margin: 2px;
   font-family: "Heebo", sans-serif;
+  border-radius: 3px;
+  padding: 2px;
+  box-shadow: 3px 7px 13px #3f3e4044;
+  border: none;
 }
 .input-ref-medium {
   height: 25px;
   width: 200px;
-  border: 1px solid black;
   margin: 2px;
   font-family: "Heebo", sans-serif;
+  border-radius: 3px;
+  padding: 2px;
+  box-shadow: 3px 7px 13px #3f3e4044;
+  border: none;
 }
 .input-ref-large {
   height: 25px;
   width: 300px;
-  border: 1px solid black;
   margin: 2px;
   resize: none;
   font-family: "Heebo", sans-serif;
+  border-radius: 3px;
+  padding: 2px;
+  box-shadow: 3px 7px 13px #3f3e4044;
+  border: none;
 }
 
 .all-buttons-ref {
@@ -202,4 +211,13 @@
   color: white;
   background: #1a3dd8;
   font-family: "Heebo", sans-serif;
+}
+
+.event-address {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 115px;
+  width: 350px;
 }

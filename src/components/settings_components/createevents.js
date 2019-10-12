@@ -172,49 +172,40 @@ class createEvent extends Component {
             rows="5"
             style={{ height: "100px" }}
           ></textarea>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              flexWrap: "wrap",
-              height: "150px",
-              width: "350px"
-            }}
-          >
+          <div className="event-address">
             <input
               type="text"
               placeholder="Street Address #1"
               name="locationStreet_one"
-              style={{ border: "1px solid black", height: "25px" }}
+              className="input-ref-small"
               onChange={this.handleChange}
             ></input>{" "}
             <input
               type="text"
               placeholder="Street Address #2"
               name="locationStreet_two"
-              style={{ border: "1px solid black", height: "25px" }}
+              className="input-ref-small"
               onChange={this.handleChange}
             ></input>{" "}
             <input
               type="text"
               placeholder="City"
               name="locationCity"
-              style={{ border: "1px solid black", height: "25px" }}
+              className="input-ref-small"
               onChange={this.handleChange}
             ></input>{" "}
             <input
               type="text"
               placeholder="State"
               name="locationState"
-              style={{ border: "1px solid black", height: "25px" }}
+              className="input-ref-small"
               onChange={this.handleChange}
             ></input>{" "}
             <input
               type="text"
               placeholder="ZIP"
               name="locationZip"
-              style={{ border: "1px solid black", height: "25px" }}
+              className="input-ref-small"
               onChange={this.handleChange}
             ></input>{" "}
           </div>

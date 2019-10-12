@@ -6,10 +6,10 @@ class Navbar extends Component {
     return (
       <footer className="footer-ref">
         <Link to="/app/home_page" style={{ textDecoration: "none" }}>
-          <button className="home-button-ref">Home</button>
+          <button className="account-settings-ref">Home</button>
         </Link>
         <Link to="/app/create_event" style={{ textDecoration: "none" }}>
-          <button className="add-event-ref">Create</button>
+          <button className="account-settings-ref">Create</button>
         </Link>
         <Link to="/app/settings" style={{ textDecoration: "none" }}>
           <button className="account-settings-ref">Settings</button>
