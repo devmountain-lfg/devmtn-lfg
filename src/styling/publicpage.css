@@ -2,22 +2,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 812px;
+  height: 100vh;
   width: 100vw;
-  background: white;
+  background: rgb(214, 214, 214);
   font-family: "Heebo", sans-serif;
+  align-items: center;
 }
 
 .header-ref {
   display: flex;
-  align-self: flex-start;
   height: 75px;
   width: 100vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   background: transparent;
-  box-shadow: 3px 7px 13px #3f3e4044;
+  /* box-shadow: 3px 7px 13px #3f3e4044; */
   font-family: "Heebo", sans-serif;
   padding: 5px;
+  max-width: 1024px;
 }
 
 .events-ref {
@@ -25,20 +26,22 @@
   height: 700px;
   width: 100vw;
   flex-direction: column;
+  align-items: center;
   overflow-y: scroll;
   font-family: "Heebo", sans-serif;
+  max-width: 1024px;
 }
 
 .footer-ref {
   display: flex;
-  align-self: flex-end;
   height: 50px;
   width: 100vw;
   justify-content: space-around;
   background: transparent;
-  box-shadow: -3px -7px 13px #3f3e4044;
+  /* box-shadow: -3px -7px 13px #3f3e4044; */
   font-family: "Heebo", sans-serif;
   padding: 3px;
+  max-width: 1024px;
 }
 
 .home-button-ref {
@@ -88,18 +91,19 @@
 
 .event {
   width: 90vw;
-  min-height: 150px;
+  /* min-height: 150px; */
   display: flex;
   flex-direction: column;
   margin: 15px;
   justify-content: space-around;
   align-items: center;
   font-family: "Heebo", sans-serif;
-  background: rgba(81, 185, 255, 0.308);
+  background: white;
   box-shadow: 3px 7px 13px #3f3e406c;
   border-radius: 7px;
   padding: 3px;
-  overflow: hidden;
+  max-width: 800px;
+  height: auto;
 }
 
 .event-top {
@@ -109,7 +113,9 @@
   flex-direction: row;
   justify-content: space-between;
   font-family: "Heebo", sans-serif;
-  margin: 3px;
+  margin: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .creator-ref {
@@ -129,7 +135,7 @@
 .people {
   height: 15px;
   width: 40px;
-  margin: 1px;
+  margin: 5px;
 }
 
 .title {
@@ -141,14 +147,17 @@
 }
 
 .message {
-  width: 100%;
-  min-height: 20px;
+  width: 90%;
+  height: auto;
   font-style: italic;
   font-family: "Heebo", sans-serif;
   margin: 10px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .event-buttons {
@@ -206,6 +215,7 @@
   flex-direction: column;
   overflow-y: scroll;
   font-family: "Heebo", sans-serif;
+  max-width: 1024px;
 }
 
 .my-events-ref {
@@ -213,8 +223,31 @@
   height: 350px;
   width: 100vw;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow: hidden;
   font-family: "Heebo", sans-serif;
   align-items: center;
   margin-bottom: 5px;
+  max-width: 1024px;
+}
+
+.event-date {
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-location {
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-height: 865px) {
+  .publicpage-ref {
+    height: 100vh;
+  }
 }

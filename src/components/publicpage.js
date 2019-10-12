@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SingleEvent from "./individual_events/singleEvent";
 import "../styling/publicpage.css";
-import Navbar from "./navbar";
 
 class PublicPage extends Component {
   render(props) {
@@ -17,7 +16,6 @@ class PublicPage extends Component {
         <div className="events-ref">
           <SingleEvent {...this.props} />
         </div>
-        <Navbar />
       </div>
     );
   }
