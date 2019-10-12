@@ -51,8 +51,12 @@ class changeEvent extends Component {
         this.setState({
           activity_id: data.activity_id,
           activity_name: data.activity_name,
-          event_date_start: moment(data.event_date_start).format("YYYY-MM-DDTkk:mm"),
-          event_date_end: moment(data.event_date_end).format("YYYY-MM-DDTkk:mm"),
+          event_date_start: moment(data.event_date_start).format(
+            "YYYY-MM-DDTkk:mm"
+          ),
+          event_date_end: moment(data.event_date_end).format(
+            "YYYY-MM-DDTkk:mm"
+          ),
           is_public_event: data.public_event,
           max_player: data.max_players,
           message: data.event_message,
@@ -246,19 +250,26 @@ class changeEvent extends Component {
               value={this.state.locationZip}
             ></input>{" "}
           </div>
-          {/* <Link to="/homepage"> */}
+
           <button
             className="button-ref-medium"
             onClick={this.handleChangeEvent}
-            style={{ backgroundColor: "#E1DFE5" }}
           >
             Submit Changes
           </button>
-          {/* </Link> */}
-          <Link to="/app/manage_events" className="sign-up-link">
+
+          <Link
+            to="/app/manage_events"
+            className="sign-up-link"
+            style={{ textDecoration: "none" }}
+          >
             Return to Manage Events
           </Link>
-          <Link to="/app/home_page" className="sign-up-link">
+          <Link
+            to="/app/home_page"
+            className="sign-up-link"
+            style={{ textDecoration: "none" }}
+          >
             Go Back Home
           </Link>
         </div>

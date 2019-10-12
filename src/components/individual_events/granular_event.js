@@ -66,21 +66,32 @@ class GranularEvent extends Component {
           <h1 className="title">{event.activity_name}</h1>
           {this.props.creator && (
             <div className="event-buttons">
-              <button onClick={this.handleDelete}>Delete Event</button>
-              <Link to={`/app/change_event/${event.event_id}`}>
-                <button>Change Event</button>
+              <button onClick={this.handleDelete} className="button-ref-small">
+                Delete
+              </button>
+              <Link
+                to={`/app/change_event/${event.event_id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className="button-ref-small">Edit</button>
               </Link>
             </div>
           )}
           {this.props.joinee && (
             <div className="event-buttons">
-              <button>DM</button>
+              <button className="button-ref-small">DM</button>
               {this.state.joined === true ? (
-                <button onClick={() => this.handleCancel(event.event_id)}>
+                <button
+                  className="button-ref-small"
+                  onClick={() => this.handleCancel(event.event_id)}
+                >
                   Unjoin
                 </button>
               ) : (
-                <button onClick={() => this.handleJoin(event.event_id)}>
+                <button
+                  className="button-ref-small"
+                  onClick={() => this.handleJoin(event.event_id)}
+                >
                   Join
                 </button>
               )}

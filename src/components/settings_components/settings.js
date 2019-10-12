@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar";
 
 class Settings extends Component {
   constructor() {
@@ -139,17 +140,7 @@ class Settings extends Component {
             Save
           </button>
         </div>
-        <footer className="footer-ref">
-          <Link to="/app/home_page">
-            <button className="home-button-ref">Home</button>
-          </Link>
-          <Link to="/app/create_event">
-            <button className="add-event-ref">+</button>
-          </Link>
-          <Link to="/app/settings">
-            <button className="account-settings-ref">=</button>
-          </Link>
-        </footer>
+        <Navbar />
       </div>
     );
   }
