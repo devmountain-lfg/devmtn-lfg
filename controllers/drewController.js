@@ -140,5 +140,18 @@ module.exports = {
       console.log(err);
       res.status(500).send(`Here is error: ${err}`)
     }
+  },
+
+  deleteEvent: async (req, res) => {
+    try {
+      const event_id = req.query.event_id;
+      const db = req.app.get("db");
+      const query = `DELETE from events WHERE event_id = ${event_id}`
+      const results = await db.query(query);
+      res.status(200).send(results);
+    } catch(err) {
+      console.log(err);
+      res.status(500).send(`Here is error: ${err}`)
+    }
   }
 };

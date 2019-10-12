@@ -37,9 +37,9 @@ class GranularEvent extends Component {
   handleCancel = id => {
     axios
       .delete("/unjoin_event", {
-        params: { eventId: id }
+        params: { event_id: id }
       })
-      .then(response => {
+      .then(() => {
         alert("You have successfully unjoined the event!");
         this.setState({ joined: false });
       })
@@ -49,7 +49,16 @@ class GranularEvent extends Component {
   };
 
   handleDelete = id => {
-    alert("Coming soon! This will delete the event you've created.");
+    axios
+      .delete("/event", {
+        params: { event_id: id }
+      })
+      .then(() => {
+        alert("You have successfully deleted the event!");
+      })
+      .catch(err => {
+        console.log("Here is the delete error:", err);
+      });
   };
 
   render() {
@@ -66,14 +75,9 @@ class GranularEvent extends Component {
           <h1 className="title">{event.activity_name}</h1>
           {this.props.creator && (
             <div className="event-buttons">
-              <button onClick={this.handleDelete} className="button-ref-small">
-                Delete
-              </button>
-              <Link
-                to={`/app/change_event/${event.event_id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className="button-ref-small">Edit</button>
+              <button className="button-ref-small" onClick={() => this.handleDelete(event.event_id)}>Delete</button>
+              <Link to={`/app/change_event/${event.event_id}`} style={{textDecoration: "none"}}>
+                <button className="button-ref-small">Change</button>
               </Link>
             </div>
           )}

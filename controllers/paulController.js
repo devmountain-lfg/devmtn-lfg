@@ -178,10 +178,11 @@ module.exports = {
     unjoinEvent: async (req, res) => {
         try {
             if(!req.session.user) return res.status(400).send('You are not signed in');
-            if(!req.params.event_id) return res.status(400).send('Please select an event');
+            if(!req.query.event_id) return res.status(400).send('Please select an event');
             const db = req.app.get('db');
             const userId = req.session.user.user_id;
-            const eventId = req.params.event_id;
+            const eventId = req.query.event_id;
+            console.log(req);
 
             await db.query("call unjoinEvent($1,$2)", [userId, eventId]); 
             

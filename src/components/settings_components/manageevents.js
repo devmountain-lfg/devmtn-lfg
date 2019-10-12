@@ -10,9 +10,7 @@ class ManageEvents extends Component {
 
     this.state = {
       loading: true,
-      userInfo: {},
-      myCreatedEvents: [],
-      myOtherEvents: []
+      userInfo: {}
     };
   }
 

@@ -36,7 +36,7 @@ class HomePage extends Component {
         <div className="calendar-ref">
           <Calendar {...this.props} userInfo={this.props.userInfo} />
         </div>
-        <div className="event-title">Events Near You</div>
+        <div className="event-title">Your Joined Events</div>
         <div className="my-events-ref">
           <UserEvents userInfo={this.props.userInfo} />
         </div>
