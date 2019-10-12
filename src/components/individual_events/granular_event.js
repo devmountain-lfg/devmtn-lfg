@@ -75,9 +75,9 @@ class GranularEvent extends Component {
           <h1 className="title">{event.activity_name}</h1>
           {this.props.creator && (
             <div className="event-buttons">
-              <button onClick={() => this.handleDelete(event.event_id)}>Delete Event</button>
-              <Link to={`/app/change_event/${event.event_id}`}>
-                <button>Change Event</button>
+              <button className="button-ref-small" onClick={() => this.handleDelete(event.event_id)}>Delete</button>
+              <Link to={`/app/change_event/${event.event_id}`} style={{textDecoration: "none"}}>
+                <button className="button-ref-small">Change</button>
               </Link>
             </div>
           )}
