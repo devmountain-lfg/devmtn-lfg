@@ -39,8 +39,10 @@ class SingleEvent extends Component {
             </div>
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
-              <button>DM</button>
-              <button onClick={this.handleAttempt}>Join</button>
+              <button className="button-ref-small">DM</button>
+              <button onClick={this.handleAttempt} className="button-ref-small">
+                Join
+              </button>
             </div>
           </div>
           <div className="message">{event.event_message}</div>

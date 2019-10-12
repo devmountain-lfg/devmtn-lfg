@@ -83,9 +83,9 @@ class createEvent extends Component {
         maxPlayers: max_player,
         message: message,
         address1: locationStreet_one,
-        address2: locationStreet_two, 
-        city: locationCity, 
-        state: locationState, 
+        address2: locationStreet_two,
+        city: locationCity,
+        state: locationState,
         zip: locationZip
       };
 
@@ -218,16 +218,14 @@ class createEvent extends Component {
               onChange={this.handleChange}
             ></input>{" "}
           </div>
-          {/* <Link to="/homepage"> */}
-          <button
-            className="button-ref-medium"
-            onClick={this.handleCreation}
-            style={{ backgroundColor: "#E1DFE5" }}
-          >
+          <button className="button-ref-medium" onClick={this.handleCreation}>
             Create Event
           </button>
-          {/* </Link> */}
-          <Link to="/app/home_page" className="sign-up-link">
+          <Link
+            to="/app/home_page"
+            className="sign-up-link"
+            style={{ textDecoration: "none" }}
+          >
             Go back home
           </Link>
         </div>
