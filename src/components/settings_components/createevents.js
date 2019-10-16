@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Navbar from "../navbar";
 import "../../styling/publicpage.css";
 import axios from "axios";
 
@@ -212,14 +212,8 @@ class createEvent extends Component {
           <button className="button-ref-medium" onClick={this.handleCreation}>
             Create Event
           </button>
-          <Link
-            to="/app/home_page"
-            className="sign-up-link"
-            style={{ textDecoration: "none" }}
-          >
-            Go back home
-          </Link>
         </div>
+        <Navbar />
       </div>
     );
   }

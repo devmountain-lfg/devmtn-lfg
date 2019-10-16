@@ -26,6 +26,7 @@ class GranularEvent extends Component {
     axios
       .post("/join_event", body)
       .then(response => {
+        console.log("join event needs fixing");
         alert("You have successfully joined the event!");
         this.setState({ joined: true });
       })
@@ -73,15 +74,23 @@ class GranularEvent extends Component {
             </div>
           </div>
           <h1 className="title">{event.activity_name}</h1>
-          {this.props.creator && (
+          {this.props.creator === true ? (
             <div className="event-buttons">
-              <button className="button-ref-small" onClick={() => this.handleDelete(event.event_id)}>Delete</button>
-              <Link to={`/app/change_event/${event.event_id}`} style={{textDecoration: "none"}}>
-                <button className="button-ref-small">Change</button>
+              <button
+                className="button-ref-small"
+                onClick={() => this.handleDelete(event.event_id)}
+              >
+                Delete
+              </button>
+              <Link
+                to={`/app/change_event/${event.event_id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <button className="button-ref-small">Edit</button>
               </Link>
             </div>
-          )}
-          {this.props.joinee && (
+          ) : null}
+          {this.props.joinee === true ? (
             <div className="event-buttons">
               <button className="button-ref-small">DM</button>
               {this.state.joined === true ? (
@@ -89,7 +98,7 @@ class GranularEvent extends Component {
                   className="button-ref-small"
                   onClick={() => this.handleCancel(event.event_id)}
                 >
-                  Unjoin
+                  Leave
                 </button>
               ) : (
                 <button
@@ -99,6 +108,16 @@ class GranularEvent extends Component {
                   Join
                 </button>
               )}
+            </div>
+          ) : (
+            <div className="event-buttons">
+              <button className="button-ref-small">DM</button>
+              <button
+                className="button-ref-small"
+                onClick={() => this.handleJoin(event.event_id)}
+              >
+                Join
+              </button>
             </div>
           )}
         </div>

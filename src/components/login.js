@@ -36,6 +36,12 @@ class Login extends Component {
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
+  handleEnter = e => {
+    if (e.which === 13) {
+      this.handleLogin();
+    }
+  };
+
   render() {
     return (
       <div className="publicpage-ref">
@@ -56,6 +62,7 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleChange}
             name="password"
+            onKeyUp={this.handleEnter}
           ></input>
 
           <button className="button-ref-medium" onClick={this.handleLogin}>
