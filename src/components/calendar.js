@@ -48,7 +48,7 @@ class calendar extends Component {
   render() {
     return (
       <div className="calendarWrapper">
-        <button onClick={this.handleClick}>Back to my Events</button>
+        <button className="button-ref-medium" onClick={this.handleClick}>Back to my Events</button>
         <Calendar
           selectable
           events={this.state.events}

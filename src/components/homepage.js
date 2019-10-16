@@ -31,7 +31,7 @@ class HomePage extends Component {
     return (
       <div className="publicpage-ref">
         <header className="header-ref">
-          <button className="button-ref-medium">
+          <button className="button-ref-medium" onClick={this.handleLogout}>
             Sign Out
           </button>
         </header>

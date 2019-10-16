@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../styling/publicpage.css";
 import axios from "axios";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class GranularEvent extends Component {
   constructor() {
@@ -61,10 +61,15 @@ class GranularEvent extends Component {
       });
   };
 
+  handelClick = async (props) => {
+console.log(this.props)
+  this.props.history.push(`/app/details/${this.props.event.event_id}`)
+  }
+
   render() {
     const { event } = this.props;
     return (
-      <div className="event" key={event.event_id}>
+      <div className="event" key={event.event_id}  >
         <div className="event-top">
           <div className="creator-ref">
             <div className="creator">{event.creator_name}</div>
@@ -87,7 +92,7 @@ class GranularEvent extends Component {
               {this.state.joined === true ? (
                 <button
                   className="button-ref-small"
-                  onClick={() => this.handleCancel(event.event_id)}
+                  onClick={() => this.handleCancel(event.event_id,event)}
                 >
                   Unjoin
                 </button>
@@ -102,7 +107,7 @@ class GranularEvent extends Component {
             </div>
           )}
         </div>
-        <div className="message">{event.event_message}</div>
+        <div className="message" onClick={this.handelClick}>{event.event_message}</div>
         <div className="event-date">
           {moment(event.event_date_start).format(
             "dddd, MMMM Do YYYY, h:mm:ss a"
@@ -114,4 +119,4 @@ class GranularEvent extends Component {
   }
 }
 
-export default GranularEvent;
+export default withRouter (GranularEvent);

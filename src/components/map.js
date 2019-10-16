@@ -14,10 +14,8 @@ class eventMaps extends Component {
 
 
   getLatLong() {
-    console.log('sup')
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=${process.env.REACT_APP_GOOGLEAPI}`)
       .then(result => {
-        console.log('result', result)
         this.setState({
           location:{
             lat: result.data.results[0].geometry.location.lat,
@@ -29,7 +27,10 @@ class eventMaps extends Component {
 
   async componentDidMount() {
     this.getLatLong();
+    console.log("map props", this.props)
   }
+
+  
 
     render() {
        return (

@@ -56,7 +56,7 @@ class AuthenticatedRoutes extends React.Component {
           }}
         />
         <Route
-          path="/app/details"
+          path="/app/details/:event_id"
           render={(props) => {
             const { user } = this.state;
             if (user.username) {

@@ -36,6 +36,7 @@ app.use(
   })
 );
 
+app.get("/event_by_id",peterController.getEventById)
 app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
 app.get("/events_created", drewController.getMyCreatedEvents);
