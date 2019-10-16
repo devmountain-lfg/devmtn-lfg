@@ -24,6 +24,7 @@ class UserEvents extends Component {
     const currentEvents = this.state.events.map(event => {
       return (
         <GranularEvent
+          key={event.event_id}
           event={event}
           joinee={true}
           user_id={this.props.userInfo.user_id}

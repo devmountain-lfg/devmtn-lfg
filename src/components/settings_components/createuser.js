@@ -44,9 +44,11 @@ class createuser extends Component {
         password,
         username
       };
-      await axios.post("create-new-user", body);
-      this.setState({ created: true });
+      await axios.post("create_user", body);
+      await this.setState({ created: true });
       alert("User successfully created!");
+      await axios.post("/user_chat", { username })
+      await alert("Chat user successfully created!")
       this.props.history.push("/app/home_page");
     } catch (error) {
       alert(error);
