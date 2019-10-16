@@ -17,6 +17,9 @@ class Navbar extends Component {
         <Link to="/app/manage_events" style={{ textDecoration: "none" }}>
           <button className="account-settings-ref">Events</button>
         </Link>
+        <Link to="/app/chat_room" style={{ textDecoration: "none" }}>
+          <button className="account-settings-ref">Enter Chat</button>
+        </Link>
       </footer>
     );
   }

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import PublicPage from "./publicpage";
+import MainChatApp from "./ChatApp/MainChatApp";
 import CreateUser from "./settings_components/createuser";
 import UserSetup from "./settings_components/usersetup";
 import CreateEvents from "./settings_components/createevents";
@@ -15,7 +16,6 @@ import ManageEvents from "./settings_components/manageevents";
 import Calendar from "./calendar";
 import Homepage from "./homepage";
 import Settings from "./settings_components/settings";
-import Chats from "./chat";
 import Login from "./login";
 import "../styling/reference.css";
 import Reference from "../reference";
@@ -110,22 +110,22 @@ class AuthenticatedRoutes extends React.Component {
           }}
         />
         <Route
-          path="/app/chats"
+          path="/app/settings"
           render={() => {
             const { user } = this.state;
             if (user.username) {
-              return <Chats />;
+              return <Settings />;
             } else {
               return <Redirect to="/public_page" />;
             }
           }}
         />
         <Route
-          path="/app/settings"
-          render={() => {
+          path="/app/chat_room"
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
-              return <Settings />;
+              return <MainChatApp {...props} user={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }

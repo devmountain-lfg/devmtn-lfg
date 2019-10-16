@@ -1,4 +1,12 @@
 const bcrypt = require("bcrypt");
+const Chatkit = require('@pusher/chatkit-server');
+const chat_instance = 'v1:us1:e2d98014-702f-4f97-9c50-067d5f18eafc';
+const secret_key = '246f89f5-f9a6-489f-a259-e9223238bac2:AnIcpJQ7u6cxH05w0Xt8S+OAten/AcL2D04r2Nmwk4s=';
+
+const chatkit = new Chatkit.default({
+    instanceLocator: chat_instance,
+    key: secret_key
+  });
 
 module.exports = {
     createNewUser: async (req, res) => {
@@ -47,7 +55,7 @@ module.exports = {
 
             await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName,lastName,gender,email,phoneNumber,username,password]);   
             res.send(`${firstName} ${lastName} has been added`);
-            
+
         } catch (error) {
             res.send(error);            
         }    
@@ -144,7 +152,7 @@ module.exports = {
             if(!state) return res.status(400).send("Please enter the state");
             if(!zip) return res.status(400).send("Please enter the zip code");
 
-
+ 
             const creatorId = req.session.user.user_id;
 
             await db.query("call createnewevent($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)", [activityId, eventStart, eventEnd, isPublic, maxPlayers, creatorId, message, address1, address2, city, state, zip]);
