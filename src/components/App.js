@@ -19,7 +19,7 @@ import Chats from "./chat";
 import Login from "./login";
 import "../styling/reference.css";
 import Reference from "../reference";
-import Detailes from "./detailedevent";
+import Details from "./detailedevent";
 
 class AuthenticatedRoutes extends React.Component {
   state = {
@@ -60,7 +60,7 @@ class AuthenticatedRoutes extends React.Component {
           render={(props) => {
             const { user } = this.state;
             if (user.username) {
-              return <Detailes {...props} userInfo={this.state.user} />;
+              return <Details {...props} userInfo={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
