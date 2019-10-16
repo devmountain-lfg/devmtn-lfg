@@ -19,16 +19,24 @@ class CreatedEvents extends Component {
         params: { user_id: this.props.userInfo.user_id }
       })
       .then(response => {
+        console.log(response.data);
         this.setState({ events: response.data });
       });
   }
 
   render() {
     const currentEvents = this.state.events.map(event => {
+      let creator = true;
+      let joinee = false;
+      if (event.creator_id !== event.user_id) {
+        creator = false;
+        joinee = true;
+      }
       return (
         <GranularEvent
           event={event}
-          creator={true}
+          creator={creator}
+          joinee={joinee}
           user_id={this.props.userInfo.user_id}
         />
       );

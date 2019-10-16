@@ -40,6 +40,7 @@
   padding: 2px;
   box-shadow: 3px 7px 13px #3f3e4044;
   border: none;
+  outline: none;
 }
 .input-ref-medium {
   height: 25px;
@@ -50,6 +51,7 @@
   padding: 2px;
   box-shadow: 3px 7px 13px #3f3e4044;
   border: none;
+  outline: none;
 }
 .input-ref-large {
   height: 25px;
@@ -61,6 +63,7 @@
   padding: 2px;
   box-shadow: 3px 7px 13px #3f3e4044;
   border: none;
+  outline: none;
 }
 
 .all-buttons-ref {
@@ -84,6 +87,7 @@
   background-color: rgb(81, 185, 255);
   border: none;
   border-radius: 7px;
+  outline: none;
 }
 .button-ref-medium {
   display: flex;
@@ -98,6 +102,7 @@
   box-shadow: 3px 7px 13px #3f3e4044;
   margin: 5px;
   font-size: 18px;
+  outline: none;
 }
 .button-ref-large {
   display: flex;
@@ -106,6 +111,7 @@
   height: 75px;
   margin: 2px;
   font-family: "Heebo", sans-serif;
+  outline: none;
 }
 
 .all-dropdowns-ref {
@@ -123,6 +129,7 @@
   height: 25px;
   width: 150px;
   font-family: "Heebo", sans-serif;
+  outline: none;
 }
 
 .all-checkboxs-ref {

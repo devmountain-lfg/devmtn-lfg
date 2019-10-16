@@ -9,6 +9,18 @@
   align-items: center;
 }
 
+.calendar-events {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(214, 214, 214);
+  font-family: "Heebo", sans-serif;
+  align-items: center;
+  max-width: 1440px;
+}
+
 .header-ref {
   display: flex;
   height: 75px;
@@ -27,9 +39,10 @@
   width: 100vw;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: auto;
   font-family: "Heebo", sans-serif;
   max-width: 1024px;
+  overflow-x: hidden;
 }
 
 .footer-ref {
@@ -72,7 +85,7 @@
   box-shadow: 3px 7px 13px #3f3e406c;
   border-radius: 7px;
   padding: 3px;
-  max-width: 800px;
+  max-width: 750px;
   height: auto;
 }
 
@@ -109,11 +122,14 @@
 }
 
 .title {
-  width: 130px;
+  width: 250px;
   height: 100%;
   font-size: 30px;
   font-family: "Heebo", sans-serif;
-  margin-left: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .message {
@@ -183,7 +199,7 @@
   width: 90%;
   margin: 10px;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   font-family: "Heebo", sans-serif;
   max-width: 1024px;
 }
@@ -193,12 +209,12 @@
   height: 350px;
   width: 100vw;
   flex-direction: column;
-  overflow: hidden;
   font-family: "Heebo", sans-serif;
   align-items: center;
   margin-bottom: 5px;
   max-width: 1024px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .event-date {
@@ -217,8 +233,20 @@
   align-items: center;
 }
 
-@media (min-height: 865px) {
-  .publicpage-ref {
-    height: 100vh;
+@media (min-width: 865px) {
+  .calendar-events {
+    flex-direction: row;
+  }
+  .my-events-ref {
+    height: 80vh;
+    width: 85vw;
+  }
+
+  .event {
+    width: 45vw;
+  }
+  .calendar-ref {
+    height: 80vh;
+    overflow: hidden;
   }
 }
