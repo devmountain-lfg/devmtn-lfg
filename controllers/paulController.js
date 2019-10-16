@@ -165,6 +165,9 @@ module.exports = {
             const db = req.app.get('db');
             const userId = req.session.user.user_id;
             const eventId = req.body.eventId;
+            const [event] = await db.user_events_view.where('event_id = $1', [eventId]);
+
+            if(event.current_player_count >= event.max_players) return res.status(400).send('Group is already full');
     
             let sqlResponse = await db.query("call joinEvent($1,$2)", [userId, eventId]); 
             sqlResponse = 'You have successfully joined this event';
@@ -282,6 +285,22 @@ module.exports = {
             console.log(deleteEventResponse)
             
             res.send('Event deleted');
+        } catch (error) {
+            console.log(error);            
+            res.send(error);            
+        }    
+
+    },
+
+    deleteAccount: async (req, res) => {
+        try {
+            if(!req.session.user) return res.status(400).send('Please sign in');
+            const db = req.app.get("db");
+
+            await db.query("call deleteUser($1)", [req.session.user.user_id]);
+            req.session.destroy();
+ 
+            res.send('Your account has been deleted');
         } catch (error) {
             console.log(error);            
             res.send(error);            
