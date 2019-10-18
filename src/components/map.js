@@ -14,7 +14,7 @@ class eventMaps extends Component {
 
 
   getLatLong() {
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=${process.env.REACT_APP_GOOGLEAPI}`)
+   return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=${process.env.REACT_APP_GOOGLEAPI}`)
       .then(result => {
         this.setState({
           location:{
@@ -35,8 +35,8 @@ class eventMaps extends Component {
       
     }})
     this.getLatLong()
-   .catch(err => console.log(err));
-    console.log("map props", this.props)
+    .catch(err => console.log(err));
+    console.log("map props", this.props)  
   }
 
   
@@ -48,7 +48,7 @@ class eventMaps extends Component {
           googleMapsApiKey={process.env.REACT_APP_GOOGLEAPI}
           
         >
-          {this.state.location === false ? 
+           {this.state.location === false ? 
             (<div>Google cannot find your address... Good Luck!</div>)
             : (
           <GoogleMap
@@ -71,10 +71,10 @@ class eventMaps extends Component {
                 lat: this.state.location.lat,
                 lng: this.state.location.lng
               }}
-              />
+          />
           </GoogleMap>
-          )
-        }
+           )
+          }
         </LoadScript>
        )
     }
