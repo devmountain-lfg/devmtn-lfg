@@ -174,13 +174,12 @@ module.exports = {
             const userId = req.session.user.user_id;
             const eventId = req.body.eventId;
 
-            let sqlResponse = await db.query("call joinEvent($1,$2)", [userId, eventId]);
+            await db.query("call joinEvent($1,$2)", [userId, eventId]);
             const [event] = await db.user_events_view.where('event_id = $1', [eventId]);
 
             if(event.current_player_count >= event.max_players) return res.status(400).send('Group is already full');
     
-            let sqlResponse = await db.query("call joinEvent($1,$2)", [userId, eventId]); 
-            sqlResponse = 'You have successfully joined this event';
+            const sqlResponse = 'You have successfully joined this event';
             res.send(sqlResponse);
         } catch (error) {
             console.log(error);
@@ -332,7 +331,7 @@ module.exports = {
             } = req.body;
             const [currentUser] = await db.users.where('user_id = $1', [userId]);
             const currentUserPassword = currentUser.user_password;
-
+            
             if(currentPassword !== currentUserPassword) return res.status(400).send('Current Password is Incorrect');
             if(newPassword.length < 7) return res.status(400).send('Password Must Be At Least 7 Chatacters Long');
             if(checkForNumber(newPassword) === false) return res.status(400).send('Password Must Contain a Number');
@@ -343,7 +342,6 @@ module.exports = {
         } catch (error) {
             console.log(error);
             res.send(error);
-            console.log(error);
         }
     },
 
