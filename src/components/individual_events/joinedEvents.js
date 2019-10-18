@@ -9,7 +9,7 @@ class JoinedEvents extends Component {
 
     this.state = {
       events: [],
-      joined: true
+      joined: false
     };
   }
 
@@ -54,14 +54,26 @@ class JoinedEvents extends Component {
   };
 
   render() {
+
     const currentEvents = this.state.events.map(event => {
-      return (
-        <GranularEvent
-          event={event}
-          joinee={true}
-          user_id={this.props.userInfo.user_id}
-        />
-      );
+      if (this.state.joined === true) {
+
+        return (
+          <GranularEvent
+            event={event}
+            joinee={true}
+            user_id={this.props.userInfo.user_id}
+          />
+        );
+      } else {
+        return (
+          <GranularEvent
+            event={event}
+            joinee={false}
+            user_id={this.props.userInfo.user_id}
+          />
+        );
+      }
     });
     return <div>{currentEvents}</div>;
   }

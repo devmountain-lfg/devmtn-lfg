@@ -63,8 +63,8 @@ class GranularEvent extends Component {
   };
 
   handelClick = async (props) => {
-console.log(this.props)
-  this.props.history.push(`/app/details/${this.props.event.event_id}`)
+    console.log(this.props)
+    this.props.history.push(`/app/details/${this.props.event.event_id}`)
   }
 
   render() {
@@ -79,7 +79,8 @@ console.log(this.props)
             </div>
           </div>
           <h1 className="title">{event.activity_name}</h1>
-          {this.props.creator === true ? (
+
+          {this.props.creator ? (
             <div className="event-buttons">
               <button
                 className="button-ref-small"
@@ -95,28 +96,18 @@ console.log(this.props)
               </Link>
             </div>
           ) : null}
-          {this.props.joinee === true ? (
+
+          {this.state.joined === true ? (
             <div className="event-buttons">
-              <button className="button-ref-small">DM</button>
-              {this.state.joined === true ? (
-                <button
-                  className="button-ref-small"
-                  onClick={() => this.handleCancel(event.event_id,event)}
-                >
-                  Leave
+              <button
+                className="button-ref-small"
+                onClick={() => this.handleCancel(event.event_id, event)}
+              >
+                Leave
                 </button>
-              ) : (
-                <button
-                  className="button-ref-small"
-                  onClick={() => this.handleJoin(event.event_id)}
-                >
-                  Join
-                </button>
-              )}
             </div>
-          ) : (
+          ) : this.props.creator ? null : (
             <div className="event-buttons">
-              <button className="button-ref-small">DM</button>
               <button
                 className="button-ref-small"
                 onClick={() => this.handleJoin(event.event_id)}
@@ -125,6 +116,7 @@ console.log(this.props)
               </button>
             </div>
           )}
+
         </div>
         <div className="message" onClick={this.handelClick}>{event.event_message}</div>
         <div className="event-date">
@@ -138,4 +130,4 @@ console.log(this.props)
   }
 }
 
-export default withRouter (GranularEvent);
+export default withRouter(GranularEvent);
