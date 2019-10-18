@@ -4,7 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import { Link, withRouter } from "react-router-dom";
 
-class GranularEvent extends Component {
+class DetailGranularEvent extends Component {
   constructor() {
     super();
 
@@ -26,7 +26,6 @@ class GranularEvent extends Component {
     axios
       .post("/join_event", body)
       .then(response => {
-        console.log("join event needs fixing");
         alert("You have successfully joined the event!");
         this.setState({ joined: true });
       })
@@ -68,7 +67,9 @@ console.log(this.props)
   }
 
   render() {
+      console.log(this.props)
     const { event } = this.props;
+    console.log("const event", event)
     return (
       <div className="event" key={event.event_id}  >
         <div className="event-top">
@@ -79,23 +80,15 @@ console.log(this.props)
             </div>
           </div>
           <h1 className="title">{event.activity_name}</h1>
-          {this.props.creator === true ? (
+          {this.props.creator && (
             <div className="event-buttons">
-              <button
-                className="button-ref-small"
-                onClick={() => this.handleDelete(event.event_id)}
-              >
-                Delete
-              </button>
-              <Link
-                to={`/app/change_event/${event.event_id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <button className="button-ref-small">Edit</button>
+              <button className="button-ref-small" onClick={() => this.handleDelete(event.event_id)}>Delete</button>
+              <Link to={`/app/change_event/${event.event_id}`} style={{textDecoration: "none"}}>
+                <button className="button-ref-small">Change</button>
               </Link>
             </div>
-          ) : null}
-          {this.props.joinee === true ? (
+          )}
+          {this.props.joinee && (
             <div className="event-buttons">
               <button className="button-ref-small">DM</button>
               {this.state.joined === true ? (
@@ -103,7 +96,7 @@ console.log(this.props)
                   className="button-ref-small"
                   onClick={() => this.handleCancel(event.event_id,event)}
                 >
-                  Leave
+                  Unjoin
                 </button>
               ) : (
                 <button
@@ -113,16 +106,6 @@ console.log(this.props)
                   Join
                 </button>
               )}
-            </div>
-          ) : (
-            <div className="event-buttons">
-              <button className="button-ref-small">DM</button>
-              <button
-                className="button-ref-small"
-                onClick={() => this.handleJoin(event.event_id)}
-              >
-                Join
-              </button>
             </div>
           )}
         </div>
@@ -138,4 +121,4 @@ console.log(this.props)
   }
 }
 
-export default withRouter (GranularEvent);
+export default withRouter (DetailGranularEvent);

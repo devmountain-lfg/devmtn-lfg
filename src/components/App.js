@@ -19,8 +19,15 @@ import Settings from "./settings_components/settings";
 import Login from "./login";
 import "../styling/reference.css";
 import Reference from "../reference";
+<<<<<<< HEAD
+import Details from "./detailedevent";
+=======
 import DeleteAccount from './settings_components/deleteaccount';
+<<<<<<< HEAD
 import ResetPassword from './settings_components/resetpassword';
+=======
+>>>>>>> master
+>>>>>>> master
 
 class AuthenticatedRoutes extends React.Component {
   state = {
@@ -47,7 +54,7 @@ class AuthenticatedRoutes extends React.Component {
       <div>
         <Route
           path="/app/home_page"
-          render={props => {
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
               return <Homepage {...props} userInfo={this.state.user} />;
@@ -57,8 +64,19 @@ class AuthenticatedRoutes extends React.Component {
           }}
         />
         <Route
+          path="/app/details/:event_id"
+          render={(props) => {
+            const { user } = this.state;
+            if (user.username) {
+              return <Details {...props} userInfo={this.state.user} />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
           path="/app/calendar"
-          render={props => {
+          render={(props) => {
             const { user } = this.state;
             if (user.username) {
               return <Calendar {...props} userInfo={this.state.user} />;
