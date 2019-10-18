@@ -8,29 +8,50 @@ class UserEvents extends Component {
     super();
 
     this.state = {
-      events: []
+      myEvents: [],
+      currentEvents: []
     };
   }
 
-  componentDidMount() {
-    axios
-      .get(`/events`, { params: { user_id: this.props.userInfo.user_id } })
-      .then(response => {
-        this.setState({ events: response.data });
-      });
+  async componentDidMount() {
+    /* Promise.all needs an array and goes in order by index. 
+    It returns an array of responses and those match to the index of Promise.all */
+    const [{ data: myEvents }, { data: currentEvents }] = await Promise.all([
+      axios.get(`/events`, {
+        params: { user_id: this.props.userInfo.user_id }
+      }),
+      axios.get("/current_events")
+    ]);
+
+    this.setState({ myEvents, currentEvents });
   }
 
   render() {
-    const currentEvents = this.state.events.map(event => {
+    const myEvents = this.state.myEvents.map(event => {
       return (
         <GranularEvent
+          key={event.event_id}
           event={event}
           joinee={true}
           user_id={this.props.userInfo.user_id}
         />
       );
     });
-    return <div>{currentEvents}</div>;
+    const currentEvents = this.state.currentEvents.map(event => {
+      return (
+        <GranularEvent
+          event={event}
+          joinee={false}
+          user_id={this.props.userInfo.user_id}
+        />
+      );
+    });
+    return (
+      <div>
+        <div>{myEvents}</div>
+        <div>{currentEvents}</div>
+      </div>
+    );
   }
 }
 

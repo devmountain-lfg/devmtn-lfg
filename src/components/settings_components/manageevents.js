@@ -32,15 +32,16 @@ class ManageEvents extends Component {
     return (
       <div className="publicpage-ref">
         <div className="welcome-back">Manage Events Here!</div>
-        <div className="event-title">Your Created Events</div>
-        <div className="my-events-ref">
-          <div className="events-ref">
+        <div className="calendar-events">
+          <div className="my-events-ref">
+            <div className="event-title">Your Created Events</div>
+
             <CreatedEvents userInfo={this.state.userInfo} />
           </div>
-        </div>
-        <div className="event-title">Your Other Events</div>
-        <div className="my-events-ref">
-          <JoinedEvents userInfo={this.state.userInfo} />
+          <div className="my-events-ref">
+            <div className="event-title">Your Other Events</div>
+            <JoinedEvents userInfo={this.state.userInfo} />
+          </div>
         </div>
         <Navbar />
       </div>

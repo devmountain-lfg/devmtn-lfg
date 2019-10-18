@@ -34,13 +34,25 @@ class HomePage extends Component {
           <button className="button-ref-medium" onClick={this.handleLogout}>
             Sign Out
           </button>
+          <div className="title">Looking for Group</div>
         </header>
+<<<<<<< HEAD
         <div className="calendar-ref" >
           <Calendar {...this.props} userInfo={this.props.userInfo}  />
         </div>
         <div className="event-title">Your Joined Events</div>
         <div className="my-events-ref">
           <UserEvents userInfo={this.props.userInfo} />
+=======
+        <div className="calendar-events">
+          <div className="calendar-ref">
+            <Calendar {...this.props} userInfo={this.props.userInfo} />
+          </div>
+          <div className="my-events-ref">
+            <div className="event-title">Your Joined Events</div>
+            <UserEvents userInfo={this.props.userInfo} />
+          </div>
+>>>>>>> master
         </div>
         <Navbar />
       </div>
