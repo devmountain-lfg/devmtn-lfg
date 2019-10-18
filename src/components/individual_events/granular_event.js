@@ -9,14 +9,16 @@ class GranularEvent extends Component {
     super();
 
     this.state = {
-      joined: false
+      joined: null
     };
   }
 
   componentDidMount() {
     if (this.props.user_id === this.props.event.creator_id) {
       this.setState({ joined: true });
-    }
+    } else if (this.props.joinee) {
+      this.setState({ joined: true })
+    } this.setState({ joined: false })
   }
 
   handleJoin = id => {
@@ -26,9 +28,10 @@ class GranularEvent extends Component {
     axios
       .post("/join_event", body)
       .then(response => {
-        console.log("join event needs fixing");
+
         alert("You have successfully joined the event!");
         this.setState({ joined: true });
+        console.log(this.state)
       })
       .catch(err => {
         console.log("Here is the join error:", err);
@@ -69,6 +72,7 @@ class GranularEvent extends Component {
 
   render() {
     const { event } = this.props;
+    if (this.props.joinee && this.state.joined === false) return <div>"loading..."</div>
     return (
       <div className="event" key={event.event_id}  >
         <div className="event-top">
@@ -106,16 +110,17 @@ class GranularEvent extends Component {
                 Leave
                 </button>
             </div>
-          ) : this.props.creator ? null : (
-            <div className="event-buttons">
-              <button
-                className="button-ref-small"
-                onClick={() => this.handleJoin(event.event_id)}
-              >
-                Join
+          ) : this.props.creator ? null :
+              this.state.joined === false ? (
+                <div className="event-buttons">
+                  <button
+                    className="button-ref-small"
+                    onClick={() => this.handleJoin(event.event_id)}
+                  >
+                    Join
               </button>
-            </div>
-          )}
+                </div>
+              ) : null}
 
         </div>
         <div className="message" onClick={this.handelClick}>{event.event_message}</div>
