@@ -43,6 +43,7 @@ app.use(
   })
 );
 
+app.get("/event_by_id",peterController.getEventById)
 app.get("/users_test", drewController.getUsers);
 app.get("/current_events", drewController.getCurrentEvents);
 app.get("/events_created", drewController.getMyCreatedEvents);
@@ -61,6 +62,7 @@ app.get("/activities", drewController.getActivities);
 app.post("/filthy_filter", paulController.filthyFilter);
 app.put("/update_event", paulController.updateEvent);
 app.delete("/delete_event/:event_id", paulController.deleteEvent);
+app.delete("/delete_account", paulController.deleteAccount);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });

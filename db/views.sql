@@ -31,7 +31,7 @@ select e.event_id,
        concat(e.event_address_1, ' ', e.event_address_2, ' ', e.event_city, ' ', e.event_state, ' ', e.event_zip) as event_location,
        e.max_players,
        pc.current_player_count,
-       concat(u.first_name, ' ', u.last_name) creator_name,
+       concat(creator.first_name, ' ', creator.last_name) creator_name,
        creator_id
        
 from users u
@@ -43,6 +43,8 @@ from users u
      on e.activity_id = a.activity_id
      inner join (select ue.event_id,count(ue.event_id) current_player_count from user_events ue group by ue.event_id) pc
      on e.event_id = pc.event_id
+     inner join users creator
+     on e.creator_id = creator.user_id
 ;
 
 CREATE VIEW current_events_view
