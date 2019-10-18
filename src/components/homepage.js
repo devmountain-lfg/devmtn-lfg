@@ -13,6 +13,11 @@ class HomePage extends Component {
     };
   }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
   handleLogout = () => {
     axios
       .get("/logout")
