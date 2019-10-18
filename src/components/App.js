@@ -19,15 +19,10 @@ import Settings from "./settings_components/settings";
 import Login from "./login";
 import "../styling/reference.css";
 import Reference from "../reference";
-<<<<<<< HEAD
 import Details from "./detailedevent";
-=======
 import DeleteAccount from './settings_components/deleteaccount';
-<<<<<<< HEAD
 import ResetPassword from './settings_components/resetpassword';
-=======
->>>>>>> master
->>>>>>> master
+
 
 class AuthenticatedRoutes extends React.Component {
   state = {
