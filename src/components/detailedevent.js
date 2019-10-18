@@ -9,68 +9,52 @@ import Map from "./map";
 class detailedView extends Component {
     state = {
         events: [],
-        creator: {},
-      activities: [],
-      event_id: null,
-      activity_id: null,
-      activity_name: "",
-      event_date_start: "",
-      event_date_end: "",
-      is_public_event: false,
-      max_player: 0,
-      message: "",
-      locationStreet_one: "",
-      locationStreet_two: null,
-      locationCity: "",
-      locationZip: 0,
-      locationState: ""
       }
 
-  async componentDidMount() {
-      console.log("detail",this.props)
-    const eventId = this.props.match.params.event_id;
-    await this.setState({ creator: this.props.user, event_id: eventId });
-    await axios
-      .get("/event_by_id", { params: { event_id: eventId } })
-      .then(res => {
-          console.log(res)
-        const [data] = res.data;
-        this.setState({
-          activity_id: data.activity_id,
-          activity_name: data.activity_name,
-          event_date_start: moment(data.event_date_start).format(
-            "YYYY-MM-DDTkk:mm"
-          ),
-          event_date_end: moment(data.event_date_end).format(
-            "YYYY-MM-DDTkk:mm"
-          ),
-          is_public_event: data.public_event,
-          max_player: data.max_players,
-          message: data.event_message,
-          locationStreet_one: data.event_address_1,
-          locationStreet_two: data.event_address_2,
-          locationCity: data.event_city,
-          locationZip: data.event_zip,
-          locationState: data.event_state
-        });
-      })
-      .catch(err => console.log(err));
-    await this.setState({ loading: false });
-    console.log(this.state)
-  }
+      async componentDidMount() {
+        console.log("detail",this.props)
+      const eventId = this.props.match.params.event_id;
+      await this.setState({ creator: this.props.user, event_id: eventId });
+      await axios
+        .get("/event_by_id", { params: { event_id: eventId } })
+        .then(res => {
+          const [data] = res.data;
+          this.setState({
+              events:{
+            activity_id: data.creator_id,
+            creator_name: data.creator_name,
+            activity_name: data.activity_name,
+            event_date_start: moment(data.event_date_start).format(
+              "YYYY-MM-DDTkk:mm"
+            ),
+            event_date_end: moment(data.event_date_end).format(
+              "YYYY-MM-DDTkk:mm"
+            ),
+            is_public_event: data.public_event,
+            max_players: data.max_players,
+            current_player_count: data.current_player_count,
+            event_message: data.event_message,
+            event_location: data.event_location
+              }
+          });
+        })
+        .catch(err => console.log(err));
+      await this.setState({ loading: false });
+      
+    }
 
     render() {
-        console.log(this.props)
+       console.log(this.state.events.event_location)
        return (
         <div className="publicpage-ref">
         <header className="header-ref">
         </header>
         <div className="event-title">Your Joined Events</div>
         <div className="my-events-ref">
-          <Event {...this.props} userInfo={this.props.userInfo}  />
+          <Event {...this.props} userInfo={this.props.userInfo} events={this.state.events} />
         </div>
         <div className="my-events-ref">
-        <Map {...this.props}  />
+        <Map location={this.state.events.event_location}  />
         </div>
         <Navbar />
       </div>
