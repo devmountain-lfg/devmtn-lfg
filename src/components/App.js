@@ -21,6 +21,8 @@ import "../styling/reference.css";
 import Reference from "../reference";
 import Details from "./detailedevent";
 import DeleteAccount from './settings_components/deleteaccount';
+import ResetPassword from './settings_components/resetpassword';
+
 
 class AuthenticatedRoutes extends React.Component {
   state = {
@@ -150,6 +152,17 @@ class AuthenticatedRoutes extends React.Component {
             const { user } = this.state;
             if (user.username) {
               return <DeleteAccount {...props} user={this.state.user} />;
+            } else {
+              return <Redirect to="/public_page" />;
+            }
+          }}
+        />
+        <Route
+          path="/app/reset_password"
+          render={props => {
+            const { user } = this.state;
+            if (user.username) {
+              return <ResetPassword {...props} user={this.state.user} />;
             } else {
               return <Redirect to="/public_page" />;
             }
