@@ -69,6 +69,10 @@ class Settings extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  deleteAccount = () => {
+    this.props.history.push("/app/delete_account");
+  }
+
   render() {
     console.log(this.state);
     const {
