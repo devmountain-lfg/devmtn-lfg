@@ -5,6 +5,7 @@ DROP PROCEDURE IF EXISTS unJoinEvent;
 DROP PROCEDURE IF EXISTS updateUser;
 DROP PROCEDURE IF EXISTS updateEvent;
 DROP PROCEDURE IF EXISTS deleteEvent;
+DROP PROCEDURE IF EXISTS resetPassword;
 
 
 CREATE PROCEDURE addNewUser(
@@ -398,6 +399,42 @@ BEGIN
 
     DELETE FROM user_events ue WHERE ue.event_id = $1;
     DELETE FROM events e WHERE e.event_id = $1;
+
+    RETURN;
+END;
+$$;
+
+CREATE PROCEDURE resetPassword(
+    user_id int, 
+    newPassword varchar
+)
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+
+    if (select count(*) from users u where u.user_id = $1) < 1
+        THEN 
+           RAISE NOTICE 'User does not exist';
+           RETURN;
+        END IF;
+        
+        
+    if LENGTH($2) < 7
+        THEN
+            RAISE NOTICE 'Password too short';
+            RETURN;
+        END IF;
+        
+    if $2 !~ '[0-9]'
+        THEN
+            RAISE NOTICE 'Password requires number';
+            RETURN;
+        END IF;
+    
+
+    UPDATE users u
+    SET user_password = $2
+    WHERE u.user_id = $1;
 
     RETURN;
 END;
