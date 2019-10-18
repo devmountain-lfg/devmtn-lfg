@@ -104,6 +104,20 @@
   font-size: 18px;
   outline: none;
 }
+.button-ref-warning {
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  margin: 2px;
+  background-color: rgb(230, 22, 22);
+  font-family: "Heebo", sans-serif;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 3px 7px 13px #3f3e4044;
+  margin: 5px;
+  font-size: 18px;
+}
 .button-ref-large {
   display: flex;
   justify-content: center;

@@ -6,6 +6,7 @@ DROP PROCEDURE IF EXISTS updateUser;
 DROP PROCEDURE IF EXISTS updateEvent;
 DROP PROCEDURE IF EXISTS deleteEvent;
 DROP PROCEDURE IF EXISTS resetPassword;
+DROP PROCEDURE IF EXISTS deleteUser;
 
 
 CREATE PROCEDURE addNewUser(
@@ -407,6 +408,8 @@ $$;
 CREATE PROCEDURE resetPassword(
     user_id int, 
     newPassword varchar
+CREATE PROCEDURE deleteUser( 
+    user_id int
 )
 LANGUAGE plpgsql    
 AS $$
@@ -435,6 +438,16 @@ BEGIN
     UPDATE users u
     SET user_password = $2
     WHERE u.user_id = $1;
+
+    RETURN;
+END;
+$$;
+    
+
+    DELETE FROM user_events ue WHERE ue.user_id = $1;
+    DELETE FROM events e WHERE e.creator_id = $1;
+    DELETE FROM user_preferences up WHERE up.user_id = $1;
+    DELETE FROM users u WHERE u.user_id = $1;
 
     RETURN;
 END;

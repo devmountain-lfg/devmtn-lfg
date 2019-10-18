@@ -62,6 +62,7 @@ app.post("/filthy_filter", paulController.filthyFilter);
 app.put("/update_event", paulController.updateEvent);
 app.delete("/delete_event/:event_id", paulController.deleteEvent);
 app.put("/reset_password", paulController.resetPassword);
+app.delete("/delete_account", paulController.deleteAccount);
 app.get("/me", (req, res) => {
   res.send(req.session.user);
 });
