@@ -84,7 +84,7 @@ module.exports = {
     try {
       const user_id = req.query.user_id;
       const db = req.app.get("db");
-      const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id};`;
+      const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id} AND u.creator_id != ${user_id};`;
 
       const results = await db.query(query);
       res.status(200).send(results);
@@ -101,6 +101,18 @@ module.exports = {
       const db = req.app.get("db");
       const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id} OR u.creator_id = ${user_id};`;
 
+      const results = await db.query(query);
+      res.status(200).send(results);
+    } catch (err) {
+      res.status(500).send(err);
+      console.log(`here is error: ${err}`);
+    }
+  },
+
+  getPublicEvents: async (req, res) => {
+    try {
+      const db = req.app.get("db");
+      const query = `SELECT * FROM current_events_view LEFT JOIN (SELECT public_event, event_id FROM events) events ON events.event_id = current_events_view.event_id`;
       const results = await db.query(query);
       res.status(200).send(results);
     } catch (err) {

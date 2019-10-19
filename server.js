@@ -49,6 +49,7 @@ app.get("/current_events", drewController.getCurrentEvents);
 app.get("/events_created", drewController.getMyCreatedEvents);
 app.get("/events_joined", drewController.getJoinedEvents);
 app.get("/events", drewController.getAllMyEvents);
+app.get("/public_events", drewController.getPublicEvents);
 app.get("/event", drewController.getChangeableEvent);
 app.post("/login", drewController.login);
 app.post("/create_user", paulController.createNewUser);

@@ -13,8 +13,6 @@ class HomePage extends Component {
     };
   }
 
-
-
   handleLogout = () => {
     axios
       .get("/logout")

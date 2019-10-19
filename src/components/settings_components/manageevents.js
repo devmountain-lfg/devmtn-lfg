@@ -35,7 +35,6 @@ class ManageEvents extends Component {
         <div className="calendar-events">
           <div className="my-events-ref">
             <div className="event-title">Your Created Events</div>
-
             <CreatedEvents userInfo={this.state.userInfo} />
           </div>
           <div className="my-events-ref">
