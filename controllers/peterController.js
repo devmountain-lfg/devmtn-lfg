@@ -3,7 +3,7 @@ getEventById : async (req, res) => {
     try {
       const event_id = req.query.event_id;
       const db = req.app.get("db");
-      const query = `SELECT * FROM events WHERE event_id = ${event_id}`
+      const query = `SELECT * FROM current_events_view WHERE event_id = ${event_id}`
       const results = await db.query(query);
         res.status(200).send(results);
       } catch (err) { 
