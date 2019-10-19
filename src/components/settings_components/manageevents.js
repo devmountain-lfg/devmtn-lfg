@@ -39,7 +39,7 @@ class ManageEvents extends Component {
             <CreatedEvents userInfo={this.state.userInfo} />
           </div>
           <div className="my-events-ref">
-            <div className="event-title">Your Other Events</div>
+            <div className="event-title">Your Joined Events</div>
             <JoinedEvents userInfo={this.state.userInfo} />
           </div>
         </div>

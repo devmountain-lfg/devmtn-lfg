@@ -9,14 +9,16 @@ class GranularEvent extends Component {
     super();
 
     this.state = {
-      joined: false
+      joined: null
     };
   }
 
   componentDidMount() {
     if (this.props.user_id === this.props.event.creator_id) {
       this.setState({ joined: true });
-    }
+    } else if (this.props.joinee) {
+      this.setState({ joined: true })
+    } this.setState({ joined: false })
   }
 
   handleJoin = id => {
@@ -26,9 +28,10 @@ class GranularEvent extends Component {
     axios
       .post("/join_event", body)
       .then(response => {
-        console.log("join event needs fixing");
+
         alert("You have successfully joined the event!");
         this.setState({ joined: true });
+        console.log(this.state)
       })
       .catch(err => {
         console.log("Here is the join error:", err);
@@ -63,12 +66,13 @@ class GranularEvent extends Component {
   };
 
   handelClick = async (props) => {
-console.log(this.props)
-  this.props.history.push(`/app/details/${this.props.event.event_id}`)
+    console.log(this.props)
+    this.props.history.push(`/app/details/${this.props.event.event_id}`)
   }
 
   render() {
     const { event } = this.props;
+    if (this.props.joinee && this.state.joined === false) return <div>"loading..."</div>
     return (
       <div className="event" key={event.event_id}  >
         <div className="event-top">
@@ -79,7 +83,8 @@ console.log(this.props)
             </div>
           </div>
           <h1 className="title">{event.activity_name}</h1>
-          {this.props.creator === true ? (
+
+          {this.props.creator ? (
             <div className="event-buttons">
               <button
                 className="button-ref-small"
@@ -95,36 +100,28 @@ console.log(this.props)
               </Link>
             </div>
           ) : null}
-          {this.props.joinee === true ? (
+
+          {this.state.joined === true ? (
             <div className="event-buttons">
-              <button className="button-ref-small">DM</button>
-              {this.state.joined === true ? (
-                <button
-                  className="button-ref-small"
-                  onClick={() => this.handleCancel(event.event_id,event)}
-                >
-                  Leave
-                </button>
-              ) : (
-                <button
-                  className="button-ref-small"
-                  onClick={() => this.handleJoin(event.event_id)}
-                >
-                  Join
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="event-buttons">
-              <button className="button-ref-small">DM</button>
               <button
                 className="button-ref-small"
-                onClick={() => this.handleJoin(event.event_id)}
+                onClick={() => this.handleCancel(event.event_id, event)}
               >
-                Join
-              </button>
+                Leave
+                </button>
             </div>
-          )}
+          ) : this.props.creator ? null :
+              this.state.joined === false ? (
+                <div className="event-buttons">
+                  <button
+                    className="button-ref-small"
+                    onClick={() => this.handleJoin(event.event_id)}
+                  >
+                    Join
+              </button>
+                </div>
+              ) : null}
+
         </div>
         <div className="message" onClick={this.handelClick}>{event.event_message}</div>
         <div className="event-date">
@@ -138,4 +135,4 @@ console.log(this.props)
   }
 }
 
-export default withRouter (GranularEvent);
+export default withRouter(GranularEvent);
