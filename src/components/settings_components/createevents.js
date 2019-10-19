@@ -34,7 +34,6 @@ class createEvent extends Component {
     axios
       .get("/activities")
       .then(response => {
-        console.log(response.data);
         this.setState({
           activities: response.data
         });
@@ -88,6 +87,8 @@ class createEvent extends Component {
         state: locationState,
         zip: locationZip
       };
+
+      console.log('this is body', body);
 
       const results = await axios.post("/create_event", body);
       console.log(results);

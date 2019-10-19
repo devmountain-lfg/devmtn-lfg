@@ -8,8 +8,7 @@ class JoinedEvents extends Component {
     super();
 
     this.state = {
-      events: [],
-      joined: false
+      events: []
     };
   }
 
@@ -42,7 +41,7 @@ class JoinedEvents extends Component {
   handleCancel = id => {
     axios
       .delete("/unjoin_event", {
-        params: { eventId: id }
+        params: { event_id: id }
       })
       .then(response => {
         alert("You have successfully unjoined the event!");
@@ -54,28 +53,19 @@ class JoinedEvents extends Component {
   };
 
   render() {
-
-    const currentEvents = this.state.events.map(event => {
-      if (this.state.joined === true) {
-
-        return (
-          <GranularEvent
-            event={event}
-            joinee={true}
-            user_id={this.props.userInfo.user_id}
-          />
-        );
-      } else {
-        return (
-          <GranularEvent
-            event={event}
-            joinee={false}
-            user_id={this.props.userInfo.user_id}
-          />
-        );
-      }
+    const joinedEvents = this.state.events.map(event => {
+      let joinee = true;
+      return (
+        <GranularEvent
+          event={event}
+          joinee={joinee}
+          user_id={this.props.userInfo.user_id}
+          handleCancel={this.handleCancel}
+          handleJoin={this.handleJoin}
+        />
+      );
     });
-    return <div>{currentEvents}</div>;
+    return <div>{joinedEvents}</div>;
   }
 }
 
