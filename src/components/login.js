@@ -21,16 +21,17 @@ class Login extends Component {
         password: this.state.password
       };
       if (body.username && body.password) {
-        axios.post("/login", body).then(response => {
-          this.setState({ currentUser: user });
-          this.props.history.push("/app/home_page");
-        });
+        const loginResponse = await axios.post("/login", body);
+        console.log(loginResponse.data);
+        this.setState({ currentUser: user });
+        this.props.history.push("/app/home_page");
       } else {
         this.props.history.push("/login");
-        alert("Login incorrect");
+        alert("Please enter username and password");
       }
     } catch (error) {
       console.error(error);
+      alert(error.response.data);
     }
   };
 
