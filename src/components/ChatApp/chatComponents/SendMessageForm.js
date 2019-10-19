@@ -37,7 +37,8 @@ class SendMessageForm extends Component {
         outline: "none",
         border: "none",
         flex: 1,
-        fontSize: 16
+        fontSize: 16,
+        height: '50px'
       }
     };
     return (

@@ -17,10 +17,10 @@ class MainChatApp extends Component {
   }
 
   render() {
-    if(this.state.currentScreen ===  "WhatIsYourUserNameScreen") { 
-    return <UsernameForm onSubmit={this.onUserNameSubmitted} />
+    if (this.state.currentScreen === "WhatIsYourUserNameScreen") {
+      return <UsernameForm onSubmit={this.onUserNameSubmitted} />
     } else if (this.state.currentScreen === "ChatScreen") {
-      return <ChatScreen currentUsername={this.state.currentUsername}/>
+      return <ChatScreen user={this.props.user} currentUsername={this.state.currentUsername} />
     }
   }
 }
