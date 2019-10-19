@@ -12,12 +12,13 @@ class eventMaps extends Component {
     }
   };
 
-  getLatLong() {
+  getLatLong = () => {
     return axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=${process.env.REACT_APP_GOOGLEAPI}`
+        `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_GOOGLEAPI}&address=${this.state.address}`
       )
       .then(result => {
+        console.log(result.data, process.env)
         this.setState({
           location: {
             lat: result.data.results[0].geometry.location.lat,
