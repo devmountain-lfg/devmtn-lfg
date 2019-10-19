@@ -25,14 +25,14 @@ module.exports = {
       const authenticated = await bcrypt.compare(password, user.user_password);
 
       if (authenticated === false) {
-        return res.status(400).send("Please authenticate!");
+        return res.status(400).send("Incorrect username or password!");
       } else {
         req.session.user = user;
       }
       delete user.password;
 
       console.log("here is user", user);
-      return res.status(200).send(user);
+      return res.status(200).send(`Welcome ${user.first_name}`);
     } catch (error) {
       console.log(error);
     }
