@@ -20,6 +20,16 @@
   align-items: center;
   max-width: 1440px;
 }
+.calendar-page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(214, 214, 214);
+  font-family: "Heebo", sans-serif;
+  align-items: center;
+  max-width: 1440px;
+  justify-content: center;
+}
 
 .header-ref {
   display: flex;
