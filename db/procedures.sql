@@ -5,6 +5,7 @@ DROP PROCEDURE IF EXISTS unJoinEvent;
 DROP PROCEDURE IF EXISTS updateUser;
 DROP PROCEDURE IF EXISTS updateEvent;
 DROP PROCEDURE IF EXISTS deleteEvent;
+DROP PROCEDURE IF EXISTS resetPassword;
 DROP PROCEDURE IF EXISTS deleteUser;
 
 
@@ -404,6 +405,9 @@ BEGIN
 END;
 $$;
 
+CREATE PROCEDURE resetPassword(
+    user_id int, 
+    newPassword varchar
 CREATE PROCEDURE deleteUser( 
     user_id int
 )
@@ -416,6 +420,28 @@ BEGIN
            RAISE NOTICE 'User does not exist';
            RETURN;
         END IF;
+        
+        
+    if LENGTH($2) < 7
+        THEN
+            RAISE NOTICE 'Password too short';
+            RETURN;
+        END IF;
+        
+    if $2 !~ '[0-9]'
+        THEN
+            RAISE NOTICE 'Password requires number';
+            RETURN;
+        END IF;
+    
+
+    UPDATE users u
+    SET user_password = $2
+    WHERE u.user_id = $1;
+
+    RETURN;
+END;
+$$;
     
 
     DELETE FROM user_events ue WHERE ue.user_id = $1;

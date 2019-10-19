@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../navbar";
 
@@ -143,6 +143,7 @@ class Settings extends Component {
           <button className="button-ref-medium" onClick={this.handleUpdate}>
             Save
           </button>
+          <Link to="/app/reset_password" className="sign-up-link">Click Here to Reset Password</Link>
         </div>
         <Navbar />
       </div>
