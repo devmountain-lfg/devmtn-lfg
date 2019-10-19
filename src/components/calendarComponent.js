@@ -41,7 +41,6 @@ class calendarComponent extends Component {
   }
 
   handelEventClick = async (eventId) => {
-    console.log(eventId)
     this.props.history.push(`/app/details/${eventId}`)
   }
 
