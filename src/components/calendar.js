@@ -3,7 +3,8 @@ import axios from "axios";
 import "../styling/react-big-calendar.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import "../styling/petercalendar.css";
+import "../styling/publicpage.css";
+import Navbar from "./navbar"; 
 
 const localizer = momentLocalizer(moment);
 
@@ -47,20 +48,22 @@ class calendar extends Component {
 
   render() {
     return (
-      <div className="calendarWrapper">
-        <button className="button-ref-medium" onClick={this.handleClick}>Back to my Events</button>
+      <div className= "publicpage-ref">
+      <div className="calendar-page">
         <Calendar
           selectable
           events={this.state.events}
           showMultiDayTimes
           localizer={localizer}
-          step={15}
+          step={30}
           onSelectEvent={event =>
             alert(`Start Time ${event.start}
           End Time ${event.end}
           Location "("to be figured out")"`)
           }
         />
+      </div>
+      <Navbar/>
       </div>
     );
   }
