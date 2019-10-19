@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 module.exports = {
   login: async (req, res) => {
     try {
@@ -19,10 +21,8 @@ module.exports = {
           .send(
             "The user does not exist. Please enter a valid email and password"
           );
-      let authenticated = false;
-      if (user.user_password === password) {
-        authenticated = true;
-      }
+
+      const authenticated = await bcrypt.compare(password, user.user_password);
 
       if (authenticated === false) {
         return res.status(400).send("Please authenticate!");
