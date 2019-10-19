@@ -91,12 +91,11 @@ class createEvent extends Component {
 
       const results = await axios.post("/create_event", body);
       console.log(results);
-      this.setState({ created_event: true });
+      await this.setState({ created_event: true });
       alert("Event successfully created!");
       this.props.history.push("/app/home_page");
     } catch (error) {
-      alert(error);
-      console.error(error);
+      alert(error.response.data);
     }
   };
 
