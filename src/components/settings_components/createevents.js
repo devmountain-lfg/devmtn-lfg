@@ -34,7 +34,6 @@ class createEvent extends Component {
     axios
       .get("/activities")
       .then(response => {
-        console.log(response.data);
         this.setState({
           activities: response.data
         });
@@ -89,8 +88,12 @@ class createEvent extends Component {
         zip: locationZip
       };
 
+      console.log('this is body', body);
+
       const results = await axios.post("/create_event", body);
-      console.log(results);
+      if(results) {
+        console.log('this is results', results)
+      }
       await this.setState({ created_event: true });
       alert("Event successfully created!");
       this.props.history.push("/app/home_page");

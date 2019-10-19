@@ -24,7 +24,7 @@ class createuser extends Component {
   handleCreation = async () => {
     try {
       if (this.state.matchingPass === false) {
-        alert("Your passwords must match!");
+        return alert("Your passwords must match!");
       }
       const {
         firstName,
@@ -51,7 +51,7 @@ class createuser extends Component {
       await alert("Chat user successfully created!")
       this.props.history.push("/app/home_page");
     } catch (error) {
-      alert(error);
+      alert(error.response.data);
       console.error(error);
     }
   };
