@@ -6,6 +6,7 @@ import axios from "axios";
 import TypingIndicator from "./TypingIndicator";
 import WhosOnlineList from "./WhosOnlineList";
 
+
 class ChatScreen extends Component {
   constructor() {
     super();
@@ -90,16 +91,19 @@ class ChatScreen extends Component {
   };
 
   render() {
-  if(!this.state.currentUser) return <div>Loading...</div>
+    if (!this.state.currentUser) return <div>Loading...</div>
     const styles = {
       container: {
         height: "100vh",
+        width: "100vw",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        overflow: "hidden"
       },
       chatContainer: {
         display: "flex",
-        flex: 1
+        height: "100vh",
+        width: "100vw"
       },
       whosOnlineListContainer: {
         width: "300px",
@@ -110,25 +114,31 @@ class ChatScreen extends Component {
       },
       chatListContainer: {
         padding: 20,
-        width: "85%",
+        width: "85vw",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        height: "80vh",
+        overflow: "hidden",
+        fontFamily: "Heebo",
+        overflowAnchor: 'auto'
       }
     };
     const users = this.state.currentUser.userStore.users
-    
+
     return (
       <div style={styles.container}>
-        <div style={styles.chatContainer}>
-          <aside style={styles.whosOnlineListContainer}>
+        <div className="chat-container">
+          <aside className="whosOnlineListContainer">
             <WhosOnlineList
               currentUser={this.state.currentUser}
               users={users}
             />{" "}
           </aside>
           <section style={styles.chatListContainer}>
-            <h2>CHAT WINDOW TITLE</h2>
+            <h2 className="welcome-back">Welcome to LFG Chat</h2>
             <MessageList
+              currentUser={this.state.currentUser}
+              user={this.props.user}
               messages={this.state.messages}
               style={styles.chatList}
             />
