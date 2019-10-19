@@ -12,11 +12,14 @@ class calendarComponent extends Component {
     events: []
   }
   getEvents = async () => {
-    const response = await axios.get(`/events/${this.props.userInfo.user_id}`);
+    const response = await axios.get("/events", {
+      params: { user_id: this.props.userInfo.user_id }
+    });
     if (response.data.length > 0)
     {
       this.setState({
-        events: response.data.map(item => ({
+        events: response.data.map((item,i) => ({
+          key: i,
           id: item.id,
           title: item.activity_name,
           start: new Date(item.event_date_start),
@@ -26,6 +29,7 @@ class calendarComponent extends Component {
         }))
       });
     };
+
   }
 
   handleClick = async (props) => {
