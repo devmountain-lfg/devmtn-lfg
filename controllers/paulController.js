@@ -41,6 +41,7 @@ module.exports = {
             }
 
             const { firstName, lastName, gender, email, phoneNumber, username, password } = req.body;
+            const hash = await bcrypt.hash(password, 10);
             // const [usernameCount] = await db.query(`select COUNT(*) from users where username = ${username}`);
 
             // ToDo: Add check for already existing email and username in DB.
@@ -53,7 +54,7 @@ module.exports = {
             if (password === null || password === "" || password.length < 7 || checkForNumber(password) === false) return res.status(400).send('Invalid password. Password must be at least 7 characters long and contain at least one number');
             if (phoneNumber !== null && checkForNonNumbers(phoneNumber) === true) return res.status(400).send('Invalid character in Phone Number');
 
-            await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName, lastName, gender, email, phoneNumber, username, password]);
+            await db.query('call addNewUser($1,$2,$3,$4,$5,$6,$7)', [firstName, lastName, gender, email, phoneNumber, username, hash]);
             res.send(`${firstName} ${lastName} has been added`);
 
         } catch (error) {
