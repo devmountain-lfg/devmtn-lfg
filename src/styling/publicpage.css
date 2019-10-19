@@ -9,6 +9,12 @@
   align-items: center;
 }
 
+.chat-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
 .calendar-events {
   display: flex;
   flex-direction: column;
@@ -213,7 +219,7 @@
 .my-events-ref {
   display: flex;
   height: 350px;
-  width: 85vw;
+  width: 100vw;
   flex-direction: column;
   font-family: "Heebo", sans-serif;
   align-items: center;
@@ -250,6 +256,15 @@
   align-items: center;
 }
 
+.whosOnlineListContainer {
+  width: 300px;
+  flex: none;
+  padding: 20;
+  background: #2c303b;
+  color: white;
+  overflow: auto;
+}
+
 @media (min-width: 865px) {
   .calendar-events {
     flex-direction: row;
@@ -276,5 +291,17 @@
   }
   .event {
     width: 45vw;
+  }
+}
+
+@media (max-width: 730px) {
+  .chat-container{
+    flex-direction: column;
+  }
+  .whosOnlineListContainer{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    height: 150px;
   }
 }
