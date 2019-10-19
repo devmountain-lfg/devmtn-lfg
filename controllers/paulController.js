@@ -159,6 +159,7 @@ module.exports = {
             await db.query("call createnewevent($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)", [activityId, eventStart, eventEnd, isPublic, maxPlayers, creatorId, message, address1, address2, city, state, zip]);
             const [activityNameRes] = await db.query(`select activity_name from activities where activity_id = ${activityId}`);
             const activityName = activityNameRes.activity_name;
+            const location = address1 + ' ' + address2 + ' ' + city + ' ' + state + ' ' + zip;
 
             res.send(`Event created: ${activityName} on ${eventStart} at ${location}`);
         } catch (error) {
@@ -330,14 +331,17 @@ module.exports = {
                 newPassword,
                 currentPassword
             } = req.body;
+            const hash = await bcrypt.hash(newPassword, 10);
             const [currentUser] = await db.users.where('user_id = $1', [userId]);
             const currentUserPassword = currentUser.user_password;
+            const passwordsMatch = await bcrypt.compare(currentPassword, currentUserPassword);
             
-            if(currentPassword !== currentUserPassword) return res.status(400).send('Current Password is Incorrect');
             if(newPassword.length < 7) return res.status(400).send('Password Must Be At Least 7 Chatacters Long');
             if(checkForNumber(newPassword) === false) return res.status(400).send('Password Must Contain a Number');
+            console.log('passwords, ', currentPassword, currentUserPassword, 'passmatch: ', passwordsMatch)
+            if(passwordsMatch == false) return res.status(400).send('Current Password is Incorrect');
             
-            await db.query('call resetPassword($1,$2)', [userId,newPassword]);
+            await db.query('call resetPassword($1,$2)', [userId,hash]);
 
             res.send('Password successfully changed');
         } catch (error) {
