@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../styling/publicpage.css";
-import axios from "axios";
 import moment from "moment";
 import { Link, withRouter } from "react-router-dom";
 
@@ -56,15 +55,15 @@ class GranularEvent extends Component {
               </button>
             </div>
           ) : (
-            <div className="event-buttons">
-              <button
-                className="button-ref-small"
-                onClick={() => this.props.handleJoin(event.event_id)}
-              >
-                Join
+              <div className="event-buttons">
+                <button
+                  className="button-ref-small"
+                  onClick={() => this.props.handleJoin(event.event_id)}
+                >
+                  Join
               </button>
-            </div>
-          )}
+              </div>
+            )}
         </div>
         <div className="message" onClick={this.handelClick}>
           {event.event_message}
