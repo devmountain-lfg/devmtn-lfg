@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../styling/publicpage.css";
 import moment from "moment";
-import axios from 'axios';
+import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 
 class GranularEvent extends Component {
@@ -10,14 +10,14 @@ class GranularEvent extends Component {
 
     this.state = {
       joined: false,
-      deleted: false,
+      deleted: false
     };
   }
 
   handelClick = async props => {
     this.props.history.push(`/app/details/${this.props.event.event_id}`);
   };
-  
+
   handleDelete = id => {
     axios
       .delete(`/delete_event/${id}`)
@@ -25,7 +25,7 @@ class GranularEvent extends Component {
         alert("You have successfully deleted the event!");
         this.setState({
           deleted: true
-        })
+        });
       })
       .catch(err => {
         console.log("Here is the delete error:", err);
@@ -73,7 +73,6 @@ class GranularEvent extends Component {
             </div>
           </div>
           <h1 className="title">{event.activity_name}</h1>
-
           {this.props.creator ? (
             <div className="event-buttons">
               <button
@@ -90,7 +89,6 @@ class GranularEvent extends Component {
               </Link>
             </div>
           ) : null}
-
           {this.props.joinee || this.state.joined === true ? (
             <div className="event-buttons">
               <button
@@ -100,16 +98,17 @@ class GranularEvent extends Component {
                 Leave
               </button>
             </div>
-          ) : (
-              <div className="event-buttons">
-                <button
-                  className="button-ref-small"
-                  onClick={() => this.handleJoin(event.event_id)}
-                >
-                  Join
+          ) : null}
+          {!this.props.joinee && !this.props.creator ? (
+            <div className="event-buttons">
+              <button
+                className="button-ref-small"
+                onClick={() => this.handleJoin(event.event_id)}
+              >
+                Join
               </button>
-              </div>
-            )}
+            </div>
+          ) : null}
         </div>
         <div className="message" onClick={this.handelClick}>
           {event.event_message}
