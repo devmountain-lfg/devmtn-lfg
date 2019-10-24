@@ -111,9 +111,10 @@ module.exports = {
 
   getPublicEvents: async (req, res) => {
     try {
+      const userId = !!req.session.user ? req.session.user.user_id : null;
       const db = req.app.get("db");
-      const query = `SELECT * FROM current_events_view LEFT JOIN (SELECT public_event, event_id FROM events) events ON events.event_id = current_events_view.event_id`;
-      const results = await db.query(query);
+      const query = "select * from get_unjoined_events($1)";
+      const results = await db.query(query, [userId]);
       res.status(200).send(results);
     } catch (err) {
       res.status(500).send(err);
