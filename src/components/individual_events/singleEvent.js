@@ -13,7 +13,7 @@ class SingleEvent extends Component {
   }
 
   componentDidMount() {
-    axios.get("/current_events").then(response => { //This is selecting everything from the current events view and rendering it. This is only on the PUBLIC PAGE.
+    axios.get("/public_events").then(response => { //This is selecting everything from the current events view and rendering it. This is only on the PUBLIC PAGE.
       console.log(response.data);
       this.setState({ events: response.data });
     });
