@@ -23,35 +23,6 @@ class JoinedEvents extends Component {
       });
   }
 
-  handleJoin = id => {
-    const body = {
-      eventId: id
-    };
-    axios
-      .post("/join_event", body)
-      .then(response => {
-        alert("You have successfully joined the event!");
-        this.setState({ joined: true });
-      })
-      .catch(err => {
-        console.log("Here is the join error:", err);
-      });
-  };
-
-  handleCancel = id => {
-    axios
-      .delete("/unjoin_event", {
-        params: { event_id: id }
-      })
-      .then(response => {
-        alert("You have successfully unjoined the event!");
-        this.setState({ joined: false });
-      })
-      .catch(err => {
-        console.log("Here is the unjoin error:", err);
-      });
-  };
-
   render() {
     const joinedEvents = this.state.events.map(event => {
       let joinee = true;
@@ -60,8 +31,6 @@ class JoinedEvents extends Component {
           event={event}
           joinee={joinee}
           user_id={this.props.userInfo.user_id}
-          handleCancel={this.handleCancel}
-          handleJoin={this.handleJoin}
         />
       );
     });

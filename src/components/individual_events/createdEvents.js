@@ -23,17 +23,6 @@ class CreatedEvents extends Component {
       });
   }
 
-  handleDelete = id => {
-    axios
-      .delete(`/delete_event/${id}`)
-      .then(() => {
-        alert("You have successfully deleted the event!");
-      })
-      .catch(err => {
-        console.log("Here is the delete error:", err);
-      });
-  };
-
   render() {
     const currentEvents = this.state.events.map(event => {
       let creator = true;
@@ -42,7 +31,6 @@ class CreatedEvents extends Component {
           event={event}
           creator={creator}
           user_id={this.props.userInfo.user_id}
-          handleDelete={this.handleDelete}
         />
       );
     });
