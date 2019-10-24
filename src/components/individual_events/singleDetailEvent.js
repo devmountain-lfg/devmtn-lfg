@@ -67,12 +67,6 @@ class Event extends Component {
             </div>
             <h1 className="title">{event.activity_name}</h1>
             <div className="event-buttons">
-              <button className="button-ref-small" onClick={this.handleAttempt}>
-                DM
-              </button>
-              <button className="button-ref-small" onClick={this.handleAttempt}>
-                Join
-              </button>
             </div>
           </div>
           <div className="message">{event.event_message}</div>
