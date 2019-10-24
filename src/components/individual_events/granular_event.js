@@ -1,18 +1,64 @@
 import React, { Component } from "react";
 import "../../styling/publicpage.css";
 import moment from "moment";
+import axios from 'axios';
 import { Link, withRouter } from "react-router-dom";
 
 class GranularEvent extends Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      joined: false,
+      deleted: false,
+    };
   }
 
   handelClick = async props => {
-    console.log(this.props);
     this.props.history.push(`/app/details/${this.props.event.event_id}`);
+  };
+  
+  handleDelete = id => {
+    axios
+      .delete(`/delete_event/${id}`)
+      .then(() => {
+        alert("You have successfully deleted the event!");
+        this.setState({
+          deleted: true
+        })
+      })
+      .catch(err => {
+        console.log("Here is the delete error:", err);
+      });
+  };
+
+  handleJoin = id => {
+    const body = {
+      eventId: id
+    };
+    axios
+      .post("/join_event", body)
+      .then(response => {
+        alert("You have successfully joined the event!");
+        this.setState({ joined: true });
+      })
+      .catch(err => {
+        console.log("Here is the join error:", err);
+      });
+  };
+
+  handleCancel = id => {
+    axios
+      .delete("/unjoin_event", {
+        params: { event_id: id }
+      })
+      .then(response => {
+        alert("You have successfully unjoined the event!");
+        this.setState({ joined: false });
+      })
+      .catch(err => {
+        console.log("Here is the unjoin error:", err);
+      });
   };
 
   render() {
@@ -32,7 +78,7 @@ class GranularEvent extends Component {
             <div className="event-buttons">
               <button
                 className="button-ref-small"
-                onClick={() => this.props.handleDelete(event.event_id)}
+                onClick={() => this.handleDelete(event.event_id)}
               >
                 Delete
               </button>
@@ -45,11 +91,11 @@ class GranularEvent extends Component {
             </div>
           ) : null}
 
-          {this.props.joinee ? (
+          {this.props.joinee || this.state.joined === true ? (
             <div className="event-buttons">
               <button
                 className="button-ref-small"
-                onClick={() => this.props.handleCancel(event.event_id)}
+                onClick={() => this.handleCancel(event.event_id)}
               >
                 Leave
               </button>
@@ -58,7 +104,7 @@ class GranularEvent extends Component {
               <div className="event-buttons">
                 <button
                   className="button-ref-small"
-                  onClick={() => this.props.handleJoin(event.event_id)}
+                  onClick={() => this.handleJoin(event.event_id)}
                 >
                   Join
               </button>

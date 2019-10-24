@@ -13,52 +13,17 @@ class UserEvents extends Component {
   }
 
   componentDidMount() {
+    this.startUp();
+  }
+
+  startUp = () => {
     axios.get("/public_events").then(response => {
       this.setState({
         publicEvents: response.data
       });
     });
-  }
-
-  handleDelete = id => {
-    axios
-      .delete(`/delete_event/${id}`)
-      .then(() => {
-        alert("You have successfully deleted the event!");
-      })
-      .catch(err => {
-        console.log("Here is the delete error:", err);
-      });
   };
 
-  handleJoin = id => {
-    const body = {
-      eventId: id
-    };
-    axios
-      .post("/join_event", body)
-      .then(response => {
-        alert("You have successfully joined the event!");
-        this.setState({ joined: true });
-      })
-      .catch(err => {
-        console.log("Here is the join error:", err);
-      });
-  };
-
-  handleCancel = id => {
-    axios
-      .delete("/unjoin_event", {
-        params: { eventId: id }
-      })
-      .then(response => {
-        alert("You have successfully unjoined the event!");
-        this.setState({ joined: false });
-      })
-      .catch(err => {
-        console.log("Here is the unjoin error:", err);
-      });
-  };
 
   render() {
     if (this.state.publicEvents.length === 0) return <div>Loading...</div>;
@@ -67,8 +32,6 @@ class UserEvents extends Component {
         <GranularEvent
           event={event}
           user_id={this.props.userInfo.user_id}
-          handleJoin={this.handleJoin}
-          handleCancel={this.handleCancel}
         />
       );
     });
