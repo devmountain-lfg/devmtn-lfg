@@ -33,12 +33,12 @@ class ManageEvents extends Component {
       <div className="publicpage-ref">
         <div className="welcome-back">Manage Events Here!</div>
         <div className="calendar-events">
-          <div className="event-title">Your Created Events</div>
           <div className="my-events-ref">
+          <div className="event-title">Your Created Events</div>
             <CreatedEvents userInfo={this.state.userInfo} />
           </div>
-          <div className="event-title">Your Joined Events</div>
           <div className="my-events-ref">
+          <div className="event-title">Your Joined Events</div>
             <JoinedEvents userInfo={this.state.userInfo} />
           </div>
         </div>

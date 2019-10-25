@@ -21,7 +21,7 @@ class calendar extends Component {
     if (response.data.length > 0) {
       this.setState({
         events: response.data.map(item => ({
-          id: item.id,
+          id: item.event_id,
           title: item.activity_name,
           start: new Date(item.event_date_start),
           end: new Date(item.event_date_end),
@@ -57,9 +57,7 @@ class calendar extends Component {
           localizer={localizer}
           step={30}
           onSelectEvent={event =>
-            alert(`Start Time ${event.start}
-          End Time ${event.end}
-          Location "("to be figured out")"`)
+           this.props.history.push(`/app/details/${event.id}`)
           }
         />
       </div>
