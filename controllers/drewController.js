@@ -70,7 +70,18 @@ module.exports = {
     try {
       const user_id = req.session.user.user_id;
       const db = req.app.get("db");
-      const query = `SELECT * FROM user_events_view u WHERE u.creator_id = ${user_id};`;
+      const query = `SELECT DISTINCT 
+                            event_id,
+                            activity_name,
+                            event_date_start,
+                            event_date_end,
+                            event_message,
+                            event_location,
+                            max_players,
+                            current_player_count,
+                            creator_name,
+                            creator_id 
+                     FROM user_events_view u WHERE u.creator_id = ${user_id};`;
 
       const results = await db.query(query);
       res.status(200).send(results);
@@ -99,7 +110,18 @@ module.exports = {
       const user_id = req.query.user_id;
       console.log("this is req", req);
       const db = req.app.get("db");
-      const query = `SELECT * FROM user_events_view u WHERE u.user_id = ${user_id} OR u.creator_id = ${user_id};`;
+      const query = `SELECT DISTINCT 
+                            event_id,
+                            activity_name,
+                            event_date_start,
+                            event_date_end,
+                            event_message,
+                            event_location,
+                            max_players,
+                            current_player_count,
+                            creator_name,
+                            creator_id  
+                      FROM user_events_view u WHERE u.user_id = ${user_id} OR u.creator_id = ${user_id};`;
 
       const results = await db.query(query);
       res.status(200).send(results);
